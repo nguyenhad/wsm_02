@@ -1,24 +1,38 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
-  wsm02: "Wsm02"
+  working_space: "Working space"
+  home: "Home"
+  education_framgia: "Education Framgia"
+  an_exclusive_management_working_space_by: "An exclusive management working space by"
+  sign_in: "Sign in"
+  sign_up: "Sign up"
+  our_core: "Our core"
+  functions: "Functions"
+  features: "Features"
+  we_are_proud_lorem_ipsum_meta_data_of_our_company: "we are proud lorem ipsum meta data of our company"
+  manager_can_make_a_new_working_space_and_management: "Manager can make a new Working Space and management."
+  timesheet: "timesheet"
+  can_view_timesheet_and_export_file: "Can view timesheet and export file."
+  more_and_more: "More and more"
+  more_and_more_funtion_helpful_for_manager_member_for_you: "More and more funtion helpful for manager member for you."
+  what_we_do: "WHAT WE DO"
+  we_have_many_training_course_for_trainer: "We have many training course for trainer."
+  education: "education"
+  mobile_develop: "mobile develop"
+  we_provide_many_excultive_for_mobile_application: "We provide many excultive for mobile application"
+  web_develop: "web develop"
+  we_development_website_for_your_requirement: "We development website for your requirement."
+  about: "About"
+  us: "US"
+  framgia_vietnam: "Framgia Vietnam"
+  is_a_company_100%_Japan_funded_specializing_in_design: "is a company 100% Japan funded specializing in design,"
+  development_applications_such_as_mobile_phone_software_games_social_and_website_applications: "development applications such as mobile phone software, games, social and website applications."
+  ha_noi: "Ha Noi (Head office)"
+  address_ha_noi: "13F Keangnam Landmark 72 Tower, Plot E6, Pham Hung Road, Nam Tu Liem District., Ha Noi"
+  da_nang: "Da Nang"
+  address_da_nang: "6F, Vinh Trung Plaza, 255~257 Hung Vuong Str., Vinh Trung ward, Thanh Khe district, Da Nang"
+  ho_chi_minh: "Ho Chi Minh"
+  address_ho_chi_minh: "8F Nice building, 467 Dien Bien Phu Str., Ward 25, Binh Thanh district, HCMC"
+  by_education_framgia: "By Education Framgia"
+  inc_all_rights_reserved: "Inc. All rights reserved."
+  year: "© 2016"
+  sub: "-"

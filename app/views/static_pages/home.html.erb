@@ -1,0 +1,126 @@
+<% provide :title, t("home") %>
+<div class="header-banner" data-stellar-background-ratio="0.5">
+  <div class="slidersection">
+    <div class="overlay">
+      <div class="center fixed-content">
+        <div class="center-fix">
+          <h1 class="underline animated fadeInDown">
+            <%= t "working_space" %>
+          </h1>
+          <h4 class="animated fadeInUp delay-05s margin_bottom_50">
+            <%= t "an_exclusive_management_working_space_by" %>
+            <strong class="green"><%= t "education_framgia" %></strong>
+          </h4>
+          <%= link_to t("sign_in"), "#",
+            class: "button animated fadeInUp delay-1s margin_right_20" %>
+          <%= link_to t("sign_up"), "#",
+            class: "button border animated fadeInUp delay-1s" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="features">
+  <div class="row-back">
+    <div class="w-container wrap">
+      <div class="center">
+        <h2 class="underline">
+          <%= t "our_cose" %> <span class="green"><%= t "functions" %></span>
+        </h2>
+        <p>
+          <strong><%= t "features" %></strong>
+          <%= t "we_are_proud_lorem_ipsum_meta_data_of_our_company" %>
+        </p>
+      </div>
+      <div class="w-col w-col-4 wp1">
+        <div class="icon-box">
+          <i class="cupelegance-icons-"></i>
+          <h4 class="icons-heading"><%= t "working_space" %></h4>
+          <p><%= t "manager_can_make_a_new_working_space_and_management" %></p>
+        </div>
+      </div>
+      <div class="w-col w-col-4 wp1 delay-05s">
+        <div class="icon-box">
+          <i class="paramselegance-icons-"></i>
+          <h4 class="icons-heading"><%= t "timesheet" %></h4>
+          <p><%= t "can_view_timesheet_and_export_file" %></p>
+        </div>
+      </div>
+      <div class="w-col w-col-4 wp1 delay-1s">
+        <div class="icon-box">
+          <i class="thumbs-upelegance-icons-"></i>
+          <h4 class="icons-heading"><%= t "more_and_more" %></h4>
+          <p>
+            <%= t "more_and_more_funtion_helpful_for_manager_member_for_you" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Service section -->
+<div id="service">
+  <div class="row-gree">
+    <div class="w-container wrap-normal">
+      <div class="center">
+        <h2><%= t "what_we_do" %></h2>
+      </div>
+      <div class="w-col w-col-4 wp2">
+        <div class="icon-box">
+          <%= image_tag("services/branding.png") %>
+          <h3 class="underline"><%= t "education" %></h3>
+          <p><%= t "we_have_many_training_course_for_trainer" %></p>
+        </div>
+      </div>
+      <div class="w-col w-col-4 wp2 delay-05s">
+        <div class="icon-box">
+          <%= image_tag("services/motion.png") %>
+          <h3 class="underline"><%= t "mobile_develop" %></h3>
+          <p><%= t "we_provide_many_excultive_for_mobile_application" %></p>
+        </div>
+      </div>
+      <div class="w-col w-col-4 wp2 delay-1s">
+        <div class="icon-box">
+          <%= image_tag("services/Web.png") %>
+          <h3 class="underline"><%= t "web_develop" %></h3>
+          <p><%= t "we_development_website_for_your_requirement" %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Contact section -->
+<div id="contact">
+  <div class="row-white">
+    <div class="w-container wrap">
+      <div class="center green">
+        <h2 class="green">
+          <%= t "about" %> <span class="black"><%= t "us" %></span>
+        </h2>
+        <p>
+          <strong class="black"><%= t "framgia_vietnam" %></strong>
+          <%= t "is_a_company_100%_Japan_funded_specializing_in_design" %>
+          <br>
+          <%= t "development_applications_such_as_mobile_phone_software_games_social_and_website_applications" %>
+        </p>
+        <div class="w-col w-col-4 wp1">
+          <h4><%= t "ha_noi" %></h4>
+          <p><%= t "address_ha_noi"%></p>
+        </div>
+        <div class="w-col w-col-4 wp1">
+          <h4><%= t "da_nang" %></h4>
+          <p><%= t "address_da_nang" %></p>
+        </div>
+        <div class="w-col w-col-4 wp1">
+          <h4><%= t "ho_chi_minh" %></h4>
+          <p><%= t "address_ho_chi_minh" %></p>
+        </div>
+        <div class="social-footter">
+          <i class="facebookelegance-icons-"></i>
+          <i class="twitter-birdelegance-icons-"></i>
+          <i class="instagramelegance-icons-"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

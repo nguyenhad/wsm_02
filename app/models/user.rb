@@ -18,4 +18,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: {maximum: Settings.user.name}
 
   scope :order_date_desc, ->{order created_at: :desc}
+
+  mount_uploader :avatar, AvatarUploader
+
 end

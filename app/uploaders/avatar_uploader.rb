@@ -4,6 +4,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   process resize_to_limit: [400, 400]
   process convert: "png"
+
   storage :file
 
   def store_dir
@@ -32,5 +33,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+
+  def default_url *args
+    "default.jpeg"
   end
 end

@@ -46,6 +46,7 @@
 .instagramelegance-icons-:before { content: '\e856'; } /* '' */
 .twitter-birdelegance-icons-:before { content: '\e845'; } /* '' */
 .facebookelegance-icons-:before { content: '\e844'; } /* '' */
+.google-pluselegance-icons-:before{ content: '\e848'; }
 .thumbs-upelegance-icons-:before { content: '\e824'; } /* '' */
 .cupelegance-icons-:before { content: '\e828'; } /* '' */
 .trashelegance-icons-:before { content: '\e829'; } /* '' */
@@ -60,11 +61,62 @@
   font-size: 500%;
 }
 
-.facebookelegance-icons- {font-size: 150%; padding: 5px 2px 5px 2px; *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe844;&nbsp;'); }
-.instagramelegance-icons-:hover {background: #bdc3c7; color: #2c3e50; transition: all, 1s; -webkit-transition: all, 1s; -moz-transition: all, 1s;}
-.instagramelegance-icons- { font-size: 150%; padding: 5px 2px 5px 2px; margin: 0 0.3em 0 0.3em; *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe856;&nbsp;'); }
-.facebookelegance-icons-:hover {background: #bdc3c7; color: #2c3e50; transition: all, 1s; -webkit-transition: all, 1s; -moz-transition: all, 1s;}
-.twitter-birdelegance-icons- {  font-size: 150%; padding: 5px 6px 5px 2px; margin: 0 0.3em 0 0.3em;  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe845;&nbsp;'); }
-.thumbs-upelegance-icons- { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe824;&nbsp;'); }
-.trashelegance-icons- { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe829;&nbsp;'); }
-.paramselegance-icons- { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe839;&nbsp;'); }
+.facebookelegance-icons- {
+  font-size: 150%; padding: 5px 2px 5px 2px;
+  *zoom: expression( this.runtimeStyle['zoom'] = '1',
+    this.innerHTML = '&#xe844;&nbsp;');
+}
+
+.instagramelegance-icons-:hover {
+  background: #bdc3c7;
+  color: #2c3e50; transition: all, 1s;
+  -webkit-transition: all, 1s;
+  -moz-transition: all, 1s;
+}
+
+.instagramelegance-icons- {
+  font-size: 150%;
+  padding: 5px 2px 5px 2px;
+  margin: 0 0.3em 0 0.3em;
+  *zoom: expression( this.runtimeStyle['zoom'] = '1',
+    this.innerHTML = '&#xe856;&nbsp;');
+}
+
+.facebookelegance-icons-:hover {
+  background: #bdc3c7;
+  color: #2c3e50;
+  transition: all, 1s;
+  -webkit-transition: all, 1s;
+  -moz-transition: all, 1s;
+}
+
+.twitter-birdelegance-icons- {
+  font-size: 150%;
+  padding: 5px 6px 5px 2px;
+  margin: 0 0.3em 0 0.3em;
+  *zoom: expression( this.runtimeStyle['zoom'] = '1',
+    this.innerHTML = '&#xe845;&nbsp;');
+}
+
+.google-pluselegance-icons- {
+  font-size: 150%;
+  padding: 5px 6px 5px 2px;
+  margin: 0 0.3em 0 0.3em;
+  *zoom: expression( this.runtimeStyle['zoom'] = '1',
+    this.innerHTML = '&#xe972;&nbsp;');
+}
+
+.thumbs-upelegance-icons- {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1',
+    this.innerHTML = '&#xe824;&nbsp;');
+}
+
+.trashelegance-icons- {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1',
+    this.innerHTML = '&#xe829;&nbsp;');
+}
+
+.paramselegance-icons- {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1',
+    this.innerHTML = '&#xe839;&nbsp;');
+}

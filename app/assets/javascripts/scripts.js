@@ -42,19 +42,4 @@ $(document).ready(function() {
   }, {
     offset: '75%'
   });
-
 });
-
-$(document).ready(function() {
-  var nice = $("html").niceScroll();  // The document page (body)
-    $("#boxscroll").niceScroll({touchbehavior:true}); // First scrollable DIV
-});
-
-$('.parallax-back').stellar();
-$('.header-banner').stellar();
-  $(function(){
-    $.stellar({
-      horizontalScrolling: false,
-      verticalOffset: 40
-    });
-  });

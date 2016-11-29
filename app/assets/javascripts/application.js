@@ -11,9 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require scripts
-//= require waypoints.min
 //= require_tree .
+//= require jquery.waypoints
+//= require infinite
+//= require inview
+//= require sticky
+//= require gojs/release/go.js
+//= require gojs/release/go-debug.js

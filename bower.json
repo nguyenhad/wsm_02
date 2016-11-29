@@ -1,0 +1,21 @@
+{
+  "name": "wsm_02",
+  "homepage": "https://github.com/framgia/wsm_02",
+  "authors": [
+    "Framgia DN"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gojs": "^1.6.21"
+  }
+}

@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(version: 20161128042839) do
     t.integer  "gender"
     t.integer  "role",                   default: 2
     t.datetime "birthday"
-    t.string   "avatar"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

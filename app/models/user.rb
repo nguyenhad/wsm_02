@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   scope :order_date_desc, ->{order created_at: :desc}
 
-  mount_uploader :avatar, AvatarUploader
-
+  def is_user? user
+    self.id == user.id
+  end
 end

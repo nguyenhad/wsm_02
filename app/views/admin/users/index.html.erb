@@ -1,0 +1,47 @@
+<% provide :title, t("list_user") %>
+<div class="container color_black">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <center><h3><%= t "list_user" %></h3></center>
+    <%= link_to t("new_user"), new_admin_user_path, class: "btn btn-primary" %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= t "index" %></th>
+            <th><%= t "name" %></th>
+            <th><%= t "email" %></th>
+            <th><%= t "role" %></th>
+            <th><%= t "gender" %></th>
+            <th><%= t "birthday" %></th>
+            <th><%= t "action" %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each_with_index do |user, index| %>
+            <tr>
+              <td>
+                <%= current_index @users.current_page,
+                  Settings.per_page.admin.user, index %>
+              </td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.role %></td>
+              <td><%= user.gender %></td>
+              <td><%= user.birthday %></td>
+              <td>
+                <%= link_to t("show"), admin_user_path(user),
+                  class: "btn btn-success" %>
+                <%= link_to t("edit"), edit_admin_user_path(user),
+                  class: "btn btn-primary" %>
+                <%= link_to t("delete"), admin_user_path(user),
+                  method: :delete, data: {confirm: t("are_you_sure")},
+                  class: "btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <center><%= paginate @users %></center>
+    </div>
+  </div>
+</div>

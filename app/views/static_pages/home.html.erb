@@ -11,10 +11,12 @@
             <%= t "an_exclusive_management_working_space_by" %>
             <strong class="green"><%= t "education_framgia" %></strong>
           </h4>
-          <%= link_to t("sign_in"), "#",
-            class: "button animated fadeInUp delay-1s margin_right_20" %>
-          <%= link_to t("sign_up"), "#",
-            class: "button border animated fadeInUp delay-1s" %>
+          <% unless user_signed_in? %>
+            <%= link_to t("sign_in"), new_user_session_path,
+              class: "button animated fadeInUp delay-1s margin_right_20" %>
+            <%= link_to t("sign_up"), new_user_registration_path,
+              class: "button border animated fadeInUp delay-1s" %>
+          <% end %>
         </div>
       </div>
     </div>

@@ -5,3 +5,6 @@ project:
 time_sheet:
   employee_code: 7
   staff_name: 50
+image_format_accept: "image/jpeg,image/gif,image/png"
+image_width: 200
+image_height: 200

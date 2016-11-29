@@ -1,0 +1,44 @@
+<div class="container container_content" >
+  <center><h3><%= t "log_in" %></h3></center>
+  <div class="form_center">
+    <%= form_for resource, as: resource_name,
+      url: session_path(resource_name) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off",
+          class: "form-control"  %>
+      </div>
+      <% if devise_mapping.rememberable? -%>
+        <div class="field row">
+          <div class="col-md-2">
+            <%= f.check_box :remember_me %>
+          </div>
+          <div class="col-md-5">
+            <%= f.label :remember_me %>
+          </div>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+      <div class="actions">
+        <%= f.submit t("log_in"), class: "form-control btn btn-primary" %>
+      </div>
+      <a class="btn btn-block btn-social btn-facebook">
+        <i class="facebookelegance-icons-"></i>
+        <%= t "sign_in_with_facebook" %>
+      </a>
+      <a class="btn btn-block btn-social btn-twitter">
+        <i class="twitter-birdelegance-icons-"></i>
+        <%= t "sign_in_with_twitter" %>
+      </a>
+      <a class="btn btn-block btn-social btn-google-plus">
+        <i class="google-pluselegance-icons-"></i>
+        <%= t "sign_in_with_google_plus" %>
+      </a>
+    <% end %>
+  </div>
+</div>

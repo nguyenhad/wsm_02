@@ -14,6 +14,7 @@ gem "bootstrap-sass", "~> 3.3.6"
 gem "config"
 gem "carrierwave", "0.11.2"
 gem "mini_magick", "4.5.1"
+gem "fog", "1.38.0"
 
 group :development, :test do
   gem "byebug", platform: :mri

@@ -1,0 +1,83 @@
+<div class="container container_content" >
+  <center><h3><%= t "edit" %> <%= resource_name.to_s.humanize %></h3></center>
+  <div class="form_center">
+    <%= form_for resource, as: resource_name,
+      url: registration_path(resource_name), html:{method: :put} do |f| %>
+      <%= devise_error_messages! %>
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true, class: "form-control"%>
+      </div>
+      <div class="field">
+        <%= f.label :gender %>
+        <div class="row">
+          <span class="col-md-1">
+            <%= f.radio_button :gender, "male" %>
+          </span>
+          <span class="col-md-2"><%= t "male" %></span>
+          <span class="col-md-1">
+            <%= f.radio_button :gender, "female" %>
+          </span>
+          <span class="col-md-2"><%= t "female" %></span>
+          <span class="col-md-1">
+            <%= f.radio_button :gender, "other" %>
+          </span>
+          <span class="col-md-2"><%= t "other" %></span>
+        </div>
+      </div>
+      <div class="field">
+        <%= f.label :birthday %>
+        <%= t "example_date" %>
+        <%= f.date_field :birthday %>
+      </div>
+      <div class="field">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar, accept: Settings.image_format_accept %>
+      </div>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      </div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>
+          <%= t "currently_waiting_confirmation_for" %>
+          <%= resource.unconfirmed_email %>
+        </div>
+      <% end %>
+      <div class="field">
+        <%= f.label :password %>
+        <i>
+          <%= t "open_parenthesis" %>
+          <%= t "leave_blank_if_you_do_not_want_to_change_it" %>
+          <%= t "close_parenthesis" %>
+        </i>
+        <%= f.password_field :password, autocomplete: "off",
+          class: "form-control" %>
+        <% if @minimum_password_length %>
+          <em>
+            <%= t "open_parenthesis" %> <%= @minimum_password_length %>
+            <%= t "characters_minimum" %> <%= t "close_parenthesis" %>
+          </em>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off",
+          class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :current_password %>
+        <i>
+          <%= t "open_parenthesis" %>
+          <%= t "we_need_your_current_password_to_confirm_your_changes" %>
+          <%= t "close_parenthesis" %>
+        </i>
+        <%= f.password_field :current_password, autocomplete: "off",
+          class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit t("update"), class: "form-control btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

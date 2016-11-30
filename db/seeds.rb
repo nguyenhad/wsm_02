@@ -1,4 +1,3 @@
-password = "123456"
 User.create!(
   name:  "admin",
   email: "admin@gmail.com",

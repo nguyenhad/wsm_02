@@ -1,4 +1,19 @@
 en:
+  dashboard:
+    workspaces:
+      index:
+        workspaces: "My workspaces"
+        create_workspace: "New workspaces"
+      new:
+        create_workspace: "Create"
+        new_workspaces: "New workspaces"
+      form:
+        name_error: "Name can't empty!"
+      workspace:
+        name: "Name"
+        description: "Description"
+  create_success: "Create success!"
+  create_failed: "Create failed!"
   working_space: "Working space"
   home: "Home"
   education_framgia: "Education Framgia"

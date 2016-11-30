@@ -1,0 +1,15 @@
+<%= simple_form_for [:dashboard, @workspace], multipart: true do |f| %>
+  <div class="form-group">
+    <%= f.input :name, class: "form-control", error: t(".name_error") %>
+  </div>
+  <div class="form-group">
+    <%= f.input :description, as: :text, class: "form-control",
+      autofocus: true  %>
+  </div>
+  <div class="form-group">
+    <%= f.input :image, autofocus: true %>
+  </div>
+  <div class="text-center">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+<% end %>

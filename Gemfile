@@ -18,6 +18,7 @@ gem "waypoints_rails"
 gem "cancancan", "~> 1.10"
 gem "figaro"
 gem "kaminari"
+gem "simple_form"
 
 group :development, :test do
   gem "byebug", platform: :mri

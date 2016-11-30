@@ -3,6 +3,7 @@ class CreateWorkspaces < ActiveRecord::Migration[5.0]
     create_table :workspaces do |t|
       t.string :name
       t.string :description
+      t.string :image
       t.boolean :status, default: false
       t.references :user, foreign_key: true
     end

@@ -1,0 +1,15 @@
+<div class="col-sm-6 col-md-4 ">
+  <div class="thumbnail product">
+    <div class="caption">
+      <%= image_tag workspace.image %>
+      <h5>
+        <%= t ".name" %>
+        <%= link_to workspace.name, dashboard_workspace_path(workspace), data: {turbolinks: false} %>
+      </h5>
+      <p>
+        <%= t ".description" %>
+        <%= workspace.description %>
+      </p>
+    </div>
+  </div>
+</div>

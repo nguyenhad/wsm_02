@@ -1,0 +1,20 @@
+.myPalet{
+  width: 140px;
+  height: 360px;
+}
+.myDiagra{
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px;
+  width:80%;
+}
+.myDiagraDiv{
+  border: solid 1px black;
+  height: 500px;
+}
+.savemod{
+  height:250px;
+}
+.ui-accordion .ui-accordion-content {
+  padding: 1px;
+}

@@ -1,6 +1,8 @@
 en:
   dashboard:
     workspaces:
+      show:
+        title: "Framgia Working Spaces"
       index:
         workspaces: "My workspaces"
         create_workspace: "New workspaces"

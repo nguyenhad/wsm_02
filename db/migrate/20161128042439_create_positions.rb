@@ -8,8 +8,7 @@ class CreatePositions < ActiveRecord::Migration[5.0]
       t.integer :width
       t.integer :height
       t.string :section_key
-      t.references :workspace, foreign_key: true, null: true
-
+      t.integer :workspace_id
       t.timestamp
     end
   end

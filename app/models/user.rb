@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :user_workspaces, dependent: :destroy
   has_many :workspaces, through: :user_workspaces
   has_one :position
+  has_many :sections, through: :positions
   has_many :owned_workspaces, class_name: Workspace.name,
     foreign_key: :user_id, dependent: :destroy
 

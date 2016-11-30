@@ -8,3 +8,7 @@ time_sheet:
 image_format_accept: "image/jpeg,image/gif,image/png"
 image_width: 200
 image_height: 200
+per_page:
+  admin:
+    user: 10
+min_password: 6

@@ -30,3 +30,4 @@ app/assets/javascripts/i18n/translations.js
 /config/application.yml
 .byebug_history
 vendor/assets/bower_resources/*
+config/application.yml

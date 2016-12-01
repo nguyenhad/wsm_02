@@ -24,3 +24,16 @@ validation:
   position_type:
     name_max_len: 128
     color_max_len: 128
+row_header: 5
+data_row_first: 6
+col_date_first: 3
+row_title: 2
+col_employee_code: 1
+num_col_not_process: 6
+format_date_to_timeline: "%H:%M:%S"
+end_of_month: 31
+end_day_pay: 25
+month_year_of_timesheet: "%m/%Y"
+file_xls: ".xls"
+file_xlsx: ".xlsx"
+slash: "/"

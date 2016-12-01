@@ -77,6 +77,7 @@ en:
   date:
     formats:
       default: "%m/%d/%Y"
+      month_year: "%m/%Y"
   forgot_your_password: "Forgot your password?"
   send_me_reset_password_instructions: "Send me reset password instructions"
   new_password: "New password"
@@ -110,3 +111,12 @@ en:
   the_form_contains: "The form contains"
   error: "error"
   list_user: "List user"
+  import_success: "Imported successful."
+  import: "Import"
+  unknown_file: "Unknown file"
+  error_format_file: "Error format file! Please input file .xls,.xlsx"
+  please_you_choose_file: "Please you choose file!"
+  slash: "/"
+  you_do_not_have_access: "You do not have access !"
+  you_are_not_manager: "you are not a manager should can not import !"
+  file_format_not_right: "File format not right !"

@@ -1,0 +1,11 @@
+<div class="container color_black">
+  <%= form_tag dashboard_set_timesheets_path, multipart: true,
+    method: :post do %>
+    <div class="col-md-6">
+      <%= file_field_tag :file, class: "form-control" %>
+    </div>
+    <div class="col-md-2">
+      <%= submit_tag t("import"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

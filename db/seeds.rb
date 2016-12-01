@@ -1,13 +1,16 @@
+password = "123456"
 User.create!(
   name:  "admin",
   email: "admin@gmail.com",
-  password: "123456",
+  password: password,
+  employee_code: "E123456",
   role: 0
 )
 User.create!(
   name:  "Manager",
   email: "manager@gmail.com",
-  password: "123456",
+  password: password,
+  employee_code: "E111111",
   role: 1
 )
 

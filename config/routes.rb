@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     root "static_pages#home"
     resources :users
   end
+
   namespace :dashboard do
     resources :workspaces
+    resources :time_sheets
+    resources :set_timesheets, only: :create
   end
 end

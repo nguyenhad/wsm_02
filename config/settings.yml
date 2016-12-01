@@ -12,3 +12,5 @@ per_page:
   admin:
     user: 10
 min_password: 6
+workspace:
+  per_page: 3

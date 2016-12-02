@@ -1,5 +1,21 @@
 class Section < ApplicationRecord
   belongs_to :workspace
-  has_many :positions, dependent: :destroy
+  has_many :positions, class_name: Position.name,
+    primary_key: [:section_key, :workspace_id],
+    foreign_key: [:section_key, :workspace_id]
   has_many :position_types, through: :positions
+
+  validates :workspace, presence: true
+  validates :section_key, presence: true,
+    uniqueness: {scope: :workspace_id}
+  validates :name, presence: true,
+    length: {maximum: Settings.validation.section.name_max_len}
+  validates :pos_x, presence: true, numericality: {only_integer: true}
+  validates :pos_y, presence: true, numericality: {only_integer: true}
+  validates :width, presence: true, numericality: {only_integer: true}
+  validates :height, presence: true, numericality: {only_integer: true}
+
+  scope :find_by_key_and_workspace, ->section_key, workspace_id do
+    where section_key: section_key, workspace_id: workspace_id
+  end
 end

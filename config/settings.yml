@@ -14,3 +14,13 @@ per_page:
 min_password: 6
 workspace:
   per_page: 3
+break_line: "<br>"
+validation:
+  workspace:
+    name_max_len: 128
+    des_max_len: 255
+  section:
+    name_max_len: 128
+  position_type:
+    name_max_len: 128
+    color_max_len: 128

@@ -12,6 +12,11 @@ en:
       workspace:
         name: "Name"
         description: "Description"
+      load_fails: "Workspace not found!"
+      unauthorized: "Access denied!"
+      update:
+        success: "%{count} items has been Updated successfully."
+        error_at: "Update \"%{key}\" unseuccessful."
   create_success: "Create success!"
   create_failed: "Create failed!"
   working_space: "Working space"

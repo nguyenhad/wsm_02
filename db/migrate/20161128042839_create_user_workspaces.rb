@@ -4,6 +4,8 @@ class CreateUserWorkspaces < ActiveRecord::Migration[5.0]
       t.references :workspace, foreign_key: true
       t.references :user, foreign_key: true
       t.boolean :is_manager, default: false
+
+      t.timestamps
     end
   end
 end

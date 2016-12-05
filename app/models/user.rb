@@ -22,4 +22,8 @@ class User < ApplicationRecord
   def is_user? user
     self.id == user.id
   end
+
+  def is_owner? workspace
+    self.id == workspace.user_id
+  end
 end

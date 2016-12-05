@@ -19,6 +19,8 @@ gem "cancancan", "~> 1.10"
 gem "figaro"
 gem "kaminari"
 gem "simple_form"
+gem "faker"
+gem "composite_primary_keys", "~> 9.0", ">= 9.0.4"
 
 group :development, :test do
   gem "byebug", platform: :mri

@@ -1,5 +1,4 @@
 class Workspace < ApplicationRecord
-
   has_many :user_workspaces, dependent: :destroy
   has_many :users, through: :user_workspaces
   has_many :sections
@@ -7,8 +6,11 @@ class Workspace < ApplicationRecord
 
   mount_uploader :image, WorkspaceImageUploader
 
-  validates :name, presence: true, length: {maximum: 50}
-  validates :description, length: {maximum: 100 }
+  validates :name, presence: true,
+    length: {maximum: Settings.validation.workspace.name_max_len}
+  validates :description, presence: true,
+    length: {maximum: Settings.validation.workspace.des_max_len}
+  validates :user, presence: true
 
   after_create :build_user_workspaces
 

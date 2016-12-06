@@ -15,10 +15,12 @@ User.create!(
 )
 
 user = User.create! name: "Son Tran", email: "sontd.it@gmail.com",
-  password: "123456", created_at: Time.now, updated_at: Time.now
+  password: "123456", created_at: Time.now, updated_at: Time.now,
+  employee_code: "E111112"
 15.times do |n|
   User.create! name: "User #{n}", email: "user_#{n}@gmail.com",
-    password: "123456", created_at: Time.now, updated_at: Time.now
+    password: "123456", created_at: Time.now, updated_at: Time.now,
+    employee_code: "MS#{n.to_s.rjust(4, '0')}"
 end
 
 5.times do |n|

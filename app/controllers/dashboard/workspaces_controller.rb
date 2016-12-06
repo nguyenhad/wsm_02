@@ -1,11 +1,15 @@
 class Dashboard::WorkspacesController < DashboardController
-  skip_before_action :load_workspace, only: :index
+  skip_before_action :load_workspace, only: [:index, :create]
   skip_before_action :verify_owner, only: :index
 
   def index
     @workspaces = current_user.owned_workspaces.page(params[:page])
-      .per(Settings.workspace.per_page)
+      .per Settings.workspace.per_page
     @workspace = Workspace.new
+  end
+
+  def show
+    @sections = ShowWorkspaceService.new(@workspace).show_hash_workspace
   end
 
   def new
@@ -15,7 +19,7 @@ class Dashboard::WorkspacesController < DashboardController
     @workspace = current_user.owned_workspaces.new workspace_params
     if @workspace.save
       flash[:success] = t "create_success"
-      redirect_to workspaces_path
+      redirect_to dashboard_workspaces_path
     else
       render :new
     end

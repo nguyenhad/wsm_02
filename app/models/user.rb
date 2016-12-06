@@ -2,7 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
     :trackable, :validatable
 
-  has_many :time_sheets, dependent: :destroy
+  has_many :time_sheets, primary_key: :employee_code,
+    foreign_key: :employee_code, dependent: :destroy
   has_many :project_members, dependent: :destroy
   has_many :user_workspaces, dependent: :destroy
   has_many :workspaces, through: :user_workspaces
@@ -16,6 +17,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   validates :name, presence: true, length: {maximum: Settings.user.name}
+  validates :employee_code, presence: true, uniqueness: {case_sensitive: false}
 
   scope :order_date_desc, ->{order created_at: :desc}
 

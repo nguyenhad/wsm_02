@@ -18,4 +18,11 @@ class ApplicationController < ActionController::Base
       user_params.permit :password, :password_confirmation, :current_password
     end
   end
+
+  def verify_manager
+    unless current_user.manager?
+      flash[:danger] = t "you_do_not_have_access"
+      redirect_to root_url
+    end
+  end
 end

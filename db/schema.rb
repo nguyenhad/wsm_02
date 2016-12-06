@@ -13,27 +13,24 @@
 ActiveRecord::Schema.define(version: 20161130013356) do
 
   create_table "position_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "color"
-    t.integer  "default_width",  default: 200
-    t.integer  "default_height", default: 200
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string  "name"
+    t.string  "color"
+    t.integer "default_width",  default: 200
+    t.integer "default_height", default: 200
   end
 
   create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "section_id"
     t.integer "position_type_id"
     t.integer "user_id"
     t.integer "pos_x"
     t.integer "pos_y"
     t.integer "width"
     t.integer "height"
-    t.string  "section_key"
-    t.integer "workspace_id"
     t.string  "position_key"
     t.index ["position_type_id"], name: "index_positions_on_position_type_id", using: :btree
+    t.index ["section_id"], name: "index_positions_on_section_id", using: :btree
     t.index ["user_id"], name: "index_positions_on_user_id", using: :btree
-    t.index ["workspace_id"], name: "index_positions_on_workspace_id", using: :btree
   end
 
   create_table "project_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -55,36 +52,28 @@ ActiveRecord::Schema.define(version: 20161130013356) do
   end
 
   create_table "sections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "workspace_id"
-    t.string   "name"
-    t.integer  "pos_x"
-    t.integer  "pos_y"
-    t.integer  "width"
-    t.integer  "height"
-    t.string   "section_key"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer "workspace_id"
+    t.string  "name"
+    t.integer "pos_x"
+    t.integer "pos_y"
+    t.integer "width"
+    t.integer "height"
     t.index ["workspace_id"], name: "index_sections_on_workspace_id", using: :btree
   end
 
   create_table "time_sheets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "employee_code"
-    t.string   "staff_name"
     t.datetime "date"
     t.string   "time_in"
     t.string   "time_out"
-    t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["user_id"], name: "index_time_sheets_on_user_id", using: :btree
   end
 
   create_table "user_workspaces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "workspace_id"
-    t.integer  "user_id"
-    t.boolean  "is_manager",   default: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer "workspace_id"
+    t.integer "user_id"
+    t.boolean "is_manager",   default: false
     t.index ["user_id"], name: "index_user_workspaces_on_user_id", using: :btree
     t.index ["workspace_id"], name: "index_user_workspaces_on_workspace_id", using: :btree
   end
@@ -94,6 +83,7 @@ ActiveRecord::Schema.define(version: 20161130013356) do
     t.integer  "gender"
     t.integer  "role",                   default: 2
     t.datetime "birthday"
+    t.string   "employee_code"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -113,23 +103,20 @@ ActiveRecord::Schema.define(version: 20161130013356) do
   end
 
   create_table "workspaces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "image"
-    t.boolean  "status",      default: false
-    t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string  "name"
+    t.string  "description"
+    t.string  "image"
+    t.boolean "status",      default: false
+    t.integer "user_id"
     t.index ["user_id"], name: "index_workspaces_on_user_id", using: :btree
   end
 
   add_foreign_key "positions", "position_types"
+  add_foreign_key "positions", "sections"
   add_foreign_key "positions", "users"
-  add_foreign_key "positions", "workspaces"
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
   add_foreign_key "sections", "workspaces"
-  add_foreign_key "time_sheets", "users"
   add_foreign_key "user_workspaces", "users"
   add_foreign_key "user_workspaces", "workspaces"
   add_foreign_key "workspaces", "users"

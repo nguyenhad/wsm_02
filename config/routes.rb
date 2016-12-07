@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     resources :workspaces
     resources :time_sheets
     resources :set_timesheets, only: :create
+    resources :projects, except: :show
   end
 end

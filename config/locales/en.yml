@@ -1,5 +1,17 @@
 en:
   dashboard:
+    projects:
+      index:
+        list_project: "List project"
+        new_project: "New project"
+        name_project: "Name project"
+        start_date: "Start date"
+        end_date: "End date"
+      create_successfully: "Create successfully"
+      update_successfully: "Update successfully"
+      delete_successfully: "Delete successfully"
+      delete_not_successfully: "Delete not successfully"
+      not_found: "Not found"
     workspaces:
       show:
         title: "Framgia Working Spaces"
@@ -22,6 +34,10 @@ en:
   create_success: "Create success!"
   create_failed: "Create failed!"
   working_space: "Working space"
+  cannot_be_before_the_start_date: "can't be before the start date"
+  time:
+    formats:
+      date_month_year: "%d/%m/%Y"
   home: "Home"
   education_framgia: "Education Framgia"
   an_exclusive_management_working_space_by: "An exclusive management working space by"

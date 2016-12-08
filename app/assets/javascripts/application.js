@@ -22,3 +22,4 @@
 //= require sticky
 //= require gojs/release/go.js
 //= require gojs/release/go-debug.js
+//= require app

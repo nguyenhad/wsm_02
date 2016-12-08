@@ -199,7 +199,7 @@ h1.underline-dotted,h2.underline-dotted,h3.underline-dotted,h4.underline-dotted 
 }
 /* Backgrounds */
 .row-back {
-  background: #2c3e50;
+  background: #07313a;
   border-bottom: 1px solid #34495E;
 }
 
@@ -360,9 +360,10 @@ background: #FFFFFF !important;
 }
 
 .overlay {
+  background:rgba(0, 0, 0, 0.45) url(pattern.png) repeat;
   position: absolute;
   width: 100%;
-  top: 85px;
+  top: 96px;
   height: 580px;
 }
 
@@ -492,7 +493,7 @@ background: #FFFFFF !important;
 
 /*footer section*/
 .footer {
-  border-top: 12px solid #95A5A6;
+  border-top: 2px solid #95A5A6;
 }
 /* Waypoints */
 .wp1, .wp2, .wp3, .wp4, .wp5, .wp6, .wp7, .wp8 { visibility: hidden; }
@@ -620,4 +621,17 @@ background: #FFFFFF !important;
 
 .w-nav-link.menu-li:hover {
   text-decoration: none;
+}
+
+.icon_header_after_login {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 20px
+}
+.icon_color_white {
+  color: white
+}
+.padding_left_after_login {
+  padding-left:35px;
 }

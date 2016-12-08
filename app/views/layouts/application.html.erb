@@ -9,9 +9,12 @@
       "data-turbolinks-track": "reload" %>
   </head>
   <body>
-    <%= render "layouts/header" %>
-    <%= render "shared/flash" %>
-    <%= yield %>
+    <% if user_signed_in? %>
+      <%= render "layouts/header_after_login" %>
+    <% else %>
+      <%= render "layouts/header" %>
+      <%= yield %>
+    <% end %>
     <%= render "layouts/footer" %>
   </body>
 </html>

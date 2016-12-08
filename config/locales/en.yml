@@ -34,6 +34,7 @@ en:
   create_success: "Create success!"
   create_failed: "Create failed!"
   working_space: "Working space"
+  staff: "Staff"
   cannot_be_before_the_start_date: "can't be before the start date"
   time:
     formats:

@@ -23,3 +23,8 @@
 //= require gojs/release/go.js
 //= require gojs/release/go-debug.js
 //= require app
+//= require ./vendor/modernizr-2.7.1-respond-1.4.2.min
+//= require ./vendor/bootstrap.min
+//= require ./pages/login.js
+//= require plugins
+//= require jquery.validate

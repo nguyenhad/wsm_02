@@ -1,4 +1,11 @@
 class User < ApplicationRecord
+  attr_accessor :validate_employee_code
+
+  def initialize *args
+    self.validate_employee_code ||= true
+    super(*args)
+  end
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
     :trackable, :validatable
 
@@ -18,8 +25,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   validates :name, presence: true, length: {maximum: Settings.user.name}
-  validates :employee_code, presence: true, uniqueness: {case_sensitive: false}
-
+  validates :employee_code, presence: true,
+    uniqueness: {case_sensitive: false}, if: :validate_employee_code
   scope :order_date_desc, ->{order created_at: :desc}
 
   def is_user? user

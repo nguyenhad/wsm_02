@@ -1,0 +1,239 @@
+<script id="code">
+  var AllowTopLevel = false;
+  var CellSize = new go.Size(50, 50);
+  var all;
+  function init() {
+    if (window.goSamples) goSamples();
+    var $ = go.GraphObject.make;
+
+    myDiagram =
+      $(go.Diagram, "myDiagramDiv",
+        {
+          grid: $(go.Panel, "Grid",
+                  { gridCellSize: CellSize },
+                  $(go.Shape, "LineH", { stroke: "lightgray" }),
+                  $(go.Shape, "LineV", { stroke: "lightgray" })
+                ),
+          "draggingTool.isGridSnapEnabled": true,
+          "draggingTool.gridSnapCellSpot": go.Spot.Center,
+          "resizingTool.isGridSnapEnabled": true,
+          allowDrop: true,
+          "animationManager.isEnabled": false,
+          "undoManager.isEnabled": true
+        });
+    function textStyle() {
+      return { font: "9pt  Segoe UI,sans-serif", stroke: "white" };
+    }
+    myDiagram.nodeTemplate =
+      $(go.Node, "Auto",
+        {
+          resizable: true, resizeObjectName: "SHAPE",
+          locationSpot: new go.Spot(0, 0, CellSize.width / 2, CellSize.height / 2),
+          mouseDragEnter: function(e, node) {
+            e.handled = true;
+            node.findObject("SHAPE").fill = "red";
+            highlightGroup(node.containingGroup, false);
+          },
+          mouseDragLeave: function(e, node) {
+            node.updateTargetBindings();
+          },
+          mouseDrop: function(e, node) {
+            node.diagram.currentTool.doCancel();
+          }
+        },
+        new go.Binding("position", "pos", go.Point.parse).
+          makeTwoWay(go.Point.stringify),
+        $(go.Shape, "Rectangle",
+          { name: "SHAPE",
+            fill: "white",
+            minSize: CellSize,
+            desiredSize: CellSize
+          },
+          new go.Binding("fill", "color"),
+          new go.Binding("desiredSize", "size", go.Size.parse).
+            makeTwoWay(go.Size.stringify)),
+        $(go.TextBlock,
+          { alignment: go.Spot.Center, font: 'bold 10px sans-serif' },
+          new go.Binding("text", "key")),
+        {
+          toolTip:
+            $(go.Adornment, "Auto",
+              $(go.Shape, "Rectangle",
+                {
+                  name: "SHAPE", fill: "green", stroke: null,
+                }),
+              $(go.Panel, "Horizontal",
+                $(go.Panel, "Table",
+                  {
+                    maxSize: new go.Size(150, 999),
+                    margin: new go.Margin(6, 10, 0, 3),
+                    defaultAlignment: go.Spot.Left
+                  },
+                  $(go.RowColumnDefinition, { column: 2, width: 4 }),
+                  $(go.TextBlock, textStyle(),
+                    {
+                      row: 0, column: 0, columnSpan: 5,
+                      font: "15pt Segoe UI,sans-serif",
+                      editable: true, isMultiline: false,
+                      minSize: new go.Size(10, 16)
+                    },
+                    new go.Binding("text", "key").makeTwoWay()),
+                  $(go.TextBlock, "Gender: ", textStyle(),
+                    { row: 1, column: 0 }),
+                  $(go.TextBlock, textStyle(),
+                    {
+                      row: 1, column: 1, columnSpan: 4,
+                      editable: true, isMultiline: false,
+                      minSize: new go.Size(10, 14),
+                      margin: new go.Margin(0, 0, 0, 3)
+                    },
+                    new go.Binding("text", "gender").makeTwoWay()),
+                  $(go.TextBlock, "Role: ", textStyle(),
+                    { row: 2, column: 0 }),
+                  $(go.TextBlock, textStyle(),
+                    {
+                      row: 2, column: 1, columnSpan: 4,
+                      editable: true, isMultiline: false,
+                      minSize: new go.Size(10, 14),
+                      margin: new go.Margin(0, 0, 0, 3)
+                    },
+                    new go.Binding("text", "role").makeTwoWay()),
+                  $(go.TextBlock, "BirthDay", textStyle(),
+                    { row: 3, column: 0 }),
+                  $(go.TextBlock, textStyle(),
+                    {
+                      row: 3, column: 1, columnSpan: 4,
+                      editable: true, isMultiline: false,
+                      minSize: new go.Size(10, 14),
+                      margin: new go.Margin(0, 0, 0, 3)
+                    },
+                    new go.Binding("text", "birthday").makeTwoWay())
+                )
+              )
+            )
+        }
+      );
+
+    function highlightGroup(grp, show) {
+      if (!grp) return;
+      if (show) {
+        var tool = grp.diagram.toolManager.draggingTool;
+        var map = tool.draggedParts || tool.copiedParts;
+        if (grp.canAddMembers(map.toKeySet())) {
+          grp.isHighlighted = true;
+          return;
+        }
+      }
+      grp.isHighlighted = false;
+    }
+
+    var groupFill = "rgba(128,128,128,0.2)";
+    var groupStroke = "gray";
+    var dropFill = "rgba(128,255,255,0.2)";
+    var dropStroke = "red";
+
+    myDiagram.groupTemplate =
+      $(go.Group,
+        {
+          layerName: "Background",
+          resizable: true, resizeObjectName: "SHAPE",
+          locationSpot: new go.Spot(0, 0, CellSize.width/2, CellSize.height/2)
+        },
+        new go.Binding("position", "pos", go.Point.parse).
+          makeTwoWay(go.Point.stringify),
+        {
+          mouseDragEnter: function(e, grp, prev) {highlightGroup(grp, true);},
+          mouseDragLeave: function(e, grp, next) {highlightGroup(grp, false);},
+          mouseDrop: function(e, grp) {
+            var ok = grp.addMembers(grp.diagram.selection, true);
+            if (!ok) grp.diagram.currentTool.doCancel();
+          }
+        },
+        $(go.Shape, "Rectangle",
+          { name: "SHAPE",
+            fill: groupFill,
+            stroke: groupStroke,
+            minSize: new go.Size(CellSize.width*2, CellSize.height*2)
+          },
+          new go.Binding("desiredSize", "size", go.Size.parse).
+            makeTwoWay(go.Size.stringify),
+          new go.Binding("fill", "isHighlighted", function(h)
+            { return h ? dropFill : groupFill; }).ofObject(),
+          new go.Binding("stroke", "isHighlighted", function(h)
+            { return h ? dropStroke: groupStroke; }).ofObject())
+      );
+
+    myDiagram.commandHandler.memberValidation = function(grp, node) {
+      if (grp instanceof go.Group && node instanceof go.Group) return false;
+      return true;
+    };
+
+    myDiagram.mouseDragOver = function(e) {
+      if (!AllowTopLevel) {
+        if (!e.diagram.selection.all(function(p)
+          { return p instanceof go.Group; })) {
+          e.diagram.currentCursor = "not-allowed";
+        }
+      }
+    };
+
+    myDiagram.mouseDrop = function(e) {
+      if (AllowTopLevel) {
+        if (!e.diagram.commandHandler.addTopLevelParts(e.diagram.selection, true)) {
+          e.diagram.currentTool.doCancel();
+        }
+      } else {
+        if (!e.diagram.selection.all(function(p)
+          { return p instanceof go.Group; })) {
+          e.diagram.currentTool.doCancel();
+          }
+      }
+    };
+
+    myDiagram.model = new go.GraphLinksModel(
+      <%= raw @sections.to_json %>
+      );
+
+    jQuery("#accordion").accordion({
+      activate: function(event, ui) {
+        myPaletteSmall.requestUpdate();
+        myPaletteTall.requestUpdate();
+        myPaletteWide.requestUpdate();
+      }
+    });
+
+    myPaletteSmall =
+      $(go.Palette, "myPaletteSmall",
+        {
+          nodeTemplate: myDiagram.nodeTemplate,
+          groupTemplate: myDiagram.groupTemplate,
+          layout: $(go.GridLayout)
+        });
+
+    var green = '#B2FF59';
+    var blue = '#81D4FA';
+    var yellow = '#FFEB3B';
+
+    myPaletteSmall.model = new go.GraphLinksModel([
+      { key: "Ghe", color: green, type: "1", user_id: "4", size: "50 50" },
+      { key: "Ban", color: blue, type: "2", user_id: "5", size: "50 50" },
+      { key: "Chau Cay", color: yellow, type: "3", user_id: "6", size: "50 50" },
+      { key: "Van Phong", isGroup: true, size: "50 50", name: "Sec 1-2" }
+    ]);
+  all = myDiagram.model.nodeDataArray;
+  }
+
+  $(document).ready(function() {
+    $('.btn-save').on('click', function() {
+      $.ajax({
+        type: 'POST',
+        url: '/dashboard/workspaces/<%= params[:id] %>',
+        data: {
+          _method: "patch",
+          nodeDataArray: all
+        },
+        dataType: 'json',
+      });
+    });
+  });
+</script>

@@ -13,6 +13,10 @@ en:
       delete_not_successfully: "Delete not successfully"
       not_found: "Not found"
     workspaces:
+      edit:
+        edit: "Edit"
+        item: "Item"
+        save: "Save"
       show:
         title: "Framgia Working Spaces"
       index:

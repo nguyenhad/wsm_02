@@ -31,7 +31,13 @@ class WorkspaceService
             key: object["key"])
           next
         end
-        position = section.first.positions.create position_params(object)
+        position = Position.of_user(object["user_id"])
+          .of_workspace(@workspace.id)
+        if position.empty?
+          position = section.first.positions.create position_params(object)
+        else
+          next
+        end
         if position.save
           @updated_counter += 1
         else

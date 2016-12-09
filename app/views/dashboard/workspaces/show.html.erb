@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= t "workspaces.show.title" %></title>
     <%= render "show.js.erb" %>
   </head>
   <body onload="init()">
@@ -11,6 +10,14 @@
           <div id="myDiagramDiv" class="myDiagraDiv"></div>
         </span>
       </div>
+    </div>
+    <div>
+      <% if current_user.manager? %>
+        <button>
+          <%= link_to t("dashboard.workspaces.edit.edit"),
+            edit_dashboard_workspace_path %>
+        </button>
+      <% end %>
     </div>
   </body>
 </html>

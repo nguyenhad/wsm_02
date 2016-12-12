@@ -6,7 +6,8 @@ class CreateGroups < ActiveRecord::Migration[5.0]
       t.text :description
       t.integer :closest_parent_id
       t.string :parent_path
-
+      t.integer :group_type
+      t.datetime :deleted_at
 
       t.timestamps
     end

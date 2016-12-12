@@ -1,4 +1,6 @@
 class PositionType < ApplicationRecord
+  acts_as_paranoid
+
   has_many :positions
 
   validates :name, presence: true,

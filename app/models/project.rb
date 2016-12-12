@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  acts_as_paranoid
+
   has_many :project_members, dependent: :destroy
 
   scope :recent, ->{order created_at: :desc}

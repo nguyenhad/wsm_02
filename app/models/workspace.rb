@@ -1,8 +1,10 @@
 class Workspace < ApplicationRecord
+  acts_as_paranoid
+
   has_many :user_workspaces, dependent: :destroy
   has_many :users, through: :user_workspaces
   has_many :sections
-  
+
   belongs_to :user
 
   mount_uploader :image, WorkspaceImageUploader

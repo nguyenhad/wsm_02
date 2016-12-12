@@ -1,4 +1,6 @@
 class Section < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :workspace
   self.primary_keys = :section_key, :workspace_id
   has_many :positions, class_name: Position.name,

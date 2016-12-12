@@ -7,6 +7,7 @@ class CreateRequestOts < ActiveRecord::Migration[5.0]
       t.integer :status
       t.references :user, foreign_key: true
       t.integer :approve_group
+      t.datetime :deleted_at
 
       t.timestamps
     end

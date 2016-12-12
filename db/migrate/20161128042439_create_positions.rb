@@ -9,6 +9,8 @@ class CreatePositions < ActiveRecord::Migration[5.0]
       t.integer :height
       t.string :section_key
       t.integer :workspace_id
+      t.datetime :deleted_at
+
       t.timestamp
     end
   end

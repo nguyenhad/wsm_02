@@ -6,6 +6,7 @@ class CreateNormalDayoffSettings < ActiveRecord::Migration[5.0]
       t.string :years
       t.string :count_day
       t.references :dayoff_setting, foreign_key: true
+      t.datetime :deleted_at
 
       t.timestamps
     end

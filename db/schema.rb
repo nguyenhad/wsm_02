@@ -10,26 +10,124 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130013356) do
+ActiveRecord::Schema.define(version: 20161212040712) do
+
+  create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "company_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "limit_leave"
+    t.integer  "cutoff_date"
+    t.integer  "limit_time_leave"
+    t.integer  "company_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["company_id"], name: "index_company_settings_on_company_id", using: :btree
+  end
+
+  create_table "compensations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "from"
+    t.date     "to"
+    t.integer  "request_off_id"
+    t.integer  "status"
+    t.integer  "type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["request_off_id"], name: "index_compensations_on_request_off_id", using: :btree
+  end
+
+  create_table "dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "company_id"
+    t.integer  "loop_available"
+    t.integer  "limmit_loop_year"
+    t.integer  "limmit_loop_day"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["company_id"], name: "index_dayoff_settings_on_company_id", using: :btree
+  end
+
+  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.text     "description",       limit: 65535
+    t.integer  "closest_parent_id"
+    t.string   "parent_path"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["company_id"], name: "index_groups_on_company_id", using: :btree
+  end
+
+  create_table "holidays", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "type"
+    t.date     "date"
+    t.integer  "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_holidays_on_company_id", using: :btree
+  end
+
+  create_table "normal_dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "operator"
+    t.string   "years"
+    t.string   "count_day"
+    t.integer  "dayoff_setting_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["dayoff_setting_id"], name: "index_normal_dayoff_settings_on_dayoff_setting_id", using: :btree
+  end
+
+  create_table "ot_detail_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ot_setting_id"
+    t.time     "from_time"
+    t.time     "end_time"
+    t.integer  "wage_rate"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["ot_setting_id"], name: "index_ot_detail_settings_on_ot_setting_id", using: :btree
+  end
+
+  create_table "ot_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "company_id"
+    t.time     "from_time_available"
+    t.time     "end_time_available"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["company_id"], name: "index_ot_settings_on_company_id", using: :btree
+  end
+
+  create_table "permissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "entry"
+    t.string   "optional"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "position_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string  "name"
-    t.string  "color"
-    t.integer "default_width",  default: 200
-    t.integer "default_height", default: 200
+    t.string   "name"
+    t.string   "color"
+    t.integer  "default_width",  default: 200
+    t.integer  "default_height", default: 200
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "section_id"
     t.integer "position_type_id"
     t.integer "user_id"
     t.integer "pos_x"
     t.integer "pos_y"
     t.integer "width"
     t.integer "height"
+    t.string  "section_key"
+    t.integer "workspace_id"
     t.string  "position_key"
     t.index ["position_type_id"], name: "index_positions_on_position_type_id", using: :btree
-    t.index ["section_id"], name: "index_positions_on_section_id", using: :btree
     t.index ["user_id"], name: "index_positions_on_user_id", using: :btree
   end
 
@@ -51,14 +149,70 @@ ActiveRecord::Schema.define(version: 20161130013356) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "sections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "workspace_id"
-    t.string  "name"
-    t.integer "pos_x"
-    t.integer "pos_y"
-    t.integer "width"
-    t.integer "height"
+  create_table "request_offs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "from"
+    t.datetime "to"
+    t.string   "reason"
+    t.integer  "special_dayoff_type_id"
+    t.integer  "status"
+    t.integer  "approve_group"
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["special_dayoff_type_id"], name: "index_request_offs_on_special_dayoff_type_id", using: :btree
+    t.index ["user_id"], name: "index_request_offs_on_user_id", using: :btree
+  end
+
+  create_table "request_ots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.time     "from_time"
+    t.time     "end_time"
+    t.string   "reason"
+    t.integer  "status"
+    t.integer  "user_id"
+    t.integer  "approve_group"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["user_id"], name: "index_request_ots_on_user_id", using: :btree
+  end
+
+  create_table "sections", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "workspace_id"
+    t.string   "name"
+    t.integer  "pos_x"
+    t.integer  "pos_y"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "section_key"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["workspace_id"], name: "index_sections_on_workspace_id", using: :btree
+  end
+
+  create_table "shifts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "company_id"
+    t.time     "time_in"
+    t.time     "time_out"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_shifts_on_company_id", using: :btree
+  end
+
+  create_table "special_dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "dayoff_setting_id"
+    t.integer  "mount"
+    t.integer  "special_dayoff_type_id"
+    t.integer  "unit"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["dayoff_setting_id"], name: "index_special_dayoff_settings_on_dayoff_setting_id", using: :btree
+    t.index ["special_dayoff_type_id"], name: "index_special_dayoff_settings_on_special_dayoff_type_id", using: :btree
+  end
+
+  create_table "special_dayoff_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "time_sheets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -70,10 +224,20 @@ ActiveRecord::Schema.define(version: 20161130013356) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "role"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_groups_on_user_id", using: :btree
+  end
+
   create_table "user_workspaces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "workspace_id"
-    t.integer "user_id"
-    t.boolean "is_manager",   default: false
+    t.integer  "workspace_id"
+    t.integer  "user_id"
+    t.boolean  "is_manager",   default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["user_id"], name: "index_user_workspaces_on_user_id", using: :btree
     t.index ["workspace_id"], name: "index_user_workspaces_on_workspace_id", using: :btree
   end
@@ -103,20 +267,36 @@ ActiveRecord::Schema.define(version: 20161130013356) do
   end
 
   create_table "workspaces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string  "name"
-    t.string  "description"
-    t.string  "image"
-    t.boolean "status",      default: false
-    t.integer "user_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "image"
+    t.boolean  "status",      default: false
+    t.integer  "user_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["user_id"], name: "index_workspaces_on_user_id", using: :btree
   end
 
+  add_foreign_key "company_settings", "companies"
+  add_foreign_key "compensations", "request_offs"
+  add_foreign_key "dayoff_settings", "companies"
+  add_foreign_key "groups", "companies"
+  add_foreign_key "holidays", "companies"
+  add_foreign_key "normal_dayoff_settings", "dayoff_settings"
+  add_foreign_key "ot_detail_settings", "ot_settings"
+  add_foreign_key "ot_settings", "companies"
   add_foreign_key "positions", "position_types"
-  add_foreign_key "positions", "sections"
   add_foreign_key "positions", "users"
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
+  add_foreign_key "request_offs", "special_dayoff_types"
+  add_foreign_key "request_offs", "users"
+  add_foreign_key "request_ots", "users"
   add_foreign_key "sections", "workspaces"
+  add_foreign_key "shifts", "companies"
+  add_foreign_key "special_dayoff_settings", "dayoff_settings"
+  add_foreign_key "special_dayoff_settings", "special_dayoff_types"
+  add_foreign_key "user_groups", "users"
   add_foreign_key "user_workspaces", "users"
   add_foreign_key "user_workspaces", "workspaces"
   add_foreign_key "workspaces", "users"

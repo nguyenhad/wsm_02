@@ -5,6 +5,7 @@ class CreateOtDetailSettings < ActiveRecord::Migration[5.0]
       t.time :from_time
       t.time :end_time
       t.integer :wage_rate
+      t.datetime :deleted_at
 
       t.timestamps
     end

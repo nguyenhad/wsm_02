@@ -25,6 +25,7 @@ gem "roo", "~> 2.5.0"
 gem "roo-xls"
 gem "jquery-validation-rails"
 gem "jquery-ui-rails"
+gem "paranoia", "~> 2.2"
 
 group :development, :test do
   gem "byebug", platform: :mri

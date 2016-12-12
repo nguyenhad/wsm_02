@@ -5,6 +5,7 @@ class CreateTimeSheets < ActiveRecord::Migration[5.0]
       t.datetime :date
       t.string :time_in
       t.string :time_out
+      t.datetime :deleted_at
 
       t.timestamps
     end

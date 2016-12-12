@@ -10,23 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212043304) do
+ActiveRecord::Schema.define(version: 20161212162601) do
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "parent_id"
     t.integer  "status"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "company_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "limit_leave"
     t.integer  "cutoff_date"
-    t.integer  "limit_time_leave"
     t.integer  "company_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["company_id"], name: "index_company_settings_on_company_id", using: :btree
   end
 
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "request_off_id"
     t.integer  "status"
     t.integer  "type"
+    t.datetime "deleted_at"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["request_off_id"], name: "index_compensations_on_request_off_id", using: :btree
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "loop_available"
     t.integer  "limmit_loop_year"
     t.integer  "limmit_loop_day"
+    t.datetime "deleted_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["company_id"], name: "index_dayoff_settings_on_company_id", using: :btree
@@ -57,6 +59,8 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.text     "description",       limit: 65535
     t.integer  "closest_parent_id"
     t.string   "parent_path"
+    t.integer  "group_type"
+    t.datetime "deleted_at"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.index ["company_id"], name: "index_groups_on_company_id", using: :btree
@@ -66,6 +70,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "type"
     t.date     "date"
     t.integer  "company_id"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_holidays_on_company_id", using: :btree
@@ -77,6 +82,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.string   "years"
     t.string   "count_day"
     t.integer  "dayoff_setting_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["dayoff_setting_id"], name: "index_normal_dayoff_settings_on_dayoff_setting_id", using: :btree
@@ -87,6 +93,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.time     "from_time"
     t.time     "end_time"
     t.integer  "wage_rate"
+    t.datetime "deleted_at"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["ot_setting_id"], name: "index_ot_detail_settings_on_ot_setting_id", using: :btree
@@ -96,6 +103,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "company_id"
     t.time     "from_time_available"
     t.time     "end_time_available"
+    t.datetime "deleted_at"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.index ["company_id"], name: "index_ot_settings_on_company_id", using: :btree
@@ -104,6 +112,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
   create_table "permissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "entry"
     t.string   "optional"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -113,20 +122,22 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.string   "color"
     t.integer  "default_width",  default: 200
     t.integer  "default_height", default: 200
+    t.datetime "deleted_at"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
 
   create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "position_type_id"
-    t.integer "user_id"
-    t.integer "pos_x"
-    t.integer "pos_y"
-    t.integer "width"
-    t.integer "height"
-    t.string  "section_key"
-    t.integer "workspace_id"
-    t.string  "position_key"
+    t.integer  "position_type_id"
+    t.integer  "user_id"
+    t.integer  "pos_x"
+    t.integer  "pos_y"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "section_key"
+    t.integer  "workspace_id"
+    t.datetime "deleted_at"
+    t.string   "position_key"
     t.index ["position_type_id"], name: "index_positions_on_position_type_id", using: :btree
     t.index ["user_id"], name: "index_positions_on_user_id", using: :btree
   end
@@ -135,6 +146,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "role_scrum", default: 2
+    t.datetime "deleted_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["project_id"], name: "index_project_members_on_project_id", using: :btree
@@ -145,6 +157,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.string   "name"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -157,6 +170,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "status"
     t.integer  "approve_group"
     t.integer  "user_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["special_dayoff_type_id"], name: "index_request_offs_on_special_dayoff_type_id", using: :btree
@@ -170,6 +184,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "status"
     t.integer  "user_id"
     t.integer  "approve_group"
+    t.datetime "deleted_at"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["user_id"], name: "index_request_ots_on_user_id", using: :btree
@@ -183,6 +198,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "width"
     t.integer  "height"
     t.string   "section_key"
+    t.datetime "deleted_at"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["workspace_id"], name: "index_sections_on_workspace_id", using: :btree
@@ -192,6 +208,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "company_id"
     t.time     "time_in"
     t.time     "time_out"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_shifts_on_company_id", using: :btree
@@ -199,9 +216,12 @@ ActiveRecord::Schema.define(version: 20161212043304) do
 
   create_table "special_dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "dayoff_setting_id"
-    t.integer  "mount"
+    t.integer  "amount"
     t.integer  "special_dayoff_type_id"
     t.integer  "unit"
+    t.integer  "limit_times"
+    t.integer  "loop_type"
+    t.datetime "deleted_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["dayoff_setting_id"], name: "index_special_dayoff_settings_on_dayoff_setting_id", using: :btree
@@ -211,6 +231,8 @@ ActiveRecord::Schema.define(version: 20161212043304) do
   create_table "special_dayoff_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.text     "description", limit: 65535
+    t.string   "code"
+    t.datetime "deleted_at"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
@@ -220,13 +242,27 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.datetime "date"
     t.string   "time_in"
     t.string   "time_out"
+    t.datetime "deleted_at"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "user_dayoffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "special_dayoff_type_id"
+    t.date     "init_date"
+    t.float    "remain",                 limit: 24
+    t.datetime "deleted_at"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["special_dayoff_type_id"], name: "index_user_dayoffs_on_special_dayoff_type_id", using: :btree
+    t.index ["user_id"], name: "index_user_dayoffs_on_user_id", using: :btree
   end
 
   create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "group_id"
     t.integer  "user_id"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_user_groups_on_group_id", using: :btree
@@ -237,6 +273,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.integer  "workspace_id"
     t.integer  "user_id"
     t.boolean  "is_manager",   default: false
+    t.datetime "deleted_at"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.index ["user_id"], name: "index_user_workspaces_on_user_id", using: :btree
@@ -259,6 +296,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.datetime "deleted_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "title"
@@ -273,6 +311,7 @@ ActiveRecord::Schema.define(version: 20161212043304) do
     t.string   "image"
     t.boolean  "status",      default: false
     t.integer  "user_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["user_id"], name: "index_workspaces_on_user_id", using: :btree
@@ -297,6 +336,8 @@ ActiveRecord::Schema.define(version: 20161212043304) do
   add_foreign_key "shifts", "companies"
   add_foreign_key "special_dayoff_settings", "dayoff_settings"
   add_foreign_key "special_dayoff_settings", "special_dayoff_types"
+  add_foreign_key "user_dayoffs", "special_dayoff_types"
+  add_foreign_key "user_dayoffs", "users"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
   add_foreign_key "user_workspaces", "users"

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  acts_as_paranoid
+
   attr_accessor :validate_employee_code
 
   def initialize *args
@@ -21,7 +23,7 @@ class User < ApplicationRecord
   has_many :request_ots
 
   has_one :position
-  
+
   belongs_to :company
 
   enum gender: {female: 0, male: 1, other: 2}

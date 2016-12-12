@@ -5,6 +5,7 @@ class CreatePositionTypes < ActiveRecord::Migration[5.0]
       t.string :color
       t.integer :default_width, default: 200
       t.integer :default_height, default: 200
+      t.datetime :deleted_at
 
       t.timestamps
     end

@@ -8,6 +8,7 @@ class CreateRequestOffs < ActiveRecord::Migration[5.0]
       t.integer :status
       t.integer :approve_group
       t.references :user, foreign_key: true
+      t.datetime :deleted_at
 
       t.timestamps
     end

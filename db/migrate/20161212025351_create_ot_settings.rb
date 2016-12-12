@@ -4,6 +4,7 @@ class CreateOtSettings < ActiveRecord::Migration[5.0]
       t.references :company, foreign_key: true
       t.time :from_time_available
       t.time :end_time_available
+      t.datetime :deleted_at
 
       t.timestamps
     end

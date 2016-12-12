@@ -8,6 +8,7 @@ class CreateSections < ActiveRecord::Migration[5.0]
       t.integer :width
       t.integer :height
       t.string :section_key
+      t.datetime :deleted_at
 
       t.timestamps
     end

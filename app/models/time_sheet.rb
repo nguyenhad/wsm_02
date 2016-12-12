@@ -1,5 +1,7 @@
 require "roo"
 class TimeSheet < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :user, primary_key: :employee_code, foreign_key: :employee_code
 
   validates :employee_code, presence: true,

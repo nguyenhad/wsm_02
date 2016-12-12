@@ -1,4 +1,6 @@
 class Position < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :section, foreign_key: [:section_key, :workspace_id]
   belongs_to :position_type
   belongs_to :user, optional: true

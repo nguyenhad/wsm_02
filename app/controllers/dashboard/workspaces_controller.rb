@@ -1,6 +1,8 @@
 class Dashboard::WorkspacesController < DashboardController
-  skip_before_action :load_workspace, only: [:index, :create]
-  skip_before_action :verify_owner, only: :index
+  before_action :load_workspace, except: [:index, :new, :create]
+  before_action :verify_owner, only: :show
+  before_action :load_service, only: [:show, :edit]
+  protect_from_forgery with: :null_session
 
   def index
     @workspaces = current_user.owned_workspaces.page(params[:page])
@@ -9,7 +11,6 @@ class Dashboard::WorkspacesController < DashboardController
   end
 
   def show
-    @sections = ShowWorkspaceService.new(@workspace).show_hash_workspace
   end
 
   def new
@@ -44,5 +45,9 @@ class Dashboard::WorkspacesController < DashboardController
   private
   def workspace_params
     params.require(:workspace).permit :name, :description, :image
+  end
+
+  def load_service
+    @sections = ShowWorkspaceService.new(@workspace).show_hash_workspace
   end
 end

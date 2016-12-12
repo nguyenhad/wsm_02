@@ -28,3 +28,4 @@
 //= require ./pages/login.js
 //= require plugins
 //= require jquery.validate
+//= require jquery-ui

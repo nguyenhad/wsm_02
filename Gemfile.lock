@@ -96,6 +96,8 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     jquery-validation-rails (1.15.0.0)
     json (2.0.2)
     kaminari (0.17.0)
@@ -232,6 +234,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   jquery-validation-rails
   kaminari
   listen (~> 3.0.5)

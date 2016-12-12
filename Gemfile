@@ -24,6 +24,7 @@ gem "composite_primary_keys", "~> 9.0", ">= 9.0.4"
 gem "roo", "~> 2.5.0"
 gem "roo-xls"
 gem "jquery-validation-rails"
+gem "jquery-ui-rails"
 
 group :development, :test do
   gem "byebug", platform: :mri

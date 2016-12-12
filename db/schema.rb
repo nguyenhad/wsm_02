@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212040712) do
+ActiveRecord::Schema.define(version: 20161212043304) do
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -225,10 +225,11 @@ ActiveRecord::Schema.define(version: 20161212040712) do
   end
 
   create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "role"
+    t.integer  "group_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_groups_on_group_id", using: :btree
     t.index ["user_id"], name: "index_user_groups_on_user_id", using: :btree
   end
 
@@ -296,6 +297,7 @@ ActiveRecord::Schema.define(version: 20161212040712) do
   add_foreign_key "shifts", "companies"
   add_foreign_key "special_dayoff_settings", "dayoff_settings"
   add_foreign_key "special_dayoff_settings", "special_dayoff_types"
+  add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
   add_foreign_key "user_workspaces", "users"
   add_foreign_key "user_workspaces", "workspaces"

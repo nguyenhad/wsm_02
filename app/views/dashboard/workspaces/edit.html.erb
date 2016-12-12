@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render "edit.js.erb" %>
+</head>
+<body onload="init()">
+  <div id="sample">
+    <div class="workspace">
+      <span class="work_span">
+        <div id="accordion">
+          <h4><%= t "dashboard.workspaces.edit.item" %></h4>
+          <div>
+            <div id="myPaletteSmall" class="myPalet"></div>
+          </div>
+        </div>
+      </span>
+      <span class="myDiagram">
+        <div id="myDiagramDiv" class="gDiv"></div>
+      </span>
+    </div>
+    <div>
+      <button type="button" name="submit" class="btn-save btn-primary btn">
+        <%= t "dashboard.workspaces.edit.save" %>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

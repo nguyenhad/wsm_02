@@ -1,63 +1,68 @@
-<div class="container container_content" >
-  <center><h3><%= t "sign_up" %></h3></center>
-  <div class="form_center">
-    <%= form_for resource, as: resource_name,
-      url: registration_path(resource_name) do |f| %>
+<%= render "layouts/background_login" %>
+<div id="login-container"
+  class="animation-fadeIn register_header row top_register overflow_auto">
+  <div class="login-title text-center row">
+    <h1>
+      <i class="gi gi-flash"></i>
+      <strong><%= t "workspace" %> </strong>
+      <br>
+      <small>
+        <strong><%= t "register_account" %></strong>
+      </small>
+    </h1>
+  </div>
+  <div class="block push-bit login_form row">
+    <div class="row">
+     <%= form_for resource, as: resource_name,
+      url: registration_path(resource_name),
+        class: "form-horizontal form-bordered form-control-borderless" do |f| %>
       <%= devise_error_messages! %>
-      <div class="field">
-        <%= f.label :name %>
-        <%= f.text_field :name, autofocus: true, class: "form-control" %>
-      </div>
-      <div class="field">
-        <%= f.label :gender %>
-        <div class="row">
-          <span class="col-md-1">
-            <%= f.radio_button :gender, "male", :checked => true %>
-          </span>
-          <span class="col-md-2"><%= t "male" %></span>
-          <span class="col-md-1">
-            <%= f.radio_button :gender, "female" %>
-          </span>
-          <span class="col-md-2"><%= t "female" %></span>
-          <span class="col-md-1">
-            <%= f.radio_button :gender, "other" %>
-          </span>
-          <span class="col-md-2"><%= t "other" %></span>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="gi gi-user"></i></span>
+            <%= f.text_field :name, autofocus: true,
+              class: "form-control input-lg", placeholder: t("name") %>
+          </div>
         </div>
       </div>
-      <div class="field">
-        <%= f.label :birthday %>
-        <%= t "example_date" %>
-        <%= f.date_field :birthday %>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+            <%= f.email_field :email, autofocus: true,
+              class: "form-control input-lg", placeholder: t("email") %>
+          </div>
+        </div>
       </div>
-      <div class="field">
-        <%= f.label :avatar %>
-        <%= f.file_field :avatar, accept: Settings.image_format_accept %>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+            <%= f.password_field :password, autocomplete: "off",
+              class: "form-control input-lg", placeholder: t("password") %>
+          </div>
+        </div>
       </div>
-      <div class="field">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+            <%= f.password_field :password_confirmation, autocomplete: "off",
+              class: "form-control input-lg", placeholder: t("retype_password") %>
+          </div>
+        </div>
       </div>
-      <div class="field">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-          <em>
-            <%= t "open_parenthesis" %> <%= @minimum_password_length %>
-            <%= t "characters_minimum" %> <%= t "close_parenthesis" %>
-          </em>
-        <% end %>
-        <%= f.password_field :password, autocomplete: "off",
-          class: "form-control" %>
+      <div class="form-group row">
+        <%= f.submit t("register_account"),
+          class: "btn btn-primary col-md-12" %>
       </div>
-      <div class="field">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "off",
-          class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <div class="color_format text-center">
+        <%= render "devise/shared/links" %>
       </div>
-      <div class="actions">
-        <%= f.submit t("sign_up"), class: "form-control btn btn-primary" %>
-      </div>
-    <% end %>
-    <%= render "devise/shared/links" %>
+    </div>
   </div>
 </div>

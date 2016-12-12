@@ -629,9 +629,56 @@ background: #FFFFFF !important;
   top: 12px;
   left: 20px
 }
+
 .icon_color_white {
   color: white
 }
+
 .padding_left_after_login {
   padding-left:35px;
+}
+
+.login_header {
+  height: 420px;
+  background: white;
+}
+
+.register_header{
+  background: white;
+}
+
+.forgot_password_header{
+  height: 200px;
+  background: white;
+}
+
+.row {
+  margin: 0;
+}
+
+.margin_row_bottom {
+  margin-bottom: 4px;
+}
+
+.color_format, a {
+  color: #07313a;
+}
+
+.overflow_auto{
+  overflow: auto;
+  white-space: nowrap;
+  height: 480px;
+}
+
+.top_forgot_password {
+  top: 180px !important;
+}
+
+.top_register {
+  top: 50px !important;
+}
+
+#error_explanation {
+  color: red;
+  text-align: center;
 }

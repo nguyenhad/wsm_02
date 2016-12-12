@@ -7,10 +7,15 @@ class User < ApplicationRecord
   has_many :project_members, dependent: :destroy
   has_many :user_workspaces, dependent: :destroy
   has_many :workspaces, through: :user_workspaces
-  has_one :position
   has_many :sections, through: :positions
   has_many :owned_workspaces, class_name: Workspace.name,
     foreign_key: :user_id, dependent: :destroy
+  has_many :user_groups
+  has_many :request_ots
+
+  has_one :position
+  
+  belongs_to :company
 
   enum gender: {female: 0, male: 1, other: 2}
   enum role: {admin: 0, manager: 1, staff: 2}

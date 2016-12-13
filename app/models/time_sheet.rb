@@ -11,7 +11,10 @@ class TimeSheet < ApplicationRecord
   scope :search_employee_code, ->employee_code do
     where "employee_code LIKE ?", "#{employee_code}%"
   end
-  scope :load_by_date, ->(date){where date: date}
+  scope :load_by_date, ->date{where date: date}
+  scope :by_period_days, -> period_dates do
+    where date: period_dates
+  end
 
   class << self
     def import file

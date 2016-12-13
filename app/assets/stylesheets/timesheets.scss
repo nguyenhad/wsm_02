@@ -1,0 +1,93 @@
+$color-dd: #ddd;
+$color-3f: #3ff;
+$color-0f: #0f0;
+$color-f6: #f63;
+$color-f7: #d9edf7;
+$color-f3: #f3f3f3;
+$color-8d: #3498db;
+$color-red: #f00;
+
+.scroll {
+  overflow: scroll;
+  overflow-y: hidden;
+}
+
+.mg-top-50 {
+  margin-top: 50px !important;
+}
+
+.time-in {
+  border: 1px solid $color-dd;
+  float: left;
+  height: 25px;
+  text-align: center;
+  width: 50px;
+}
+
+.time-out {
+  border: 1px solid $color-dd;
+  float: left;
+  height: 25px;
+  text-align: center;
+  width: 50px;
+}
+
+.wth-100 {
+  width: 100px;
+}
+
+.wth-200 {
+  width: 200px;
+}
+
+.brg-red {
+  background: $color-red !important;
+}
+
+.brg-blue {
+  background: $color-3f !important;
+}
+
+.bg-green {
+  background: $color-0f !important;
+}
+
+.bg-dark-gray {
+  background: PeachPuff;
+}
+
+.bg-white {
+  background: White;
+}
+
+.bg-orange {
+  background: $color-f6 !important;
+}
+
+.pg-blue-line {
+  background: $color-f7 !important;
+}
+
+.inner {
+  max-height: 750px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.loader {
+  animation: spin 2s linear infinite;
+  border: 16px solid $color-f3;
+  border-radius: 50%;
+  border-top: 16px solid $color-8d;
+  height: 120px;
+  left: 50%;
+  position: fixed;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+}
+
+@keyframes spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}

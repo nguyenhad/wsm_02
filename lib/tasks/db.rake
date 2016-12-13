@@ -9,6 +9,19 @@ namespace :db do
         Rake::Task[task].invoke
       end
 
+      puts "create companies"
+      Company.create!(
+        [
+          {name: "Framgia Viet Nam",
+           parent_id: nil,
+           status: 1},
+
+          {name: "Framgia Ha Noi",
+           parent_id: 0,
+           status: 1}
+        ]
+      )
+
       puts "create users"
       [
         "Nguyen Van Tran Anh B",
@@ -27,9 +40,11 @@ namespace :db do
         "Doan Thi Phuong Thao"
       ].each do |name|
         FactoryGirl.create :user, name: name,
-          email: "#{name.split(' ').join('.').downcase}@framgia.com"
+          email: "#{name.split(' ').join('.').downcase}@framgia.com",
+          company: Company.first
       end
 
+      Shift.create company: Company.first, time_in: "8:00", time_out: "17:00"
       FactoryGirl.create(:manager)
 
       # puts "create workspace"
@@ -63,19 +78,6 @@ namespace :db do
       #     created_at: Time.now,
       #     updated_at: Time.now
       # end
-
-      puts "create companies"
-      Company.create!(
-        [
-          {name: "Framgia Viet Nam",
-           parent_id: nil,
-           status: 1},
-
-          {name: "Framgia Ha Noi",
-           parent_id: 0,
-           status: 1}
-        ]
-      )
 
       puts "create leave_settings"
       Company.all.each do |company|
@@ -254,6 +256,17 @@ namespace :db do
         cutoff_date: 5,
         timezone: "Hanoi"
       )
+    end
+
+    User.update_all company_id: Company.first.id
+
+    puts "create timesheets"
+    (10..12).each do |month|
+      User.all.each do |user|
+        30.times do |m|
+          TimeSheet.create user_id: user.id , date: "#{m+1}/#{month}/2016", time_in: "8:00", time_out: "17:00", type: ""
+        end
+      end
     end
   end
 end

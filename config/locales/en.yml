@@ -70,6 +70,8 @@ en:
       edit_setting: "Edit Setting"
       create_setting: "New Setting"
 
+    service:
+      not_found_leave_type: "Leave type not found"
   create_success: "Create success!"
   create_failed: "Create failed!"
   working_space: "Working space"

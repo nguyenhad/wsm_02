@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
     t.float    "amount",      limit: 24
     t.integer  "unit"
     t.integer  "limit_times"
+    t.datetime "deleted_at"
     t.integer  "company_id"
     t.datetime "deleted_at"
     t.datetime "created_at",             null: false
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
     t.string   "name"
     t.string   "description"
     t.string   "code"
+    t.datetime "deleted_at"
     t.integer  "leave_setting_id"
     t.integer  "company_id"
     t.datetime "deleted_at"
@@ -192,6 +194,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
     t.string   "reason"
     t.integer  "status",        default: 0
     t.integer  "approve_group"
+    t.datetime "deleted_at"
     t.integer  "leave_type_id"
     t.integer  "user_id"
     t.datetime "deleted_at"
@@ -289,8 +292,8 @@ ActiveRecord::Schema.define(version: 20161215040001) do
     t.date     "date"
     t.time     "time_in"
     t.time     "time_out"
-    t.datetime "deleted_at"
     t.integer  "type"
+    t.datetime "deleted_at"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -303,6 +306,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
     t.string   "optional_settings"
     t.date     "start_date"
     t.date     "end_date"
+    t.datetime "deleted_at"
     t.integer  "company_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
@@ -333,6 +337,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
 
   create_table "user_leaves", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.float    "remain",     limit: 24
+    t.datetime "deleted_at"
     t.integer  "user_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false

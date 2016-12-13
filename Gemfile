@@ -39,4 +39,19 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 end
 
+group :test do
+  gem "rspec-rails", "~> 3.4"
+  gem "rspec-collection_matchers"
+  gem "shoulda-matchers", "~> 3.0", require: false
+  gem "database_cleaner", "~> 1.5"
+  gem "rubocop", require: false
+  gem "rubocop-checkstyle_formatter", require: false
+  gem "scss_lint", require: false
+  gem "scss_lint_reporter_checkstyle", require: false
+  gem "brakeman", require: false
+  gem "reek"
+  gem "bundler-audit"
+  gem "rails_best_practices"
+end
+
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

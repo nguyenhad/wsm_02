@@ -31,3 +31,5 @@ app/assets/javascripts/i18n/translations.js
 .byebug_history
 vendor/assets/bower_resources/*
 config/application.yml
+/.framgia-ci-reports
+.framgia-ci-result.temp.yml

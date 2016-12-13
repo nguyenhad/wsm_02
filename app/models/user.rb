@@ -16,13 +16,13 @@ class User < ApplicationRecord
   has_many :project_members, dependent: :destroy
   has_many :user_workspaces, dependent: :destroy
   has_many :workspaces, through: :user_workspaces
-  has_many :sections, through: :positions
+  has_many :sections, through: :locations
   has_many :owned_workspaces, class_name: Workspace.name,
     foreign_key: :user_id, dependent: :destroy
   has_many :user_groups
   has_many :request_ots
 
-  has_one :position
+  has_one :location
 
   belongs_to :company
 

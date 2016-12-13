@@ -3,10 +3,10 @@ class Section < ApplicationRecord
 
   belongs_to :workspace
   self.primary_keys = :section_key, :workspace_id
-  has_many :positions, class_name: Position.name,
+  has_many :locations, class_name: Location.name,
     foreign_key: [:section_key, :workspace_id]
 
-  has_many :position_types, through: :positions
+  has_many :location_types, through: :locations
 
   validates :workspace, presence: true
   validates :section_key, presence: true,

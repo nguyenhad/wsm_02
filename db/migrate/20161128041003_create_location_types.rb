@@ -1,6 +1,6 @@
-class CreatePositionTypes < ActiveRecord::Migration[5.0]
+class CreateLocationTypes < ActiveRecord::Migration[5.0]
   def change
-    create_table :position_types do |t|
+    create_table :location_types do |t|
       t.string :name
       t.string :color
       t.integer :default_width, default: 200

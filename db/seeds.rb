@@ -46,7 +46,7 @@ Workspace.all.each do |workspace|
 end
 
 3.times do |n|
-  PositionType.create! name: "Type #{n}",
+  LocationType.create! name: "Type #{n}",
     color: Faker::Color.hex_color,
     created_at: Time.now,
     updated_at: Time.now

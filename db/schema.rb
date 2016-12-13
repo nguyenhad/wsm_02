@@ -76,6 +76,31 @@ ActiveRecord::Schema.define(version: 20161212162601) do
     t.index ["company_id"], name: "index_holidays_on_company_id", using: :btree
   end
 
+  create_table "location_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "color"
+    t.integer  "default_width",  default: 200
+    t.integer  "default_height", default: 200
+    t.datetime "deleted_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "location_type_id"
+    t.integer  "user_id"
+    t.integer  "pos_x"
+    t.integer  "pos_y"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "section_key"
+    t.integer  "workspace_id"
+    t.string   "location_key"
+    t.datetime "deleted_at"
+    t.index ["location_type_id"], name: "index_locations_on_location_type_id", using: :btree
+    t.index ["user_id"], name: "index_locations_on_user_id", using: :btree
+  end
+
   create_table "normal_dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "operator"
@@ -115,31 +140,6 @@ ActiveRecord::Schema.define(version: 20161212162601) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "position_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "color"
-    t.integer  "default_width",  default: 200
-    t.integer  "default_height", default: 200
-    t.datetime "deleted_at"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-  end
-
-  create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "position_type_id"
-    t.integer  "user_id"
-    t.integer  "pos_x"
-    t.integer  "pos_y"
-    t.integer  "width"
-    t.integer  "height"
-    t.string   "section_key"
-    t.integer  "workspace_id"
-    t.datetime "deleted_at"
-    t.string   "position_key"
-    t.index ["position_type_id"], name: "index_positions_on_position_type_id", using: :btree
-    t.index ["user_id"], name: "index_positions_on_user_id", using: :btree
   end
 
   create_table "project_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -322,11 +322,11 @@ ActiveRecord::Schema.define(version: 20161212162601) do
   add_foreign_key "dayoff_settings", "companies"
   add_foreign_key "groups", "companies"
   add_foreign_key "holidays", "companies"
+  add_foreign_key "locations", "location_types"
+  add_foreign_key "locations", "users"
   add_foreign_key "normal_dayoff_settings", "dayoff_settings"
   add_foreign_key "ot_detail_settings", "ot_settings"
   add_foreign_key "ot_settings", "companies"
-  add_foreign_key "positions", "position_types"
-  add_foreign_key "positions", "users"
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
   add_foreign_key "request_offs", "special_dayoff_types"

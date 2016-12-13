@@ -23,7 +23,7 @@ validation:
     des_max_len: 255
   section:
     name_max_len: 128
-  position_type:
+  location_type:
     name_max_len: 128
     color_max_len: 128
 row_header: 5

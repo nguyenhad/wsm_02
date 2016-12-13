@@ -33,7 +33,7 @@ class Dashboard::WorkspacesController < DashboardController
     node_data = params[:nodeDataArray]
     services = WorkspaceService.new @workspace
     services.build_sections node_data
-    services.build_positions node_data
+    services.build_locations node_data
     build_results = services.get_build_results
     result_msg = build_results[0]
     updated_counter = build_results[1]

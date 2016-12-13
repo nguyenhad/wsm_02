@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require scripts
-//= require_tree .
 //= require jquery.waypoints
 //= require infinite
 //= require inview
@@ -24,7 +23,6 @@
 //= require gojs/release/go-debug.js
 //= require app
 //= require ./vendor/modernizr-2.7.1-respond-1.4.2.min
-//= require ./vendor/bootstrap.min
 //= require ./pages/login.js
 //= require plugins
 //= require jquery.validate

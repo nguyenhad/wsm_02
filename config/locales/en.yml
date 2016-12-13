@@ -223,4 +223,14 @@ en:
       example_kinds: "IL: in late morning; LE: leave early; LO: leave out; IL (A): in late afternoon"
       example_time: "Notice: 2.5h is the policy of leave just for women"
       example_compensation: "Ex: 16:45~17:45 23/11/2015"
+  request_offs:
+    index:
+      title: List Request Offs
+      index: Index
+      time_off_from: Time off from
+      time_off_from: Time off to
+      reason: Reason
+      edit_request_off: Edit
+      delete_request_off: Delete
+      action: "Action"
 

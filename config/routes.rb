@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     resources :set_timesheets, only: :create
     resources :projects, except: :show
   end
+  resources :request_leaves
 end

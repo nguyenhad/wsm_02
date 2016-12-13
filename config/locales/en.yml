@@ -152,3 +152,34 @@ en:
   please: "Please"
   reset_password: "Reset password"
   forgot_password: "Forgot password"
+  request_form:
+    title: Requirement for leave Development Division
+    content_of_title_html: "Please fill in the information below to require to
+      leave the office. After that, please send this link to your managers and
+      group leaders to have their aprroval: ...<br/>Notice:<br/>
+      - Please note this form on your phones in in case of emergency.<br/>
+      - This form CANNOT be used to replace the paper of one day or half a day absence form <br/>
+      Thank you very much!"
+    require: "*Must fill*"
+    content:
+      staff_name: "Staff name *"
+      staff_code: "Staff_code *"
+      branch: "Branch *"
+      division: "Division *"
+      section: "Section/Group *"
+      leave_from: "Leave from *"
+      leave_to: "To *"
+      leave_kinds: "Kinds of leave *"
+      leave_time: "Time *"
+      leave_reason: "Reason for leave *"
+      compensation_time: "Register for compensation time"
+      example_name: "Full name with accent. Ex: Nguyễn Văn A"
+      example_code: "EX: B120163. Link of staff's code: 1. Ha Noi
+        - https://goo.gl/x8RNeu 2. Da Nang - https://goo.gl/5Om6mH 3
+        - HCM - https://goo.gl/VBlK1Z 4- TKC - https://goo.gl/8t62P1"
+      example_leave_from: "Ex: 23/11/2015 7:45 AM"
+      example_leave_to: "Ex: 23/11/2015 8:45 AM"
+      example_kinds: "IL: in late morning; LE: leave early; LO: leave out; IL (A): in late afternoon"
+      example_time: "Notice: 2.5h is the policy of leave just for women"
+      example_compensation: "Ex: 16:45~17:45 23/11/2015"
+

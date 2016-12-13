@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def verify_manager
+  def authenticate_manager!
     unless current_user.manager?
-      flash[:danger] = t "you_do_not_have_access"
-      redirect_to root_url
+      flash[:warning] = t "you_do_not_have_access"
+      redirect_to :back
     end
   end
 end

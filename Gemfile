@@ -26,6 +26,7 @@ gem "roo-xls"
 gem "jquery-validation-rails"
 gem "jquery-ui-rails"
 gem "paranoia", "~> 2.2"
+gem "kaminari-bootstrap", "~> 3.0.1"
 
 group :development, :test do
   gem "byebug", platform: :mri

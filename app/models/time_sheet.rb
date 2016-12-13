@@ -26,17 +26,6 @@ class TimeSheet < ApplicationRecord
     end
 
     private
-    def open_spreadsheet file
-      case File.extname file.original_filename
-      when Settings.file_xls
-        Roo::Excel.new file.path, file_warning: :ignore
-      when Settings.file_xlsx
-        Roo::Excelx.new file.path, file_warning: :ignore
-      else
-        nil
-      end
-    end
-
     def add_timesheet spreadsheet, record_timesheet, header, month, year
       num_col_inprocess =
         spreadsheet.last_column - Settings.num_col_not_process

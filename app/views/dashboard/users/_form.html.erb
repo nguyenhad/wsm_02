@@ -1,0 +1,107 @@
+<%= javascript_include_tag "pages/login", "data-turbolinks-track": true %>
+<div class="container well form-horizontal">
+  <%= form_for [:dashboard, @user] do |f| %>
+    <%= render "shared/error_messages", object: f.object %>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :name, class: "col-md-3 control-label" %>
+        <div class="col-md-6 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <%= f.text_field :name, class: "form-control",
+              placeholder: t("name") %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :employee_code, class: "col-md-3 control-label" %>
+        <div class="col-md-6 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <%= f.text_field :employee_code, class: "form-control",
+              placeholder: t("employee_code") %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, class: "col-md-3 control-label" %>
+        <div class="col-md-6 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-envelope"></i>
+            </span>
+            <%= f.email_field :email, class: "form-control",
+              placeholder: t("email") %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :company_id, class: "col-md-3 control-label" %>
+        <div class="col-md-6 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-home"></i>
+            </span>
+            <%= f.collection_select :company_id, @companies, :id, :name, {},
+              class: "form-control selectpicker" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :avatar, class: "col-md-3 control-label" %>
+        <div class="col-md-6 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <%= f.file_field :avatar, accept: Settings.image_format_accept,
+              class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :gender, class: "col-md-3 control-label" %>
+        <div class="col-md-6 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <%= f.select :gender, User.genders.keys, {},
+              class: "form-control selectpicker" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :role, class: "col-md-3 control-label" %>
+        <div class="col-md-6 selectContainer">
+          <div class="input-group row">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <%= f.select :role, User.roles.keys, {},
+              class: "form-control selectpicker col-md-8" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :birthday, class: "col-md-3 control-label" %>
+        <div class="col-md-6 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <%= f.date_field :birthday, class: "form-control selectpicker" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.submit yield(:button_text),
+          class: "btn btn-primary col-md-offset-5 col-md-2" %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

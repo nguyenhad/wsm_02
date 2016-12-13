@@ -1,10 +1,12 @@
-class Admin::UsersController < ApplicationController
+class Dashboard::UsersController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
+  before_action :load_company, only: [:new, :edit, :create]
 
   def index
-    @users = User.recent.page(params[:page])
-      .per Settings.per_page.admin.user
+    User.random_password
+    @users = User.includes(:company).recent.page(params[:page])
+      .per Settings.per_page.dashboard.user
   end
 
   def new
@@ -15,7 +17,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new user_params
     if @user.save
       flash[:success] = t "devise.registrations.signed_up"
-      redirect_to admin_users_path
+      redirect_to dashboard_users_path
     else
       render :new
     end
@@ -30,7 +32,7 @@ class Admin::UsersController < ApplicationController
   def update
     if @user.update_attributes user_params
       flash[:success] = t "devise.registrations.updated"
-      redirect_to admin_users_path
+      redirect_to dashboard_users_path
     else
       render :edit
     end
@@ -42,12 +44,17 @@ class Admin::UsersController < ApplicationController
     else
       flash[:warning] = t "delete_not_success"
     end
-    redirect_to admin_users_path
+    redirect_to dashboard_users_path
   end
 
   private
   def user_params
-    params.require(:user).permit :name, :gender, :birthday, :avatar, :email,
-      :password, :password_confirmation, :role
+    params.require(:user)
+      .permit(:name, :employee_code, :gender, :birthday, :avatar, :email,
+        :role, :company_id).merge password: User.random_password
+  end
+
+  def load_company
+    @companies = Company.all
   end
 end

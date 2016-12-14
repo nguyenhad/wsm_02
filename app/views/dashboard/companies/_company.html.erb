@@ -1,0 +1,39 @@
+<% provide :title, t("dashboard.companies.list_branch") %>
+<div class="container color_black">
+  <div class="row">
+    <div class="toppad col-md-12" >
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h2 class="panel-title"><%= t "dashboard.companies.branch" %></h2>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th><%= t "dashboard.company_setting.name branch" %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @companies.each_with_index do |company, index| %>
+                    <tr>
+                      <td>
+                        <%= current_index @companies.current_page,
+                          Settings.per_page.dashboard.company_page, index %>
+                      </td>
+                      <td>
+                        <%= link_to company.name, dashboard_company_path(company) %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

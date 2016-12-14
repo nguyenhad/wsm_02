@@ -3,7 +3,7 @@ class CreateCompensations < ActiveRecord::Migration[5.0]
     create_table :compensations do |t|
       t.date :from
       t.date :to
-      t.references :request_off, foreign_key: true
+      t.references :request_leave, foreign_key: true
       t.integer :status
       t.integer :type
       t.datetime :deleted_at

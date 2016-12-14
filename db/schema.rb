@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213020925) do
+ActiveRecord::Schema.define(version: 20161214090800) do
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 20161213020925) do
   create_table "compensations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "from"
     t.date     "to"
-    t.integer  "request_off_id"
+    t.integer  "request_leave_id"
     t.integer  "status"
     t.integer  "type"
     t.datetime "deleted_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["request_off_id"], name: "index_compensations_on_request_off_id", using: :btree
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["request_leave_id"], name: "index_compensations_on_request_leave_id", using: :btree
   end
 
   create_table "dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -76,6 +76,28 @@ ActiveRecord::Schema.define(version: 20161213020925) do
     t.index ["company_id"], name: "index_holidays_on_company_id", using: :btree
   end
 
+  create_table "leave_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.float    "amount",      limit: 24
+    t.integer  "unit"
+    t.integer  "limit_times"
+    t.integer  "company_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["company_id"], name: "index_leave_settings_on_company_id", using: :btree
+  end
+
+  create_table "leave_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "code"
+    t.integer  "leave_setting_id"
+    t.integer  "company_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["company_id"], name: "index_leave_types_on_company_id", using: :btree
+    t.index ["leave_setting_id"], name: "index_leave_types_on_leave_setting_id", using: :btree
+  end
+
   create_table "location_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "color"
@@ -103,9 +125,9 @@ ActiveRecord::Schema.define(version: 20161213020925) do
 
   create_table "normal_dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.string   "operator"
-    t.string   "years"
-    t.string   "count_day"
+    t.integer  "operator"
+    t.integer  "years"
+    t.integer  "count_day"
     t.integer  "dayoff_setting_id"
     t.datetime "deleted_at"
     t.datetime "created_at",        null: false
@@ -160,6 +182,20 @@ ActiveRecord::Schema.define(version: 20161213020925) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "request_leaves", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "from"
+    t.datetime "to"
+    t.string   "reason"
+    t.integer  "status"
+    t.integer  "approve_group"
+    t.integer  "leave_type_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["leave_type_id"], name: "index_request_leaves_on_leave_type_id", using: :btree
+    t.index ["user_id"], name: "index_request_leaves_on_user_id", using: :btree
   end
 
   create_table "request_offs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -240,8 +276,8 @@ ActiveRecord::Schema.define(version: 20161213020925) do
   create_table "time_sheets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "employee_code"
     t.datetime "date"
-    t.string   "time_in"
-    t.string   "time_out"
+    t.time     "time_in"
+    t.time     "time_out"
     t.datetime "deleted_at"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -267,6 +303,14 @@ ActiveRecord::Schema.define(version: 20161213020925) do
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_user_groups_on_group_id", using: :btree
     t.index ["user_id"], name: "index_user_groups_on_user_id", using: :btree
+  end
+
+  create_table "user_leaves", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.float    "remain",     limit: 24
+    t.integer  "user_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["user_id"], name: "index_user_leaves_on_user_id", using: :btree
   end
 
   create_table "user_workspaces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -320,10 +364,13 @@ ActiveRecord::Schema.define(version: 20161213020925) do
   end
 
   add_foreign_key "company_settings", "companies"
-  add_foreign_key "compensations", "request_offs"
+  add_foreign_key "compensations", "request_leaves", column: "request_leave_id"
   add_foreign_key "dayoff_settings", "companies"
   add_foreign_key "groups", "companies"
   add_foreign_key "holidays", "companies"
+  add_foreign_key "leave_settings", "companies"
+  add_foreign_key "leave_types", "companies"
+  add_foreign_key "leave_types", "leave_settings"
   add_foreign_key "locations", "location_types"
   add_foreign_key "locations", "users"
   add_foreign_key "normal_dayoff_settings", "dayoff_settings"
@@ -331,6 +378,8 @@ ActiveRecord::Schema.define(version: 20161213020925) do
   add_foreign_key "ot_settings", "companies"
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
+  add_foreign_key "request_leaves", "leave_types"
+  add_foreign_key "request_leaves", "users"
   add_foreign_key "request_offs", "special_dayoff_types"
   add_foreign_key "request_offs", "users"
   add_foreign_key "request_ots", "users"
@@ -342,6 +391,7 @@ ActiveRecord::Schema.define(version: 20161213020925) do
   add_foreign_key "user_dayoffs", "users"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
+  add_foreign_key "user_leaves", "users"
   add_foreign_key "user_workspaces", "users"
   add_foreign_key "user_workspaces", "workspaces"
   add_foreign_key "users", "companies"

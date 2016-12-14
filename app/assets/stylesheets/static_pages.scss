@@ -39,6 +39,24 @@
   margin-right: 20px
 }
 
-.color_black {
+.color_black,.table thead > tr > th {
   color: black;
+  font-size: 15px;
+}
+
+.header_content {
+  background: #f9f9f9;
+  color: #777246;
+  height:60px;
+  text-align:center;
+  font-size:25px;
+  padding:10px
+}
+
+.container {
+  width: 100%
+}
+
+#page-content{
+  min-height: 540px
 }

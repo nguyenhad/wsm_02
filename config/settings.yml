@@ -13,6 +13,7 @@ per_page:
     user: 10
   dashboard:
     project: 10
+    user: 10
 min_password: 6
 workspace:
   per_page: 3
@@ -28,6 +29,8 @@ validation:
     color_max_len: 128
 row_header: 5
 data_row_first: 6
+row_excel_header: 1
+row_excel_data_first: 2
 col_date_first: 3
 row_title: 2
 col_employee_code: 1
@@ -38,4 +41,5 @@ end_day_pay: 25
 month_year_of_timesheet: "%m/%Y"
 file_xls: ".xls"
 file_xlsx: ".xlsx"
+file_csv: ".csv"
 slash: "/"

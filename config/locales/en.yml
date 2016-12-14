@@ -1,5 +1,8 @@
 en:
   dashboard:
+    users:
+      index:
+        company: "Company"
     projects:
       index:
         list_project: "List project"
@@ -124,7 +127,11 @@ en:
   role: "Role"
   gender: "Gender"
   birthday: "Birthday"
+  information_user: "Information user"
+  employee_code: "Employee code"
   retype_password: "Retype password"
+  current_password: "Current password"
+  account_update: "Account updated"
   password: "Password"
   action: "Action"
   create: "Created"
@@ -139,7 +146,7 @@ en:
   import_success: "Imported successful."
   import: "Import"
   unknown_file: "Unknown file"
-  error_format_file: "Error format file! Please input file .xls,.xlsx"
+  error_format_file: "Error format file! Please input file .csv,.xls,.xlsx"
   please_you_choose_file: "Please you choose file!"
   slash: "/"
   you_do_not_have_access: "You do not have access !"

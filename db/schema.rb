@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212162601) do
+ActiveRecord::Schema.define(version: 20161213020925) do
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -301,6 +301,8 @@ ActiveRecord::Schema.define(version: 20161212162601) do
     t.datetime "updated_at",                          null: false
     t.string   "title"
     t.string   "avatar"
+    t.integer  "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -342,5 +344,6 @@ ActiveRecord::Schema.define(version: 20161212162601) do
   add_foreign_key "user_groups", "users"
   add_foreign_key "user_workspaces", "users"
   add_foreign_key "user_workspaces", "workspaces"
+  add_foreign_key "users", "companies"
   add_foreign_key "workspaces", "users"
 end

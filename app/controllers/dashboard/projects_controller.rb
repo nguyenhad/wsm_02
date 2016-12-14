@@ -1,6 +1,6 @@
 class Dashboard::ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :verify_manager
+  before_action :authenticate_manager!
   before_action :load_project, only: [:edit, :update, :destroy]
 
   def index

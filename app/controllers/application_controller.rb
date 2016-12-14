@@ -1,3 +1,5 @@
+require "json_response"
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -8,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
       user_params.permit(:name, :email, :password, :password_confirmation).
@@ -23,6 +26,12 @@ class ApplicationController < ActionController::Base
     unless current_user.manager?
       flash[:warning] = t "you_do_not_have_access"
       redirect_to :back
+    end
+  end
+
+  JsonResponse::STATUS_CODE.keys.each do |status|
+    define_method "response_#{status}" do |message = "", content = {}|
+      render json: JsonResponse.send(status, message, content) and return
     end
   end
 end

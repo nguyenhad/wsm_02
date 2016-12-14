@@ -6,6 +6,8 @@ class Company < ApplicationRecord
   has_many :company_settings
   has_many :shifts
   has_many :dayoff_settings
+  has_many :leave_settings
+  has_many :leave_types
 
   has_one :ot_setting
 end

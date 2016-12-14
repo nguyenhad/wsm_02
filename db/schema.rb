@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "parent_id"
-    t.integer  "status"
+    t.integer  "status",     default: 1
     t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "company_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   end
 
   create_table "compensations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "from"
-    t.date     "to"
+    t.datetime "from"
+    t.datetime "to"
     t.integer  "request_leave_id"
     t.integer  "status"
     t.integer  "type"
@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(version: 20161215040001) do
 
   create_table "dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "company_id"
-    t.integer  "loop_available"
+    t.integer  "loop_available",   default: 1
     t.integer  "limmit_loop_year"
     t.integer  "limmit_loop_day"
     t.datetime "deleted_at"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["company_id"], name: "index_dayoff_settings_on_company_id", using: :btree
   end
 
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
     t.integer  "unit"
     t.integer  "limit_times"
     t.integer  "company_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["company_id"], name: "index_leave_settings_on_company_id", using: :btree
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
     t.string   "code"
     t.integer  "leave_setting_id"
     t.integer  "company_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["company_id"], name: "index_leave_types_on_company_id", using: :btree
@@ -185,30 +187,40 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   end
 
   create_table "request_leaves", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "from"
-    t.datetime "to"
+    t.datetime "leave_from"
+    t.datetime "leave_to"
     t.string   "reason"
-    t.integer  "status"
+    t.integer  "status",        default: 0
     t.integer  "approve_group"
     t.integer  "leave_type_id"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["leave_type_id"], name: "index_request_leaves_on_leave_type_id", using: :btree
     t.index ["user_id"], name: "index_request_leaves_on_user_id", using: :btree
   end
 
   create_table "request_offs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "from"
-    t.datetime "to"
+    t.string   "phone_number"
+    t.string   "address_contact"
+    t.datetime "off_have_salary_from"
+    t.datetime "off_have_salary_to"
+    t.integer  "special_dayoff_setting_id"
+    t.datetime "off_no_salary_from"
+    t.datetime "off_no_salary_to"
     t.string   "reason"
     t.integer  "special_dayoff_type_id"
+    t.integer  "user_handover"
+    t.string   "part_handover"
+    t.string   "work_handover"
     t.integer  "status"
     t.integer  "approve_group"
     t.integer  "user_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["special_dayoff_setting_id"], name: "index_request_offs_on_special_dayoff_setting_id", using: :btree
     t.index ["special_dayoff_type_id"], name: "index_request_offs_on_special_dayoff_type_id", using: :btree
     t.index ["user_id"], name: "index_request_offs_on_user_id", using: :btree
   end
@@ -274,13 +286,15 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   end
 
   create_table "time_sheets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "employee_code"
-    t.datetime "date"
+    t.date     "date"
     t.time     "time_in"
     t.time     "time_out"
     t.datetime "deleted_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "type"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_time_sheets_on_user_id", using: :btree
   end
 
   create_table "timesheet_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -392,6 +406,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   add_foreign_key "project_members", "users"
   add_foreign_key "request_leaves", "leave_types"
   add_foreign_key "request_leaves", "users"
+  add_foreign_key "request_offs", "special_dayoff_settings"
   add_foreign_key "request_offs", "special_dayoff_types"
   add_foreign_key "request_offs", "users"
   add_foreign_key "request_ots", "users"
@@ -399,6 +414,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   add_foreign_key "shifts", "companies"
   add_foreign_key "special_dayoff_settings", "dayoff_settings"
   add_foreign_key "special_dayoff_settings", "special_dayoff_types"
+  add_foreign_key "time_sheets", "users"
   add_foreign_key "timesheet_settings", "companies"
   add_foreign_key "user_dayoffs", "special_dayoff_types"
   add_foreign_key "user_dayoffs", "users"

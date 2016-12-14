@@ -5,5 +5,4 @@ class LeaveType < ApplicationRecord
   has_one :compensation
 
   belongs_to :leave_setting
-  belongs_to :company
 end

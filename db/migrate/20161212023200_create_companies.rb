@@ -3,7 +3,7 @@ class CreateCompanies < ActiveRecord::Migration[5.0]
     create_table :companies do |t|
       t.string :name
       t.integer :parent_id
-      t.integer :status
+      t.integer :status, default: 1
       t.datetime :deleted_at
 
       t.timestamps

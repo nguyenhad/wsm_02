@@ -37,7 +37,7 @@ en:
       unauthorized: "Access denied!"
       update:
         success: "%{count} items has been Updated successfully."
-        error_at: "Update \"%{key}\" unseuccessful."
+        errors: "Update \"%{key}\" unseuccessful."
   create_success: "Create success!"
   create_failed: "Create failed!"
   working_space: "Working space"

@@ -1,18 +1,26 @@
 project_type: ruby
 test:
   bundle-audit:
+    ignore: true
     command: bundle-audit --update | tee .framgia-ci-reports/bundle-audit.txt
   rspec:
+    ignore: true
     command: rspec --format html --out .framgia-ci-reports/rspec.html spec/
   brakeman:
+    ignore: true
     command: brakeman -o .framgia-ci-reports/brakeman.html -o .framgia-ci-reports/brakeman.json
   reek:
+    ignore: true
     command: reek --format html > .framgia-ci-reports/reek.html
   rubocop:
+    ignore: true
     command: bundle exec rubocop --require rubocop/formatter/checkstyle_formatter --format RuboCop::Formatter::CheckstyleFormatter --no-color --rails --out .framgia-ci-reports/rubocop.xml app/ lib/
   scss-lint:
+    ignore: true
     command: scss-lint --require=scss_lint_reporter_checkstyle --format=Checkstyle --out=.framgia-ci-reports/scss-lint.xml app/assets/stylesheets/
   eslint:
+    ignore: true
     command: rake eslint:run_all --format=checkstyle --output-file=.framgia-ci-reports/eslint.xml app/
   rails_best_practices:
+    ignore: true
     command: rails_best_practices --format html --output-file .framgia-ci-reports/rails_best_practices.html app/

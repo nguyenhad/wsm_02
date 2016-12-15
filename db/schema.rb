@@ -274,15 +274,13 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   end
 
   create_table "time_sheets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "date"
+    t.string   "employee_code"
+    t.datetime "date"
     t.time     "time_in"
     t.time     "time_out"
     t.datetime "deleted_at"
-    t.integer  "type"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_time_sheets_on_user_id", using: :btree
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "timesheet_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -401,7 +399,6 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   add_foreign_key "shifts", "companies"
   add_foreign_key "special_dayoff_settings", "dayoff_settings"
   add_foreign_key "special_dayoff_settings", "special_dayoff_types"
-  add_foreign_key "time_sheets", "users"
   add_foreign_key "timesheet_settings", "companies"
   add_foreign_key "user_dayoffs", "special_dayoff_types"
   add_foreign_key "user_dayoffs", "users"

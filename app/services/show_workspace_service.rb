@@ -15,7 +15,7 @@ class ShowWorkspaceService
       sections.push temp_section
       locations = section_workspace.locations
       locations.each do |location|
-        temp_location = {key: "#{location.user.name}",
+        temp_location = {key: "#{location.location_key}",
           color: "#{location.location_type.color}",
           pos: "#{location.pos_x} #{location.pos_y}",
           size: "#{location.width} #{location.height}",

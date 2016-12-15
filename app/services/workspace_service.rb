@@ -27,8 +27,7 @@ class WorkspaceService
                 if section_workspace.update section_params(object)
                   @updated_counter += 1
                 else
-                  @result_msg.push I18n.t("dashboard.workspaces.update.errors",
-                    key: object["key"])
+                  @result_msg.push I18n.t("dashboard.workspaces.update.errors", key: object["key"])
                 end
                 break
               else
@@ -49,24 +48,50 @@ class WorkspaceService
   end
 
   def build_locations(node_data)
-    node_data.each do |_index, object|
-      unless object["isGroup"]
-        section = Section.find_by_key_and_workspace object["group"],
-          @workspace.id
-        if section.empty?
-          @result_msg.push I18n.t("dashboard.workspaces.update.error_at",
-            key: object["key"])
-          next
+    flag = false
+    temp_location = []
+    location_delete = []
+    node = []
+    location_workspaces = Location.of_workspace @workspace.id
+    if node_data
+      node_data.each do |_index, object|
+        unless object["isGroup"]
+          node.push object
         end
-        location = Location.of_user(object["user_id"])
-          .of_workspace(@workspace.id)
-        if location.empty?
-          location = section.first.locations.create location_params(object)
-        else
-          next
-        end
-        check_save section, object
       end
+      if node.present?
+        node.each do |object|
+          if location_workspaces.empty?
+            location = Location.create location_params(object)
+            check_save location, object
+          else
+            location_workspaces.each do |location_workspace|
+              if location_workspace.location_key == object["key"]
+                flag = false
+                temp_location.push location_workspace
+                location_delete = location_workspaces - temp_location
+                if location_workspace.update location_params(object)
+                  @updated_counter += 1
+                else
+                  @result_msg.push I18n.t("dashboard.workspaces.update.errors", key: object["key"])
+                end
+                break
+              else
+                flag = true
+              end
+            end
+            if flag
+              location = Location.create location_params(object)
+              check_save location, object
+            end
+          end
+        end
+        location_delete.each(&:destroy)
+      else
+        location_workspaces.each(&:destroy)
+      end
+    else
+      location_workspaces.each(&:destroy)
     end
   end
 
@@ -98,15 +123,17 @@ class WorkspaceService
       pos_y: pos[1],
       width: size[0],
       height: size[1],
-      location_key: object["key"],
+      section_key: object["group"],
+      workspace_id: @workspace.id,
+      location_key: object["key"]
     }
   end
 
-  def check_save section, object
+  def check_save(section, object)
     if section.save
       @updated_counter += 1
     else
-      @result_msg.push I18n.t("dashboard.workspaces.update.error_at",
+      @result_msg.push I18n.t("dashboard.workspaces.update.errors",
         key: object["key"])
     end
   end

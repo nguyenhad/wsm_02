@@ -10,4 +10,5 @@ class Company < ApplicationRecord
   has_many :leave_types
 
   has_one :ot_setting
+  has_one :timesheet_settings
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161214090800) do
+ActiveRecord::Schema.define(version: 20161215040001) do
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -274,13 +274,27 @@ ActiveRecord::Schema.define(version: 20161214090800) do
   end
 
   create_table "time_sheets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "employee_code"
-    t.datetime "date"
+    t.date     "date"
     t.time     "time_in"
     t.time     "time_out"
     t.datetime "deleted_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "type"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_time_sheets_on_user_id", using: :btree
+  end
+
+  create_table "timesheet_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "layout_type"
+    t.integer  "value_type"
+    t.string   "optional_settings"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "company_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["company_id"], name: "index_timesheet_settings_on_company_id", using: :btree
   end
 
   create_table "user_dayoffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -387,6 +401,8 @@ ActiveRecord::Schema.define(version: 20161214090800) do
   add_foreign_key "shifts", "companies"
   add_foreign_key "special_dayoff_settings", "dayoff_settings"
   add_foreign_key "special_dayoff_settings", "special_dayoff_types"
+  add_foreign_key "time_sheets", "users"
+  add_foreign_key "timesheet_settings", "companies"
   add_foreign_key "user_dayoffs", "special_dayoff_types"
   add_foreign_key "user_dayoffs", "users"
   add_foreign_key "user_groups", "groups"

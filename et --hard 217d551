@@ -1,0 +1,117 @@
+[33m217d551[m HEAD@{0}: checkout: moving from develop to show_list_request_off
+[33m9dad6d4[m HEAD@{1}: checkout: moving from 44b773eb43e217508e7de75be9e60db42f429c46 to develop
+[33m44b773e[m HEAD@{2}: commit (amend): Merge pull request #36 from dothidiemthao/refactor-timesheet-models
+[33m88d8844[m HEAD@{3}: rebase -i (start): checkout HEAD~5
+[33m217d551[m HEAD@{4}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m217d551[m HEAD@{5}: rebase -i (start): checkout HEAD~3
+[33m217d551[m HEAD@{6}: rebase: aborting
+[33m545bb69[m HEAD@{7}: rebase -i (start): checkout HEAD~2
+[33m217d551[m HEAD@{8}: rebase: aborting
+[33m217d551[m HEAD@{9}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m217d551[m HEAD@{10}: rebase -i (start): checkout HEAD~4
+[33m217d551[m HEAD@{11}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m217d551[m HEAD@{12}: rebase -i (start): checkout HEAD~5
+[33m217d551[m HEAD@{13}: reset: moving to 217d551
+[33mcc03954[m HEAD@{14}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33mcc03954[m HEAD@{15}: rebase -i (start): checkout HEAD~4
+[33mcc03954[m HEAD@{16}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33mcc03954[m HEAD@{17}: rebase -i (squash): show/edit/destroy setting of company
+[33mdfd3bf0[m HEAD@{18}: rebase -i (start): checkout HEAD~5
+[33m217d551[m HEAD@{19}: reset: moving to 217d551
+[33mc4fa10c[m HEAD@{20}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33mc4fa10c[m HEAD@{21}: rebase -i (pick): [UI] Request inlate form
+[33mb1feada[m HEAD@{22}: rebase -i (pick): update delete location gojs
+[33m7751744[m HEAD@{23}: rebase -i (pick): [lib] Json response template
+[33m68cc674[m HEAD@{24}: rebase -i (pick): update and delete section gojs
+[33md9c0e61[m HEAD@{25}: rebase -i (start): checkout HEAD~5
+[33mdfd3bf0[m HEAD@{26}: reset: moving to dfd3bf0
+[33ma67be3a[m HEAD@{27}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33ma67be3a[m HEAD@{28}: rebase -i (start): checkout HEAD~2
+[33ma67be3a[m HEAD@{29}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33ma67be3a[m HEAD@{30}: rebase -i (squash): fake-master-date-request-offs
+[33m545bb69[m HEAD@{31}: rebase -i (start): checkout HEAD~2
+[33mcff8563[m HEAD@{32}: rebase: aborting
+[33m8c7f4bd[m HEAD@{33}: rebase -i (start): checkout HEAD~2
+[33mcff8563[m HEAD@{34}: rebase: aborting
+[33m8c7f4bd[m HEAD@{35}: rebase -i (start): checkout HEAD~2
+[33mcff8563[m HEAD@{36}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33mcff8563[m HEAD@{37}: rebase -i (squash): [UI] Request inlate form
+[33mdfd3bf0[m HEAD@{38}: rebase -i (start): checkout HEAD~2
+[33m217d551[m HEAD@{39}: rebase: aborting
+[33m545bb69[m HEAD@{40}: rebase -i (start): checkout HEAD~2
+[33m217d551[m HEAD@{41}: rebase: aborting
+[33m545bb69[m HEAD@{42}: rebase -i (start): checkout HEAD~2
+[33m217d551[m HEAD@{43}: rebase: aborting
+[33m545bb69[m HEAD@{44}: rebase -i (start): checkout HEAD~2
+[33m217d551[m HEAD@{45}: rebase: aborting
+[33m88d8844[m HEAD@{46}: rebase -i (start): checkout HEAD~5
+[33m217d551[m HEAD@{47}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m217d551[m HEAD@{48}: rebase -i (pick): [User]Show list request off
+[33mdfd3bf0[m HEAD@{49}: rebase -i (pick): [UI] Request inlate form
+[33m545bb69[m HEAD@{50}: rebase -i (pick): update delete location gojs
+[33m8c7f4bd[m HEAD@{51}: rebase -i (pick): [lib] Json response template
+[33m23f51f4[m HEAD@{52}: rebase -i (pick): update and delete section gojs
+[33m88d8844[m HEAD@{53}: rebase -i (start): checkout HEAD~5
+[33ma4100eb[m HEAD@{54}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33ma4100eb[m HEAD@{55}: rebase -i (pick): [User]Show list request off
+[33m5931a01[m HEAD@{56}: rebase -i (pick): [UI] Request inlate form
+[33m3cd1fb0[m HEAD@{57}: rebase -i (squash): update delete location gojs
+[33m4b8ac47[m HEAD@{58}: rebase -i (pick): update delete location gojs
+[33m40d495f[m HEAD@{59}: rebase -i (pick): [lib] Json response template
+[33mb65f588[m HEAD@{60}: rebase -i (start): checkout HEAD~5
+[33m6cfdd54[m HEAD@{61}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m6cfdd54[m HEAD@{62}: rebase -i (start): checkout HEAD~4
+[33m6cfdd54[m HEAD@{63}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m6cfdd54[m HEAD@{64}: rebase -i (pick): [User]Show list request off
+[33m940468f[m HEAD@{65}: rebase -i (pick): [UI] Request inlate form
+[33mfdf2524[m HEAD@{66}: rebase -i (pick): fake-master-date-request-offs
+[33me6856bd[m HEAD@{67}: rebase -i (start): checkout HEAD~4
+[33maf80101[m HEAD@{68}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33maf80101[m HEAD@{69}: rebase -i (pick): [User]Show list request off
+[33m5376872[m HEAD@{70}: rebase -i (squash): [UI] Request inlate form
+[33m5aff4fa[m HEAD@{71}: rebase -i (pick): [UI] Request inlate form
+[33m82e910f[m HEAD@{72}: rebase -i (start): checkout HEAD~4
+[33m82cbe4f[m HEAD@{73}: rebase: aborting
+[33m9eb1337[m HEAD@{74}: rebase -i (start): checkout HEAD~3
+[33m82cbe4f[m HEAD@{75}: rebase: aborting
+[33m125bcfc[m HEAD@{76}: rebase -i (start): checkout HEAD~5
+[33m82cbe4f[m HEAD@{77}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m82cbe4f[m HEAD@{78}: rebase -i (start): checkout HEAD~2
+[33m82cbe4f[m HEAD@{79}: rebase: aborting
+[33m64af7a7[m HEAD@{80}: rebase -i (start): checkout HEAD~2
+[33m82cbe4f[m HEAD@{81}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m82cbe4f[m HEAD@{82}: rebase -i (pick): [User]Show list request off
+[33mf32a125[m HEAD@{83}: rebase -i (squash): show/edit/destroy setting of company
+[33m8dac61c[m HEAD@{84}: rebase -i (pick): show/edit/destroy setting of company
+[33m64af7a7[m HEAD@{85}: rebase -i (start): checkout HEAD~2
+[33m3066b50[m HEAD@{86}: rebase: aborting
+[33m82e910f[m HEAD@{87}: rebase -i (start): checkout HEAD~4
+[33m3066b50[m HEAD@{88}: rebase: aborting
+[33m125bcfc[m HEAD@{89}: rebase -i (start): checkout HEAD~5
+[33m3066b50[m HEAD@{90}: rebase: aborting
+[33m3066b50[m HEAD@{91}: reset: moving to 3066b50
+[33m44a8145[m HEAD@{92}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m44a8145[m HEAD@{93}: rebase -i (pick): fake-master-date-request-offs
+[33m46641d1[m HEAD@{94}: rebase -i (pick): update delete location gojs
+[33m9776d13[m HEAD@{95}: rebase -i (pick): [lib] Json response template
+[33m5916b16[m HEAD@{96}: rebase -i (pick): update and delete section gojs
+[33md9c0e61[m HEAD@{97}: rebase -i (start): checkout HEAD~5
+[33mc91fd9b[m HEAD@{98}: reset: moving to c91fd9b
+[33mcf775c0[m HEAD@{99}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33mcf775c0[m HEAD@{100}: rebase -i (start): checkout HEAD~5
+[33mcf775c0[m HEAD@{101}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33mcf775c0[m HEAD@{102}: rebase -i (start): checkout HEAD~5
+[33mcf775c0[m HEAD@{103}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33mcf775c0[m HEAD@{104}: rebase -i (pick): fake-master-date-request-offs
+[33m67f236f[m HEAD@{105}: rebase -i (pick): update delete location gojs
+[33m8305e0d[m HEAD@{106}: rebase -i (pick): [lib] Json response template
+[33mddcacc4[m HEAD@{107}: rebase -i (pick): update and delete section gojs
+[33md9c0e61[m HEAD@{108}: rebase -i (start): checkout HEAD~5
+[33m62203c2[m HEAD@{109}: rebase -i (finish): returning to refs/heads/show_list_request_off
+[33m62203c2[m HEAD@{110}: rebase -i (squash): fake-master-date-request-offs
+[33m4090c77[m HEAD@{111}: rebase -i (squash): # This is a combination of 4 commits.
+[33m715b660[m HEAD@{112}: rebase -i (squash): # This is a combination of 3 commits.
+[33m1deb7d7[m HEAD@{113}: rebase -i (squash): # This is a combination of 2 commits.
+[33mc91fd9b[m HEAD@{114}: rebase -i (start): checkout HEAD~5
+[33m8946c88[m HEAD@{115}: rebase: aborting
+[33m125bcfc[m HEAD@{116}: rebase -i (start): checkou

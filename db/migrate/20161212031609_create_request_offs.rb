@@ -1,6 +1,7 @@
 class CreateRequestOffs < ActiveRecord::Migration[5.0]
   def change
     create_table :request_offs do |t|
+      t.date :request_date
       t.string :phone_number
       t.string :address_contact
       t.datetime :off_have_salary_from

@@ -24,7 +24,7 @@ class User < ApplicationRecord
   has_many :request_ots
   has_many :user_leaves
   has_many :request_offs
-  has_many :request_leaves
+  has_many :request_leaves, class_name: RequestLeave.name
 
   has_one :location
 

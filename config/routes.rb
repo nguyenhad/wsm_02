@@ -15,4 +15,5 @@ Rails.application.routes.draw do
     resources :set_users, only: :create
   end
   resources :request_leaves
+  resources :request_offs
 end

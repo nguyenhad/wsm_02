@@ -17,6 +17,8 @@ class Ability
       can :update, User, id: user.id
       can :read, :all
       can :create, User
+      can :manage, RequestOff, user_id: user.id
+      can :manage, RequestLeave, user_id: user.id
     end
   end
 end

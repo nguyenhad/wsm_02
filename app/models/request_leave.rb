@@ -1,10 +1,14 @@
 class RequestLeave < ApplicationRecord
   acts_as_paranoid
 
-  has_many :compensations
+  has_one :compensation
 
   belongs_to :leave_type
   belongs_to :user
 
   enum status: {pendding: 0, approve: 1, reject: 2}
+
+  scope :find_by_date, ->date do
+    where "DATE(request_leaves.to) = ?", date
+  end
 end

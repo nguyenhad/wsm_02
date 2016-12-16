@@ -3,7 +3,6 @@ class Company < ApplicationRecord
 
   has_many :users
   has_many :holidays
-  has_many :company_settings
   has_many :shifts
   has_many :dayoff_settings
   has_many :leave_settings
@@ -12,4 +11,17 @@ class Company < ApplicationRecord
   has_one :timesheet_settings
 
   enum status: {pending: 0, active: 1, block:2}
+
+  has_one :company_setting
+
+  accepts_nested_attributes_for :company_setting
+
+  scope :recent, ->{order created_at: :desc}
+
+  scope :parent_company, -> user_id do
+    where "id IN(select id from companies
+      where parent_id = (select company_id from users where id = ?)
+      or id = (select company_id from users where id = ?)
+    )", user_id, user_id
+  end
 end

@@ -1,0 +1,74 @@
+// Place all the styles related to the request_offs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.form-request {
+  width: 45%;
+  float: none;
+  margin: 0 auto ;
+  color: black;
+  border-style: groove;
+  background-color: #F5F5F5;
+
+  .form-title {
+  font-style: normal;
+  color: #D2691E;
+  font-size: 1em;
+  text-align: center;
+
+    .title-content {
+      width: 120%;
+      height: 140px;
+      margin-left: 13px;
+      color: #808080;
+      font-size: 1.1em;
+      margin: 20px;
+    }
+
+    .require {
+      font-size: 0.8em;
+      margin-right: 663px;
+    }
+  }
+
+  .form-group {
+    width: 100%;
+    float: none;
+    margin: 0 auto ;
+    margin-left: 15px;
+
+    label {
+      color: #D2691E;
+      font-size: 1rem;
+      margin-top: 15px;
+    }
+    .notice-text {
+      font-size: 0.7em;
+      color: #808080;
+      margin-top: -10px;
+    }
+    .select {
+      font-size: 1rem;
+    }
+    .button_save {
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    .select-branch {
+      width: 50px;
+    }
+    .select-division {
+      width: 80px;
+    }
+    .select-section {
+      width: 180px;
+    }
+    .select-time {
+      width: 130px;
+    }
+    .select-reason {
+      width: 500px;
+      height: 100px;
+    }
+  }
+}

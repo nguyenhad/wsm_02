@@ -1,5 +1,7 @@
 user:
   name: 50
+  user_request_leave:
+    per_page: 10
 project:
   name: 100
 time_sheet:

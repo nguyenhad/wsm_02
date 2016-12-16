@@ -542,5 +542,42 @@ namespace :db do
         end
       end
     end
+
+    # puts "create timesheets"
+    # (10..12).each do |month|
+    #   User.all.each do |user|
+    #     30.times do |m|
+    #       TimeSheet.create user_id: user.id , date: "#{m+1}/#{month}/2016", time_in: "8:00", time_out: "17:00", type: ""
+    #     end
+    #   end
+    # end
+
+    puts "create request_leaves"
+    RequestLeave.create!([
+      {leave_from: "2016-12-11 07:45:00", leave_to: "2016-12-11 08:15:00",
+        reason: "I have been sick", approve_group: 1, leave_type_id: 1,
+        user_id: 1},
+
+      {leave_from: "2016-12-12 16:15:00", leave_to: "2016-12-12 16:45:00",
+        reason: "Personal issue", approve_group: 1, leave_type_id: 2,
+        user_id: 1},
+
+      {leave_from: "2016-12-13 09:00:00", leave_to: "2016-12-13 09:30:00",
+        reason: "Personal issue", approve_group: 1, leave_type_id: 3,
+        user_id: 1},
+
+      {leave_from: "2016-12-14 12:45:00", leave_to: "2016-12-14 13:15:00",
+        reason: "Personal issue", approve_group: 1, leave_type_id: 4,
+        user_id: 1}
+      ])
+
+    puts "create compensations"
+    Compensation.create!([
+      {from: "2016-12-11 16:45:00", to: "2016-12-11 17:15:00", request_leave_id: 1},
+      {from: "2016-12-13 17:15:00", to: "2016-12-13 17:45:00", request_leave_id: 2},
+      {from: "2016-12-13 16:45:00", to: "2016-12-13 17:15:00", request_leave_id: 3},
+      {from: "2016-12-14 16:45:00", to: "2016-12-14 17:15:00", request_leave_id: 4}
+    ])
+
   end
 end

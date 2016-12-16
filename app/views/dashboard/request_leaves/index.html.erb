@@ -1,0 +1,26 @@
+<div class="request-leaves">
+  <div class="user-requests-leaves">
+    <div class="title-request-leaves">
+      <h3 class="text-center"><%= t ".list_request_leave" %></h3>
+    </div>
+    </br>
+    <table class="table table-striped table-hover color_black">
+      <thead>
+        <th class="col-sm-1"><%= t ".no_num" %></th>
+        <th class="col-sm-1"><%= t ".created_at" %></th>
+        <th class="col-sm-1"><%= t ".leave_from" %></th>
+        <th class="col-sm-1"><%= t ".leave_to" %></th>
+        <th class="col-sm-2"><%= t ".reason" %></th>
+        <th class="col-sm-2"><%= t ".compensation" %></th>
+        <th class="col-sm-2"><%= t ".kind_of_leave" %></th>
+        <th class="col-sm-1"><%= t ".time" %></th>
+        <th class="col-sm-1"><%= t ".status" %></th>
+        <th class="col-sm-1"><%= t ".action" %></th>
+      </thead>
+      <tbody>
+        <%= render partial: "request_leave", collection: @request_leaves %>
+      </tbody>
+    </table>
+    <center><%= paginate @request_leaves %></center>
+  </div>
+</div>

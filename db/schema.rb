@@ -244,6 +244,7 @@ ActiveRecord::Schema.define(version: 20161222043216) do
     t.integer  "company_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.index ["approver_id"], name: "index_request_offs_on_approver_id", using: :btree
     t.index ["special_dayoff_setting_id"], name: "index_request_offs_on_special_dayoff_setting_id", using: :btree
     t.index ["special_dayoff_type_id"], name: "index_request_offs_on_special_dayoff_type_id", using: :btree
     t.index ["user_id"], name: "index_request_offs_on_user_id", using: :btree

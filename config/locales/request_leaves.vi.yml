@@ -1,0 +1,19 @@
+vi:
+  dashboard:
+    request_leaves:
+      index:
+        list_request_leave: "Danh sách yêu cầu IL (M), LE, LO, IL (A)"
+        no_num: "STT"
+        created_at: "Thời gian tạo"
+        leave_from: "Từ"
+        leave_to: "Đến"
+        reason: "Lý do"
+        compensation: "Đăng ký làm bù"
+        kind_of_leave: "Loại"
+        time: "Thời gian"
+        status: "Trạng thái"
+        action: "Hành động"
+      request_leave:
+        tooltip_approve: "Chấp nhận"
+        tooltip_reject: "Loại bỏ"
+        time_unit: "p"

@@ -1,0 +1,50 @@
+<tr>
+  <td>
+    <%= current_index @request_leaves.current_page,
+      Settings.user.user_request_leave.per_page, request_leave_counter %>
+  </td>
+  <td><%= l request_leave.created_at, format: :format_datetime %></td>
+  <td><%= l request_leave.leave_from, format: :format_datetime %></td>
+  <td><%= l request_leave.leave_to, format: :format_datetime %></td>
+  <td><%= request_leave.reason %></td>
+  <td>
+    <%= l request_leave.compensation.from, format: :format_datetime %> -
+    <%= l request_leave.compensation.to, format: :format_datetime %>
+  </td>
+  <td><%= request_leave.leave_type_name %></td>
+  <td>
+    <%= request_leave.time_leave %> <%= t(".time_unit") %>
+  </td>
+  <td>
+    <% if request_leave.pendding? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_leave.status %>">
+        <i class="fa fa-circle-o"></i>
+      </a>
+    <% elsif request_leave.approve? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_leave.status %>">
+        <i class="fa fa-check"></i>
+      </a>
+    <% elsif request_leave.reject? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_leave.status %>">
+        <i class="fa fa-times-circle-o"></i>
+      </a>
+    <% end %>
+  </td>
+  <td>
+    <ul class="menu-action">
+      <li>
+        <%= link_to "#", title: t(".tooltip_approve") do %>
+          <span class="fa fa-check-circle-o"></span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to "#", title: t(".tooltip_reject") do %>
+          <span class="fa fa-trash-o"></span>
+        <% end %>
+      </li>
+    </ul>
+  </td>
+</tr>

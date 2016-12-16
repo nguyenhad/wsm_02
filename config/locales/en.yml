@@ -93,6 +93,7 @@ en:
   time:
     formats:
       date_month_year: "%d/%m/%Y"
+      format_datetime: "%d/%m/%Y %H:%M"
   home: "Home"
   education_framgia: "Education Framgia"
   an_exclusive_management_working_space_by: "An exclusive management working space by"

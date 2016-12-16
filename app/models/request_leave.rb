@@ -5,4 +5,6 @@ class RequestLeave < ApplicationRecord
 
   belongs_to :leave_type
   belongs_to :user
+
+  enum status: {pendding: 0, approve: 1, reject: 2}
 end

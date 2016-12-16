@@ -6,6 +6,7 @@ class CreateLeaveTypes < ActiveRecord::Migration[5.0]
       t.string :code
       t.references :leave_setting, foreign_key: true
       t.references :company, foreign_key: true
+      t.datetime :deleted_at
 
       t.timestamps
     end

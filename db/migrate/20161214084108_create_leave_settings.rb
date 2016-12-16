@@ -5,6 +5,7 @@ class CreateLeaveSettings < ActiveRecord::Migration[5.0]
       t.integer :unit
       t.integer :limit_times
       t.references :company, foreign_key: true
+      t.datetime :deleted_at
 
       t.timestamps
     end

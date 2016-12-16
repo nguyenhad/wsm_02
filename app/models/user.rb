@@ -22,9 +22,9 @@ class User < ApplicationRecord
     foreign_key: :user_id, dependent: :destroy
   has_many :user_groups
   has_many :request_ots
-  has_many :request_leaves
-  has_many :request_offs
   has_many :user_leaves
+  has_many :request_offs
+  has_many :request_leaves
 
   has_one :location
 

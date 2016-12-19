@@ -1,0 +1,12 @@
+en:
+  flash:
+    message:
+      create:
+        successfully: "%{model_name} was successfully created."
+        fail: "%{model_name} was fail created."
+      update:
+        successfully: "%{model_name} was successfully updated."
+        fail: "%{model_name} was fail updated."
+      destroy:
+        successfully: "%{model_name} was successfully destroyed."
+        fail: "%{model_name} was fail destroyed."

@@ -1,0 +1,15 @@
+<%= simple_form_for @request_off do |f| %>
+  <%= f.input :request_date %>
+  <%= f.input :off_have_salary_from %>
+  <%= f.input :off_have_salary_to %>
+  <%= f.input :special_dayoff_setting_id %>
+  <%= f.input :special_dayoff_type_id %>
+
+  <%= f.input :off_no_salary_from %>
+  <%= f.input :off_no_salary_to %>
+  <%= f.input :reason, as: :text, input_html: {rows: 5} %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
+<% end %>

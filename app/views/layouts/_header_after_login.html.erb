@@ -64,10 +64,14 @@
       </div>
     </div>
     <div id="main-container">
-      <div class="header_content"><%= yield :title %></div>
+      <div class="header_content">
+        <%= render "shared/navbar" %>
+      </div>
       <div id="page-content" class="color_black">
         <%= render "shared/flash" %>
+        <%= yield :title %>
         <%= yield %>
       </div>
     </div>
   </div>
+</div>

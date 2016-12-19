@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 20161215040001) do
   end
 
   create_table "request_offs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "request_date"
     t.string   "phone_number"
     t.string   "address_contact"
     t.datetime "off_have_salary_from"

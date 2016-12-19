@@ -29,6 +29,8 @@ gem "paranoia", "~> 2.2"
 gem "kaminari-bootstrap", "~> 3.0.1"
 gem "active_model_serializers", "~> 0.10.0"
 
+gem "twitter-bootstrap-rails"
+
 group :development, :test do
   gem "byebug", platform: :mri
   gem "pry"
@@ -57,6 +59,10 @@ group :test do
   gem "reek"
   gem "bundler-audit"
   gem "rails_best_practices"
+
+  gem "simplecov"
+  gem "simplecov-rcov"
+  gem "simplecov-json"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

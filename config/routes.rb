@@ -16,4 +16,5 @@ Rails.application.routes.draw do
     resources :companies
   end
   resources :request_leaves
+  resources :request_offs
 end

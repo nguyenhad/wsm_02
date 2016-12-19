@@ -2,14 +2,12 @@ require "roo"
 class TimeSheet < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :user, primary_key: :employee_code, foreign_key: :employee_code
+  belongs_to :user
 
-  validates :employee_code, presence: true,
-    length: {maximum: Settings.time_sheet.employee_code}
-
-  scope :order_date_desc, ->{order created_at: :desc}
-  scope :search_staff_name,
-    ->staff_name {where "staff_name LIKE ?", "%#{staff_name}%"}
+  scope :order_date_desc, -> {order created_at: :desc}
+  scope :search_staff_name, -> staff_name do
+    where "staff_name LIKE ?", "%#{staff_name}%"
+  end
   scope :search_employee_code, ->employee_code do
     where "employee_code LIKE ?", "#{employee_code}%"
   end

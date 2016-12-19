@@ -4,6 +4,7 @@ class CreateLeaveSettings < ActiveRecord::Migration[5.0]
       t.float :amount
       t.integer :unit
       t.integer :limit_times
+      t.datetime :deleted_at
       t.references :company, foreign_key: true
       t.datetime :deleted_at
 

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :projects, except: :show
     resources :users
     resources :set_users, only: :create
+    resources :companies
   end
   resources :request_leaves
 end

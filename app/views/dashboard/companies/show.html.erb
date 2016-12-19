@@ -1,0 +1,43 @@
+<% provide :title, t("dashboard.companies.branch_title") %>
+<div class="container color_black">
+  <div class="row">
+    <div class="toppad col-md-12" >
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title text-center"><%= @company.name %></h3>
+          <h6 class="panel-title text-center"><%= @company.status %></h6>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td><%= t "dashboard.companies.cutoff_date" %></td>
+                    <td>
+                      <span class="label label-info"><%= @company.company_setting.cutoff_date %></span>
+                    </td>
+                    <td>
+                      <%= link_to t("delete"), dashboard_company_path(@company),
+                        method: :delete, data: {confirm: t("are_you_sure")},
+                        class: "btn btn-danger" %>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="panel-footer">
+                <span class="pull-right">
+                  <%= link_to edit_dashboard_company_path(@company),
+                    class: "btn btn-sm btn-warning" do %>
+                    <i class="glyphicon glyphicon-edit"></i>
+                    <%= t "dashboard.companies.edit_button" %>
+                  <% end %>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

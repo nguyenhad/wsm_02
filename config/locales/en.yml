@@ -38,6 +38,40 @@ en:
       update:
         success: "%{count} items has been Updated successfully."
         errors: "Update \"%{key}\" unseuccessful."
+        error_at: "Update \"%{key}\" unseuccessful."
+    companies:
+      list_branch: "List Branches"
+      branch_title: "Branch Infomation"
+      branch: "Branch"
+      company: Companies
+      cutoff_date: Cutoff Date
+      edit_button: Edit
+      title: "Setting Company"
+      update: "Update"
+
+    company:
+      danger_message: "Can not find!"
+      update_successfully: "Successfully"
+      update_failure: "Failed"
+      not_setting_message: "Have not setting!"
+
+    company_setting:
+      cutoff_date: "Cutoff Date"
+      company: "Company Setting"
+      title: "Setting"
+      list_setting: "List Setting"
+      new_setting: "Create Setting"
+      index: "Index"
+      name: "Name"
+      action: "Action"
+      edit: "Edit"
+      delete: "Delete"
+      update_setting: "Update setting"
+      edit_setting: "Edit Setting"
+      create_setting: "New Setting"
+
+    service:
+      not_found_leave_type: "Leave type not found"
   create_success: "Create success!"
   create_failed: "Create failed!"
   working_space: "Working space"

@@ -61,6 +61,11 @@ class User < ApplicationRecord
       end
     end
 
+    def random_password
+      chars = (0..9).to_a + ("a".."z").to_a + ("A".."Z").to_a
+      chars.sample(8).join
+    end
+
     private
     def store_user data
       user = User.load_by_company(data["company_id"])
@@ -68,11 +73,6 @@ class User < ApplicationRecord
       user.attributes = data.to_hash
       user.password = User.random_password
       user.save
-    end
-
-    def random_password
-      chars = (0..9).to_a + ("a".."z").to_a + ("A".."Z").to_a
-      chars.sample(8).join
     end
   end
 end

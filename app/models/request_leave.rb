@@ -9,5 +9,5 @@ class RequestLeave < ApplicationRecord
   belongs_to :user
 
   enum status: {pendding: 0, approve: 1, reject: 2}
-  scope :find_by_date, ->(date){where "DATE(request_leaves.leave_to) = ?", date}
+  scope :find_by_date, ->(date){where "DATE(leave_to) = ?", date}
 end

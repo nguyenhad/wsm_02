@@ -1,4 +1,3 @@
-<% provide :title, t("dashboard.companies.list_branch") %>
 <div class="container color_black">
   <div class="row">
     <div class="toppad col-md-12" >
@@ -24,7 +23,7 @@
                           Settings.per_page.dashboard.company_page, index %>
                       </td>
                       <td>
-                        <%= link_to company.name, dashboard_company_path(company) %>
+                        <%= link_to company.name, dashboard_company_time_sheets_path(company) %>
                       </td>
                     </tr>
                   <% end %>

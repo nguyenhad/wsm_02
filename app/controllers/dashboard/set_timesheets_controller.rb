@@ -18,9 +18,8 @@ class Dashboard::SetTimesheetsController < ApplicationController
 
   private
   def load_file
-    if params[:file].blank?
-      flash[:notice] = t "please_you_choose_file"
-      redirect_to dashboard_time_sheets_path
-    end
+    return if params[:file].present?
+    flash[:notice] = t "please_you_choose_file"
+    redirect_to dashboard_time_sheets_path
   end
 end

@@ -12,11 +12,6 @@ class Location < ApplicationRecord
   validates :width, presence: true, numericality: {only_integer: true}
   validates :height, presence: true, numericality: {only_integer: true}
 
-  scope :of_user, ->user_id do
-    where user_id: user_id
-  end
-
-  scope :of_workspace, ->workspace_id do
-    where workspace_id: workspace_id
-  end
+  scope :of_user, ->(user_id){where user_id: user_id}
+  scope :of_workspace, ->(workspace_id){where workspace_id: workspace_id}
 end

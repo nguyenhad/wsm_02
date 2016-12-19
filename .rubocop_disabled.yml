@@ -28,6 +28,18 @@ Style/ClassAndModuleChildren:
   Description: "Checks style of children classes and modules."
   Enabled: false
 
+Style/MethodDefParentheses:
+  Description: >-
+                 Checks if the method definitions have or don"t have
+                 parentheses.
+  Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  Description: >-
+                 Checks indentation of method calls with the dot operator
+                 that span more than one line.
+  Enabled: false
+
 Metrics/ClassLength:
   Description: "Avoid classes longer than 100 lines of code."
   Enabled: false
@@ -60,6 +72,14 @@ Style/AccessorMethodName:
 
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/StabbyLambdaParentheses:
+  Description: 'Check for the usage of parentheses around stabby lambda arguments.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#stabby-lambda-with-args'
   Enabled: false
 
 #################### Lint ################################

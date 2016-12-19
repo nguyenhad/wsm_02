@@ -19,7 +19,6 @@ class Workspace < ApplicationRecord
 
   protected
   def build_user_workspaces
-    user_workspaces.create workspace_id: self.id, user_id: self.user_id,
-      is_manager: true
+    user_workspaces.create workspace_id: id, user_id: user_id, is_manager: true
   end
 end

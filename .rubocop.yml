@@ -16,9 +16,11 @@ AllCops:
     - 'config/unicorn.rb'
     - 'bin/**'
     - 'db/**'
+    - 'db/**/*'
     - 'spec/**'
     - 'test/**'
     - 'config/**/*'
+    - 'app/services/**'
   # By default, the rails cops are not run. Override in project or home
   # directory .rubocop.yml files, or by giving the -R/--rails option.
 Rails:

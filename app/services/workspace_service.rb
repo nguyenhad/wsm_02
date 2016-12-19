@@ -1,43 +1,43 @@
 class WorkspaceService
   attr_accessor :workspace, :result_msg, :updated_counter
 
-  def initialize(workspace)
+  def initialize workspace
     @workspace = workspace
     @result_msg = []
     @updated_counter = 0
   end
 
-  def build_sections(node_data)
+  def build_sections node_data
     flag = false
     temp_section = []
     section_delete = []
     section_workspaces = @workspace.sections
     if node_data
       node_data.each do |_index, object|
-        if object["isGroup"]
-          if section_workspaces.empty?
+        next if object["isGroup"].blank?
+
+        if section_workspaces.empty?
+          section = @workspace.sections.create section_params(object)
+          check_save section, object
+        else
+          section_workspaces.each do |section_workspace|
+            if section_workspace.section_key == object["key"]
+              flag = false
+              temp_section.push section_workspace
+              section_delete = section_workspaces - temp_section
+              if section_workspace.update section_params(object)
+                @updated_counter += 1
+              else
+                @result_msg.push I18n.t("dashboard.workspaces.update.errors", key: object["key"])
+              end
+              break
+            else
+              flag = true
+            end
+          end
+          if flag
             section = @workspace.sections.create section_params(object)
             check_save section, object
-          else
-            section_workspaces.each do |section_workspace|
-              if section_workspace.section_key == object["key"]
-                flag = false
-                temp_section.push section_workspace
-                section_delete = section_workspaces - temp_section
-                if section_workspace.update section_params(object)
-                  @updated_counter += 1
-                else
-                  @result_msg.push I18n.t("dashboard.workspaces.update.errors", key: object["key"])
-                end
-                break
-              else
-                flag = true
-              end
-            end
-            if flag
-              section = @workspace.sections.create section_params(object)
-              check_save section, object
-            end
           end
         end
       end
@@ -47,7 +47,7 @@ class WorkspaceService
     end
   end
 
-  def build_locations(node_data)
+  def build_locations node_data
     flag = false
     temp_location = []
     location_delete = []
@@ -55,9 +55,7 @@ class WorkspaceService
     location_workspaces = Location.of_workspace @workspace.id
     if node_data
       node_data.each do |_index, object|
-        unless object["isGroup"]
-          node.push object
-        end
+        node.push object unless object["isGroup"]
       end
       if node.present?
         node.each do |object|
@@ -129,7 +127,7 @@ class WorkspaceService
     }
   end
 
-  def check_save(section, object)
+  def check_save section, object
     if section.save
       @updated_counter += 1
     else

@@ -4,14 +4,14 @@ class TimeSheet < ApplicationRecord
 
   belongs_to :user
 
-  scope :order_date_desc, -> {order created_at: :desc}
-  scope :search_staff_name, -> staff_name do
+  scope :order_date_desc, ->{order created_at: :desc}
+  scope :search_staff_name, ->staff_name do
     where "staff_name LIKE ?", "%#{staff_name}%"
   end
   scope :search_employee_code, ->employee_code do
     where "employee_code LIKE ?", "#{employee_code}%"
   end
-  scope :load_by_date, ->date {where date: date}
+  scope :load_by_date, ->(date){where date: date}
 
   class << self
     def import file
@@ -64,14 +64,14 @@ class TimeSheet < ApplicationRecord
   end
 
   def reset_time_in time_in_other
-    if self.time_in.present? && time_in_other.present? && time_in_other < self.time_in
-      self.update_attributes time_in: time_in_other
+    if time_in.present? && time_in_other.present? && time_in_other < time_in
+      update_attributes time_in: time_in_other
     end
   end
 
   def reset_time_out time_out_other
-    if self.time_out.present? && time_out_other.present? && time_out_other > self.time_out
-      self.update_attributes time_out: time_out_other
+    if time_out.present? && time_out_other.present? && time_out_other > time_out
+      update_attributes time_out: time_out_other
     end
   end
 end

@@ -1,7 +1,7 @@
 class Dashboard::CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_manager!
-  before_action :load_company, except: [:index, :new, :create]
+  load_and_authorize_resource except: [:index, :new, :create]
 
   def index
     @companies = Company.parent_company(current_user.id)
@@ -39,14 +39,6 @@ class Dashboard::CompaniesController < ApplicationController
   end
 
   private
-
-  def load_company
-    @company = Company.find_by id: params[:id]
-    unless @company
-      flash[:warning] = t "dashboard.company.danger_message"
-      redirect_to dashboard_companies_path
-    end
-  end
 
   def company_params
     params.require(:company).permit :name,

@@ -6,6 +6,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.integer :role, default: 2
       t.datetime :birthday
       t.string :employee_code
+      t.integer :position_id
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

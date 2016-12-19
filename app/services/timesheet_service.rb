@@ -1,9 +1,10 @@
 class TimesheetService
   attr_accessor :timesheet
 
-  def initialize timesheet, shift
+  def initialize timesheet, shift, position
     @timesheet = timesheet
     @shift = shift
+    @position = position
   end
 
   def timesheet_inlate? timesheet, shift
@@ -34,9 +35,14 @@ class TimesheetService
     holiday ? true : false
   end
 
+  def check_object_timesheet
+    position.manager?
+  end
+
   private
+
   def format_to_time time
-    time.strftime(Settings.hour_minutes).to_time
+    time.strftime(Settings.hour_minutes).in_time_zone.utc
   end
 
   def load_leave_type code_type, company_id

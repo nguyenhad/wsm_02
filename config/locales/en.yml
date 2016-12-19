@@ -74,6 +74,9 @@ en:
 
     service:
       not_found_leave_type: "Leave type not found"
+  you_must_setting_timesheet: "Please setting timesheets for import"
+  invalid_time_format: "Invalid format Time, please check your time setting"
+  invalid_date_format: "invalid format Date, please check your date setting"
   create_success: "Create success!"
   create_failed: "Create failed!"
   working_space: "Working space"

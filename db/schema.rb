@@ -311,10 +311,12 @@ ActiveRecord::Schema.define(version: 20161219064348) do
     t.string   "optional_settings"
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "start_row_data"
+    t.string   "date_format_type",  default: "%d/%m/%Y"
     t.datetime "deleted_at"
     t.integer  "company_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.index ["company_id"], name: "index_timesheet_settings_on_company_id", using: :btree
   end
 

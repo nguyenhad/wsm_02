@@ -17,72 +17,270 @@ class TimeSheet < ApplicationRecord
   end
 
   class << self
-    def import file
+    def import file, timesheet_setting
+      @timesheet_setting = timesheet_setting
       @spreadsheet = open_spreadsheet file
       return false unless @spreadsheet
-      text_title = @spreadsheet.row Settings.row_title
-      month_year_of_timesheet = text_title[0].to_date
-      @header = spreadsheet.row Settings.row_header
-      @month = month_year_of_timesheet.month
-      @year = month_year_of_timesheet.year
-      read_each_line
+      @optional_settings = @timesheet_setting.optional_settings
+      import_follow_setting
     end
 
     private
-    def add_timesheet row
-      num_col_inprocess = @spreadsheet.last_column - Settings.num_col_not_process
-      (Settings.col_date_first...num_col_inprocess).step(2) do |i|
-        time_in, time_out = load_time_in_out(row, i)
-        add_data_to_timesheet time_in,
-          time_out, build_date(@header[i]), row[Settings.col_employee_code]
+
+    def import_follow_setting
+      if @timesheet_setting.horizontal?
+        check_type_import_horizontal
+      else
+        check_type_import_vertical
+      end
+    end
+
+    def check_type_import_horizontal
+      if @timesheet_setting.title?
+        read_file_horizontal_with_title
+      else
+        read_file_horizontal_with_serial
+      end
+    end
+
+    def check_type_import_vertical
+      if @timesheet_setting.title?
+        read_file_vertical_with_title
+      else
+        import_data_vertical_with_serial
+      end
+    end
+
+    def read_each_line_header_horizontal row_header
+      row_header.each_with_index do |item, index|
+        check_horizontal_title_optional item, index
+      end
+      get_number_column_inprocess
+      import_data_horizontal unless invalid_horizontal_optinal?
+    end
+
+    def read_file_horizontal_with_title
+      get_title_horizontal_optional_settings
+      @list_dates = (@timesheet_setting.start_date..@timesheet_setting.end_date).to_a
+      (@spreadsheet.first_row..(@timesheet_setting.start_row_data - 1)).each do |i|
+        record_header = @spreadsheet.row i
+        next unless record_header.blank?
+        read_each_line_header_horizontal record_header
+      end
+    end
+
+    def read_file_horizontal_with_serial
+      set_num_col_process_horizontal_serial
+      import_data_horizontal unless invalid_horizontal_optinal?
+    end
+
+    def invalid_horizontal_optinal?
+      @num_col_key.blank? || @num_col_start_date.blank? ||
+        @num_col_end_date.blank?
+    end
+
+    def import_data_horizontal
+      (@timesheet_setting.start_row_data..@spreadsheet.last_row).each do |i|
+        record_data_timesheet = @spreadsheet.row i
+        user = find_by_user record_data_timesheet[@num_col_key]
+        next unless user
+        import_data_horizontal_of_user user, record_data_timesheet
       end
     end
 
     def load_time_in_out row, i
       [
-        CustomCommon.format_unix_time_to_date(row[i]),
-        CustomCommon.format_unix_time_to_date(row[i + 1])
+        CustomCommon.format_unix_to_time(row[i]),
+        CustomCommon.format_unix_to_time(row[i + 1])
       ]
     end
 
-    def read_each_line
-      (Settings.data_row_first..@spreadsheet.last_row).step(2) do |i|
-        row = @spreadsheet.row i
-        user = User.find_by employee_code: row[Settings.col_employee_code]
-        next if user.nil?
-        add_timesheet row
+    def import_data_horizontal_of_user user, record_data_timesheet
+      (@num_col_start_date..@num_col_end_date).step(2) do |j|
+        time_in, time_out = load_time_in_out(record_data_timesheet, j)
+        next if time_in.blank? && time_out.blank?
+        date = get_date_of_timesheet j
+        add_timesheet user, date, time_in, time_out
       end
     end
 
-    def build_date hdate
-      month = @month
-      year = @year
-      if hdate > Settings.end_day_pay && hdate <= Settings.end_of_month
-        month, year = CustomCommon.calculated_month_year(month, year)
+    def add_timesheet user, date, time_in, time_out
+      timesheet_by_date = user.time_sheets.find_by date: date
+      if timesheet_by_date.present?
+        timesheet_by_date.reset_time_in time_in
+        timesheet_by_date.reset_time_out time_out
+      else
+        user.time_sheets.create date: date, time_in: time_in, time_out: time_out
       end
-      Date.parse("#{hdate}#{I18n.t 'slash'}#{month}#{I18n.t 'slash'}#{year}")
     end
 
-    def add_data_to_timesheet time_in, time_out, date, employee_code
-      timesheet = TimeSheet.load_by_date(date)
-        .find_by employee_code: employee_code
+    def set_num_col_process_horizontal_serial
+      @list_dates = (@timesheet_setting.start_date..@timesheet_setting.end_date).to_a
+      @num_col_start_date = @optional_settings[:date] - 1
+      return if @num_col_start_date.blank? || @list_dates.blank?
+      @num_col_end_date = @list_dates.length * 2 + @num_col_start_date - 1
+      set_num_col_key
+    end
 
-      if timesheet.blank?
-        return TimeSheet.create date: date, time_in: time_in,
-                  time_out: time_out, employee_code: employee_code
+    def set_num_col_key
+      case @optional_settings[:key]
+      when Settings.employee_code_attribute
+        @num_col_key = @optional_settings[:employee_code] - 1
+      when Settings.name_attribute
+        @num_col_key = @optional_settings[:name] - 1
+      else
+        false
+      end
+    end
+
+    def get_title_horizontal_optional_settings
+      @title_date = @optional_settings[:date]
+      case @optional_settings[:key]
+      when Settings.employee_code_attribute
+        @title_key = @optional_settings[:employee_code]
+      when Settings.name_attribute
+        @title_key = @optional_settings[:name]
+      else
+        return false
+      end
+    end
+
+    def check_horizontal_title_optional item, index
+      case item.to_s.strip
+      when @title_key
+        @num_col_key = index
+      when @title_date
+        @num_col_start_date = index
+      end
+    end
+
+    def get_number_column_inprocess
+      return if @num_col_start_date.blank? || @list_dates.blank?
+      @num_col_end_date = @list_dates.length * 2 + @num_col_start_date - 1
+    end
+
+    def get_date_of_timesheet index
+      if index == @num_col_start_date
+        @list_dates[index - @num_col_start_date]
+      else
+        @list_dates[(index - @num_col_start_date) / 2]
+      end
+    end
+
+    def get_title_vertical_optional_settings
+      @title_date = @optional_settings[:date]
+      @title_time_in = @optional_settings[:time_in]
+      @title_time_out = @optional_settings[:time_out]
+      case @optional_settings[:key]
+      when Settings.employee_code_attribute
+        @title_key = @optional_settings[:employee_code]
+      when Settings.name_attribute
+        @title_key = @optional_settings[:name]
+      else
+        return false
+      end
+    end
+
+    def check_vertical_title_optional item, index
+      case item.to_s.strip
+      when @title_key
+        @num_col_key = index
+      when @title_date
+        @num_col_date = index
+      when @title_time_in
+        @num_col_time_in = index
+      when @title_time_out
+        @num_col_time_out = index
+      end
+    end
+
+    def invalid_optinal?
+      @num_col_key.blank? || @num_col_date.blank? ||
+        @num_col_time_in.blank? || @num_col_time_out.blank?
+    end
+
+    def find_by_user value
+      case @optional_settings[:key]
+      when Settings.employee_code_attribute
+        User.find_by employee_code: value,
+          company_id: @timesheet_setting.company_id
+      when Settings.name_attribute
+        User.find_by name: value, company_id: @timesheet_setting.company_id
+      end
+    end
+
+    def valid_date? date
+      if date.is_a? Date
+        date
+      else
+        CustomCommon.format_string_to_date date,
+          @timesheet_setting.date_format_type
+      end
+    end
+
+    def format_time_vertical string_time
+      return "" if string_time.blank?
+      CustomCommon.format_string_to_time(string_time)
+    end
+
+    def import_data_vertical
+      (@timesheet_setting.start_row_data..@spreadsheet.last_row).each do |i|
+        record_data_timesheet = @spreadsheet.row i
+        user = find_by_user record_data_timesheet[@num_col_key]
+        next unless user
+        date = valid_date? record_data_timesheet[@num_col_date]
+        time_in = format_time_vertical(record_data_timesheet[@num_col_time_in])
+        time_out = format_time_vertical(record_data_timesheet[@num_col_time_out])
+        next if time_in.blank? && time_out.blank?
+        add_timesheet user, date, time_in, time_out
+      end
+    end
+
+    def read_each_line_header_vertical_title row_header
+      row_header.each_with_index do |item, index|
+        check_vertical_title_optional item, index
+      end
+    end
+
+    def read_file_vertical_with_title
+      get_title_vertical_optional_settings
+      (@spreadsheet.first_row..(@timesheet_setting.start_row_data - 1)).each do |i|
+        record_header = @spreadsheet.row i
+        next if row_header.blank?
+        read_each_line_header_vertical_title record_header
+        next if invalid_optinal?
+        import_data_vertical
       end
       timesheet.reset_time_in time_in
       timesheet.reset_time_out time_out
     end
+
+    def set_number_column_process_vertical
+      @num_col_date = @optional_settings[:date] - 1
+      @num_col_time_in = @optional_settings[:time_in] - 1
+      @num_col_time_out = @optional_settings[:time_out] - 1
+      set_num_col_key
+    end
+
+    def import_data_vertical_with_serial
+      set_number_column_process_vertical
+      import_data_vertical
+    end
   end
 
-  def reset_time_in time_in_other
-    return if time_in.blank? || time_in_other.blank? || time_in_other > time_in
-    update_attributes time_in: time_in_other
+  def reset_time_in time_in
+    if (self.time_in.present? && time_in.present? &&
+      CustomCommon.format_string_to_time(time_in) < self.time_in) ||
+       (self.time_in.blank? && time_in.present?)
+      update_attributes time_in: time_in
+    end
   end
 
-  def reset_time_out time_out_other
-    return if time_out.blank? || time_out_other.blank? || time_out_other < time_out
-    update_attributes time_out: time_out_other
+  def reset_time_out time_out
+    if (self.time_out.present? && time_out.present? &&
+      CustomCommon.format_string_to_time(time_out) > self.time_out) ||
+       (self.time_out.blank? && time_out.present?)
+      update_attributes time_out: time_out
+    end
   end
 end

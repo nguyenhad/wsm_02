@@ -4,15 +4,13 @@ class Dashboard::SetTimesheetsController < ApplicationController
   before_action :load_file, only: :create
 
   def create
-    begin
-      if TimeSheet.import params[:file]
-        flash[:success] = t "import_success"
-      else
-        flash[:danger] = t "error_format_file"
-      end
-    rescue Exception
-      flash[:danger] = t "file_format_not_right"
+    if TimeSheet.import params[:file]
+      flash[:success] = t "import_success"
+    else
+      flash[:danger] = t "error_format_file"
     end
+  rescue StandardError
+    flash[:danger] = t "file_format_not_right"
     redirect_to dashboard_time_sheets_path
   end
 

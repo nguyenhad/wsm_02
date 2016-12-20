@@ -33,7 +33,7 @@ class Dashboard::WorkspacesController < DashboardController
     build_results = build_workspace_data(params[:nodeDataArray])
     result_msg = build_results[0]
     result_msg.push t(".success", count: build_results[1])
-    flash[:info] = safe_join(result_msg.join(Settings.break_line).html_safe)
+    flash[:info] = safe_join(result_msg.join(Settings.break_line))
     redirect_to action: :edit
   end
 

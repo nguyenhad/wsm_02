@@ -11,6 +11,8 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20_161_219_064_348) do
+ActiveRecord::Schema.define(version: 20161219064348) do
+
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "parent_id"
@@ -80,8 +82,8 @@ ActiveRecord::Schema.define(version: 20_161_219_064_348) do
     t.float    "amount", limit: 24
     t.integer  "unit"
     t.integer  "limit_times"
-    t.integer  "company_id"
     t.datetime "deleted_at"
+    t.integer  "company_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["company_id"], name: "index_leave_settings_on_company_id", using: :btree
@@ -92,8 +94,12 @@ ActiveRecord::Schema.define(version: 20_161_219_064_348) do
     t.string   "description"
     t.string   "code"
     t.datetime "deleted_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "leave_setting_id"
+    t.integer  "company_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["company_id"], name: "index_leave_types_on_company_id", using: :btree
+    t.index ["leave_setting_id"], name: "index_leave_types_on_leave_setting_id", using: :btree
   end
 
   create_table "location_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -337,7 +343,7 @@ ActiveRecord::Schema.define(version: 20_161_219_064_348) do
   end
 
   create_table "user_leaves", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.float    "remain", limit: 24
+    t.float    "remain",     limit: 24
     t.datetime "deleted_at"
     t.integer  "user_id"
     t.datetime "created_at",            null: false

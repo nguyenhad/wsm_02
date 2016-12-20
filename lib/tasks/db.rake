@@ -220,46 +220,6 @@ namespace :db do
       ]
     )
 
-    puts "create request_offs"
-    RequestOff.create!(
-      [
-        {phone_number: "01255060994",
-         address_contact: "Wall stress",
-         off_have_salary_from: "06/09/2016",
-         off_have_salary_to: "06/10/2016",
-         reason: "Tired",
-         user_id: 1},
-
-        {phone_number: "01255060994",
-         address_contact: "American stress",
-         off_have_salary_from: "06/09/2016",
-         off_have_salary_to: "06/10/2016",
-         reason: "Tired",
-         user_id: 1},
-
-        {phone_number: "01255060994",
-         address_contact: "Newyork stress",
-         off_have_salary_from: "06/09/2016",
-         off_have_salary_to: "06/10/2016",
-         reason: "Tired",
-         user_id: 1},
-
-        {phone_number: "01255060994",
-         address_contact: "ND stress",
-         off_have_salary_from: "06/09/2016",
-         off_have_salary_to: "06/10/2016",
-         reason: "Tired",
-         user_id: 1},
-
-        {phone_number: "01255060994",
-         address_contact: "Framgia stress",
-         off_have_salary_from: "06/09/2016",
-         off_have_salary_to: "06/10/2016",
-         reason: "Tired",
-         user_id: 1}
-      ]
-    )
-
     puts "create positions"
     Position.create!([{name: "CEO",
       description: "ceo"
@@ -283,6 +243,56 @@ namespace :db do
 
       {name: "Staff",
       description: "s"}
+
+    RequestOff.create!([
+      { phone_number: "01255060994",
+        address_contact: "Wall stress",
+        off_have_salary_from: "07/09/2016",
+        off_have_salary_to: "06/10/2016",
+        reason: "Tired",
+        user_id: 5 },
+
+      { phone_number: "01255060994",
+        address_contact: "American stress",
+        off_have_salary_from: "06/09/2016",
+        off_have_salary_to: "09/10/2016",
+        reason: "Tired",
+        user_id: 5 },
+
+      { phone_number: "01255060994",
+        address_contact: "Newyork stress",
+        off_have_salary_from: "15/09/2016",
+        off_have_salary_to: "06/10/2016",
+        reason: "Tired",
+        user_id: 5 },
+
+      { phone_number: "01255060994",
+        address_contact: "ND stress",
+        off_have_salary_from: "06/09/2016",
+        off_have_salary_to: "06/10/2016",
+        reason: "Tired",
+        user_id: 1 },
+
+      { phone_number: "01255060994",
+        address_contact: "Framgia stress",
+        off_have_salary_from: "06/09/2016",
+        off_have_salary_to: "06/10/2016",
+        reason: "Heache",
+        user_id: 5 },
+
+      { phone_number: "01255060994",
+        address_contact: "Framgia stress",
+        off_have_salary_from: "06/09/2016",
+        off_have_salary_to: "06/10/2016",
+        reason: "Sick",
+        user_id: 5 },
+
+      { phone_number: "01255060994",
+        address_contact: "Framgia stress",
+        off_have_salary_from: "06/09/2016",
+        off_have_salary_to: "06/10/2016",
+        reason: "So Tired",
+        user_id: 5 }
     ])
 
     puts "create company_settings"

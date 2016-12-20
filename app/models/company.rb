@@ -16,9 +16,9 @@ class Company < ApplicationRecord
 
   accepts_nested_attributes_for :company_setting
 
-  scope :recent, -> {order created_at: :desc}
+  scope :recent, ->{order created_at: :desc}
 
-  scope :parent_company, -> user_id do
+  scope :parent_company, ->user_id do
     where "id IN(select id from companies
       where parent_id = (select company_id from users where id = ?)
       or id = (select company_id from users where id = ?)

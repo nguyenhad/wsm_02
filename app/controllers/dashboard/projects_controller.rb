@@ -1,7 +1,7 @@
 class Dashboard::ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_manager!
-  before_action :load_project, only: [:edit, :update, :destroy]
+  load_and_authorize_resource only: [:edit, :update, :destroy]
 
   def index
     @projects = Project.recent.page(params[:page])
@@ -46,13 +46,5 @@ class Dashboard::ProjectsController < ApplicationController
   private
   def project_params
     params.require(:project).permit :name, :start_date, :end_date
-  end
-
-  def load_project
-    @project = Project.find_by_id params[:id]
-    unless @project
-      flash[:warning] = t "dashboard.projects.not_found"
-      redirect_to dashboard_projects_path
-    end
   end
 end

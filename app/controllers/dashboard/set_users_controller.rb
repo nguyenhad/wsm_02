@@ -18,9 +18,8 @@ class Dashboard::SetUsersController < ApplicationController
 
   private
   def load_file
-    if params[:file].blank?
-      flash[:warning] = t "please_you_choose_file"
-      redirect_to dashboard_users_path
-    end
+    return if params[:file].present?
+    flash[:warning] = t "please_you_choose_file"
+    redirect_to dashboard_users_path
   end
 end

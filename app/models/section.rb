@@ -18,7 +18,7 @@ class Section < ApplicationRecord
   validates :width, presence: true, numericality: {only_integer: true}
   validates :height, presence: true, numericality: {only_integer: true}
 
-  scope :find_by_key_and_workspace, ->section_key, workspace_id do
+  scope :find_by_key_and_workspace, ->(section_key, workspace_id) do
     where section_key: section_key, workspace_id: workspace_id
   end
 end

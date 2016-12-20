@@ -85,7 +85,8 @@ class TimesheetService
   def request_leave? timesheet, code_type
     load_leave_type code_type, timesheet.user.company_id
     request_leave = @leave_type.request_leaves
-      .find_by_date(timesheet.date).find_by user_id: timesheet.user_id
+                               .find_by_date(timesheet.date)
+                               .find_by user_id: timesheet.user_id
     if request_leave.any?
       valid_request? request_leave.first
     else

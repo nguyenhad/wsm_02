@@ -1,4 +1,3 @@
-# encoding: utf-8
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
@@ -12,7 +11,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "/assets/" + [version_name, "user_avatar_default.png"].compact.join('_')
+    "/assets/" + [version_name, "user_avatar_default.png"].compact.join("_")
   end
 
   version :standard do
@@ -35,8 +34,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
-
-  def default_url *args
-    "default.jpeg"
-  end
+  # def default_url *args
+  #   "default.jpeg"
+  # end
 end

@@ -30,15 +30,10 @@ class Dashboard::WorkspacesController < DashboardController
   end
 
   def update
-    node_data = params[:nodeDataArray]
-    services = WorkspaceService.new @workspace
-    services.build_sections node_data
-    services.build_locations node_data
-    build_results = services.get_build_results
+    build_results = build_workspace_data(params[:nodeDataArray])
     result_msg = build_results[0]
-    updated_counter = build_results[1]
-    result_msg.push t(".success", count: updated_counter)
-    flash[:info] = result_msg.join(Settings.break_line).html_safe
+    result_msg.push t(".success", count: build_results[1])
+    flash[:info] = safe_join(result_msg.join(Settings.break_line).html_safe)
     redirect_to action: :edit
   end
 
@@ -49,5 +44,12 @@ class Dashboard::WorkspacesController < DashboardController
 
   def load_service
     @sections = ShowWorkspaceService.new(@workspace).show_hash_workspace
+  end
+
+  def build_workspace_data node_data
+    services = WorkspaceService.new @workspace
+    services.build_sections node_data
+    services.build_locations node_data
+    services.get_build_results
   end
 end

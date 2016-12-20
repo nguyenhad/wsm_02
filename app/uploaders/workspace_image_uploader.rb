@@ -10,7 +10,7 @@ class WorkspaceImageUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "/assets/" + [version_name, "workspace_default.jpg"].compact.join('_')
+    "/assets/" + [version_name, "workspace_default.jpg"].compact.join("_")
   end
 
   def extension_white_list

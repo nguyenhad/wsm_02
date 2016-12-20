@@ -1,6 +1,10 @@
 class LeaveType < ApplicationRecord
-  LEAVE_CODES = {inlate: "IL", leave_out: "LO", leave_early: "LE",
-    inlate_afternoon: "IL(A)"}
+  LEAVE_CODES = {
+    inlate: "IL",
+    leave_out: "LO",
+    leave_early: "LE",
+    inlate_afternoon: "IL(A)"
+  }.freeze
   acts_as_paranoid
 
   has_many :request_leaves, class_name: RequestLeave.name

@@ -42,6 +42,6 @@ class Dashboard::CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit :name,
-      company_setting_attributes: [:id, :cutoff_date]
+      company_setting_attributes: [:id, :cutoff_date, :timezone]
   end
 end

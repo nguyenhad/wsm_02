@@ -5,14 +5,23 @@
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control" %>
     </div>
-
-    <%= f.fields_for :company_setting do |ff| %>
-      <div class="field">
-        <%= f.label :cutoff_date %>
-        <%= ff.text_field :cutoff_date %>
-      </div>
-    <% end %>
-
+    <div class="field">
+      <%= f.fields_for :company_setting do |ff| %>
+        <div class="field">
+          <%= f.label :cutoff_date %>
+          <%= ff.text_field :cutoff_date %>
+        </div>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.fields_for :company_setting do |ff| %>
+        <div class="field">
+          <%= f.label :timezone %>
+          <%= ff.time_zone_select :timezone, nil, {},
+            {include_blank: true, class: "form-control"} %>
+        </div>
+      <% end %>
+    </div>
     <div class="field">
       <%= f.submit yield(:button_text), class: "btn btn-primary" %>
     </div>

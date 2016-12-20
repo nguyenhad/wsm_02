@@ -14,6 +14,8 @@ class Company < ApplicationRecord
 
   has_one :company_setting
 
+  delegate :timezone, to: :company_setting, prefix: :company_setting
+
   accepts_nested_attributes_for :company_setting
 
   scope :recent, ->{order created_at: :desc}

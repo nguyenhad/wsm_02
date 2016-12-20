@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219072404) do
+ActiveRecord::Schema.define(version: 20161219064348) do
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(version: 20161219072404) do
   create_table "compensations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "from"
     t.datetime "to"
-    t.integer  "request_leave_id"
     t.integer  "status"
     t.integer  "type"
+    t.integer  "request_leave_id"
     t.datetime "deleted_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 20161219072404) do
     t.float    "amount",      limit: 24
     t.integer  "unit"
     t.integer  "limit_times"
-    t.integer  "company_id"
     t.datetime "deleted_at"
+    t.integer  "company_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["company_id"], name: "index_leave_settings_on_company_id", using: :btree
@@ -91,9 +91,9 @@ ActiveRecord::Schema.define(version: 20161219072404) do
     t.string   "name"
     t.string   "description"
     t.string   "code"
+    t.datetime "deleted_at"
     t.integer  "leave_setting_id"
     t.integer  "company_id"
-    t.datetime "deleted_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["company_id"], name: "index_leave_types_on_company_id", using: :btree
@@ -297,8 +297,8 @@ ActiveRecord::Schema.define(version: 20161219072404) do
     t.date     "date"
     t.time     "time_in"
     t.time     "time_out"
-    t.datetime "deleted_at"
     t.integer  "type"
+    t.datetime "deleted_at"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 20161219072404) do
     t.string   "optional_settings"
     t.date     "start_date"
     t.date     "end_date"
+    t.datetime "deleted_at"
     t.integer  "company_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
@@ -341,6 +342,7 @@ ActiveRecord::Schema.define(version: 20161219072404) do
 
   create_table "user_leaves", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.float    "remain",     limit: 24
+    t.datetime "deleted_at"
     t.integer  "user_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
@@ -364,6 +366,7 @@ ActiveRecord::Schema.define(version: 20161219072404) do
     t.integer  "role",                   default: 2
     t.datetime "birthday"
     t.string   "employee_code"
+    t.integer  "position_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -380,7 +383,6 @@ ActiveRecord::Schema.define(version: 20161219072404) do
     t.string   "title"
     t.string   "avatar"
     t.integer  "company_id"
-    t.integer  "position_id"
     t.index ["company_id"], name: "index_users_on_company_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

@@ -22,8 +22,8 @@
 //= require gojs/release/go.js
 //= require gojs/release/go-debug.js
 //= require app
-//= require ./vendor/modernizr-2.7.1-respond-1.4.2.min
-//= require ./pages/login.js
+//= require modernizr-2.7.1-respond-1.4.2.min
+//= require login.js
 //= require plugins
 //= require jquery.validate
 //= require jquery-ui

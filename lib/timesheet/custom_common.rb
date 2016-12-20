@@ -11,11 +11,9 @@ class CustomCommon
     end
 
     def format_unix_time_to_date num
-      begin
-        Time.at(num).utc.strftime Settings.format_date_to_timeline
-      rescue TypeError
-        ""
-      end
+      Time.at(num).utc.strftime Settings.format_date_to_timeline
+    rescue StandardError
+      ""
     end
   end
 end

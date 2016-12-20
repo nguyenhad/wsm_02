@@ -57,9 +57,6 @@ class User < ApplicationRecord
       header = spreadsheet.row(Settings.row_excel_header)
       (Settings.row_excel_data_first..spreadsheet.last_row).each do |i|
         row = Hash[[header, spreadsheet.row(i)].transpose]
-        row["gender"] = row["gender"].to_i
-        row["role"] = row["role"].to_i
-        row["company_id"] = row["company_id"].to_i
         user = User.load_by_company(row["company_id"])
           .find_by(employee_code: row["employee_code"]) || User.new
         user.attributes = row.to_hash

@@ -1,4 +1,4 @@
-<%= javascript_include_tag "pages/login", "data-turbolinks-track": true %>
+<%= javascript_include_tag "login", "data-turbolinks-track": true %>
 <div class="container well form-horizontal">
   <%= form_for [:dashboard, @user] do |f| %>
     <%= render "shared/error_messages", object: f.object %>

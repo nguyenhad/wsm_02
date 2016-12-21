@@ -1,4 +1,6 @@
 class RequestLeave < ApplicationRecord
+  self.table_name = "request_leaves"
+
   acts_as_paranoid
 
   has_one :compensation

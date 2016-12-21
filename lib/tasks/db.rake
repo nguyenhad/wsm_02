@@ -259,5 +259,39 @@ namespace :db do
          user_id: 1}
       ]
     )
+
+    puts "create positions"
+    Position.create!([{name: "CEO",
+      description: "ceo"
+      },
+
+      {name: "DivisonManager",
+      description: "dm"
+      },
+
+      {name: "SectionManager",
+      description: "sm"
+      },
+
+      {name: "GroupLeader",
+      description: "gl"
+      },
+
+      {name: "Leader",
+      description: "l"
+      },
+
+      {name: "Staff",
+      description: "s"}
+    ])
+
+    puts "create company_settings"
+    Company.all.each do |company_setting|
+      CompanySetting.create!(
+        company_id: company.id,
+        cutoff_date: 5,
+        timezone: "Hanoi"
+      )
+    end
   end
 end

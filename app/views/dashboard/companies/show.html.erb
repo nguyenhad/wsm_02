@@ -17,10 +17,16 @@
                     <td>
                       <span class="label label-info"><%= @company.company_setting.cutoff_date %></span>
                     </td>
-                    <td>
+                    <!-- <td>
                       <%= link_to t("delete"), dashboard_company_path(@company),
                         method: :delete, data: {confirm: t("are_you_sure")},
                         class: "btn btn-danger" %>
+                    </td> -->
+                  </tr>
+                  <tr>
+                    <td><%= t "dashboard.companies.timezone" %></td>
+                    <td>
+                      <span class="label label-info"><%= @company.company_setting.timezone %></span>
                     </td>
                   </tr>
                 </tbody>

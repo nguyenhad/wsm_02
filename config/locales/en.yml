@@ -48,6 +48,7 @@ en:
       edit_button: Edit
       title: "Setting Company"
       update: "Update"
+      timezone: "Time Zone"
 
     company:
       danger_message: "Can not find!"

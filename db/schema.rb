@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20_161_219_064_348) do
 
   create_table "company_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "cutoff_date"
+    t.string   "timezone"
     t.integer  "company_id"
     t.datetime "deleted_at"
     t.datetime "created_at",  null: false

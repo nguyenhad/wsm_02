@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_161_219_064_348) do
 ActiveRecord::Schema.define(version: 20161219064348) do
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "parent_id"
-    t.integer  "status", default: 1
+    t.integer  "status",     default: 1
     t.datetime "deleted_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -46,7 +45,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
 
   create_table "dayoff_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "company_id"
-    t.integer  "loop_available", default: 1
+    t.integer  "loop_available",   default: 1
     t.integer  "limmit_loop_year"
     t.integer  "limmit_loop_day"
     t.datetime "deleted_at"
@@ -58,7 +57,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "company_id"
     t.string   "name"
-    t.text     "description", limit: 65_535
+    t.text     "description",       limit: 65535
     t.integer  "closest_parent_id"
     t.string   "parent_path"
     t.integer  "group_type"
@@ -79,11 +78,11 @@ ActiveRecord::Schema.define(version: 20161219064348) do
   end
 
   create_table "leave_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.float    "amount", limit: 24
+    t.float    "amount",      limit: 24
     t.integer  "unit"
     t.integer  "limit_times"
-    t.datetime "deleted_at"
     t.integer  "company_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["company_id"], name: "index_leave_settings_on_company_id", using: :btree
@@ -94,12 +93,8 @@ ActiveRecord::Schema.define(version: 20161219064348) do
     t.string   "description"
     t.string   "code"
     t.datetime "deleted_at"
-    t.integer  "leave_setting_id"
-    t.integer  "company_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["company_id"], name: "index_leave_types_on_company_id", using: :btree
-    t.index ["leave_setting_id"], name: "index_leave_types_on_leave_setting_id", using: :btree
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "location_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -199,7 +194,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
     t.datetime "leave_from"
     t.datetime "leave_to"
     t.string   "reason"
-    t.integer  "status", default: 0
+    t.integer  "status",        default: 0
     t.integer  "approve_group"
     t.integer  "leave_type_id"
     t.integer  "user_id"
@@ -288,7 +283,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
 
   create_table "special_dayoff_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.text     "description", limit: 65_535
+    t.text     "description", limit: 65535
     t.string   "code"
     t.datetime "deleted_at"
     t.datetime "created_at",                null: false
@@ -324,7 +319,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
     t.integer  "user_id"
     t.integer  "special_dayoff_type_id"
     t.date     "init_date"
-    t.float    "remain", limit: 24
+    t.float    "remain",                 limit: 24
     t.datetime "deleted_at"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
@@ -354,7 +349,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
   create_table "user_workspaces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "workspace_id"
     t.integer  "user_id"
-    t.boolean  "is_manager", default: false
+    t.boolean  "is_manager",   default: false
     t.datetime "deleted_at"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
@@ -365,7 +360,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "gender"
-    t.integer  "role", default: 2
+    t.integer  "role",                   default: 2
     t.datetime "birthday"
     t.string   "employee_code"
     t.integer  "position_id"
@@ -374,7 +369,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count", default: 0, null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -394,7 +389,7 @@ ActiveRecord::Schema.define(version: 20161219064348) do
     t.string   "name"
     t.string   "description"
     t.string   "image"
-    t.boolean  "status", default: false
+    t.boolean  "status",      default: false
     t.integer  "user_id"
     t.datetime "deleted_at"
     t.datetime "created_at",                  null: false

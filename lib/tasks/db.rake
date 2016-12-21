@@ -243,6 +243,7 @@ namespace :db do
 
       {name: "Staff",
       description: "s"}
+    ])
 
     RequestOff.create!([
       { phone_number: "01255060994",
@@ -296,7 +297,7 @@ namespace :db do
     ])
 
     puts "create company_settings"
-    Company.all.each do |company_setting|
+    Company.all.each do |company|
       CompanySetting.create!(
         company_id: company.id,
         cutoff_date: 5,

@@ -10,12 +10,15 @@
   <td><%= request_off.reason %></td>
 
   <td>
-    <%= link_to dashboard_user_request_offs_path do %>
-      <span class="glyphicon glyphicon-edit" %></span>
-    <% end %>
-    <%= link_to dashboard_user_request_offs_path, method: :delete,
-      data: {confirm: t("are_you_sure")} do %>
-      <span class="glyphicon glyphicon-trash" %></span>
+    <% if can? :manage, request_off %>
+      <%= link_to request_off do %>
+        <span class="glyphicon glyphicon-edit" %></span>
+      <% end %>
+
+      <%= link_to [:dashboard, request_off.user, request_off],
+        method: :delete, data: {confirm: t("are_you_sure")} do %>
+        <span class="glyphicon glyphicon-trash" %></span>
+      <% end %>
     <% end %>
   </td>
 </tr>

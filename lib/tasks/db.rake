@@ -170,56 +170,6 @@ namespace :db do
       )
     end
 
-    puts "create dayoff_settings"
-    DayoffSetting.create!(
-      company_id: 2,
-      limmit_loop_year: 1,
-      limmit_loop_day: 20
-    )
-
-    puts "create normal_dayoff_settings"
-    NormalDayoffSetting.create!(
-      [
-        {operator: 1,
-         years: 1,
-         count_day: 12,
-         dayoff_setting_id: 1},
-
-        {operator: 0,
-         years: 5,
-         count_day: 13,
-         dayoff_setting_id: 1}
-      ]
-    )
-
-    puts "create special_dayoff_types"
-    SpecialDayoffType.create!(
-      [
-        {name: "Leave of absent",
-         description: "This is leave yearly of every official staff over one year.
-          This have paid leave, no allowances"},
-
-        {name: "Married leave",
-         description: "Married leave have three days, full salary"},
-
-        {name: "Married of his children leave",
-         description: "Married of his children leave, have 1 day full salary"},
-
-        {name: "Antenatal care leave time off",
-         description: "Antenatal care leave time off. The company not paid,
-          Social security befenits"},
-
-        {name: "Miscarriage leave",
-         description: "Miscarriage leave. The company not paid, Social security befenits"},
-
-        {name: "Maternity leave",
-         description: "Maternity leave. The company not paid, Social security befenits"},
-
-        {name: "Sick leave",
-         description: "Sick leave. The company not paid, Social security befenits"}
-      ]
-    )
-
     puts "create positions"
     Position.create!([{name: "CEO",
       description: "ceo"
@@ -245,7 +195,8 @@ namespace :db do
       description: "s"}
     ])
 
-    RequestOff.create!([
+    puts "create request_offs"
+     RequestOff.create!([
       { phone_number: "01255060994",
         address_contact: "Wall stress",
         off_have_salary_from: "07/09/2016",

@@ -9,3 +9,9 @@ en:
       edit_request_off: Edit
       delete_request_off: Delete
       action: "Action"
+    new:
+      personal:
+        title: Request leave of absent (Personal Offs)
+        require: I would like to submit this form to be approved of my leave of
+          adsence (off with no salary)
+

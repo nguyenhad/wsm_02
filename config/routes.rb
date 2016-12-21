@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :set_timesheets, only: :create
     resources :projects, except: :show
     resources :users do
-      resources :request_offs, only: [:index, :destroy]
+      resources :request_offs, only: [:index, :destroy, :new]
     end
     resources :set_users, only: :create
     resources :companies

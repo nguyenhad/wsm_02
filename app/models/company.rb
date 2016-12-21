@@ -9,6 +9,7 @@ class Company < ApplicationRecord
   has_one :timesheet_setting
   has_one :leave_setting
   has_one :shift
+  has_one :company_setting
 
   enum status: {pending: 0, active: 1, block: 2}
 

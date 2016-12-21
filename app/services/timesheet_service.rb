@@ -1,56 +1,47 @@
 class TimesheetService
-  attr_accessor :timesheet
 
-  def initialize timesheet, shift, position
+  def initialize timesheet, shift, company
     @timesheet = timesheet
     @shift = shift
-    @position = position
+    @company = company
+    @leave_type = LeaveType.all
+    @holidays = company.holidays
+    @request_leaves = RequestLeave.find_by_date timesheet.date
   end
 
-  def timesheet_inlate? timesheet, shift
-    if timesheet.time_in.blank? || timesheet.time_in > shift.time_in
-      if holiday? timesheet
+  def timesheet_inlate?
+    if @timesheet.time_in.blank? || @timesheet.time_in > @shift.time_in
+      if holiday? @timesheet
         false
       end
-        !request_leave? timesheet, LeaveType::LEAVE_CODES[:inlate]
+        !request_leave? @timesheet, LeaveType::LEAVE_CODES[:inlate]
     else
       false
     end
   end
 
-  def timesheet_early_leave? timesheet, shift
-    if timesheet.time_in.blank? || timesheet.time_out > shift.time_out
-      if holiday? timesheet
+  def timesheet_early_leave?
+    if @timesheet.time_in.blank? || @timesheet.time_out < @shift.time_out
+      if holiday? @timesheet
         false
       end
-        !request_leave? timesheet, LeaveType::LEAVE_CODES[:leave_early]
+        !request_leave? @timesheet, LeaveType::LEAVE_CODES[:leave_early]
     else
       false
     end
   end
 
   def holiday? timesheet
-    holiday = Holiday.find_by date: timesheet.date,
-      company_id: timesheet.user.company_id
+    holiday = @holidays.find do |h|
+      h.date == timesheet.date && h.company_id == timesheet.user.company_id
+    end
     holiday ? true : false
-  end
-
-  def check_object_timesheet
-    position.manager?
   end
 
   private
 
   def format_to_time time
-    time.strftime(Settings.hour_minutes).in_time_zone.utc
-  end
-
-  def load_leave_type code_type, company_id
-    @leave_type = LeaveType.find_by code: code_type, company_id: company_id
-    unless @leave_type
-      flash[:danger] = I18n.t("not_found_leave_type")
-      return false
-    end
+    time.strftime(Settings.hour_minutes).in_time_zone
   end
 
   def valid_compensation? compensation, timesheet_compensation
@@ -59,15 +50,16 @@ class TimesheetService
     timesheet_time_out < compensation_time_to ? false : true
   end
 
-  def valid_timesheet_of_compensation? timesheet
-    timesheet.blank? ? false : valid_compensation?(compensation, timesheet)
+  def valid_timesheet_of_compensation?
+    @timesheet.blank? ? false : valid_compensation?(compensation, @timesheet)
   end
 
   def compensation? request_leave
     compensation = request_leave.compensation
     if compensation
-      timesheet_compensation = TimeSheet.load_by_date(compensation.to.to_date)
-        .find_by user_id: request_leave.user.id
+      timesheet_compensation = @timesheet.find do |t|
+        t.date == compensation.to.to_date && t.user_id == request_leave.user.id
+      end
       valid_timesheet_of_compensation? timesheet_compensation
     else
       false
@@ -83,14 +75,16 @@ class TimesheetService
   end
 
   def request_leave? timesheet, code_type
-    load_leave_type code_type, timesheet.user.company_id
-    request_leave = @leave_type.request_leaves
-                               .find_by_date(timesheet.date)
-                               .find_by user_id: timesheet.user_id
-    if request_leave.any?
-      valid_request? request_leave.first
-    else
-      false
+    leave_type = @leave_type.find{|k| k.code == code_type }
+    if leave_type && @request_leaves
+      request_leave = @request_leaves.find do |h|
+        h.to == timesheet.date && h.leave_type_id == leave_type.id
+      end
+      if request_leave
+        valid_request? request_leave.first
+      else
+        false
+      end
     end
   end
 end

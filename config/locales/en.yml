@@ -1,5 +1,6 @@
 en:
   dashboard:
+    load_timesheet_success: "load timesheets success"
     users:
       index:
         company: "Company"

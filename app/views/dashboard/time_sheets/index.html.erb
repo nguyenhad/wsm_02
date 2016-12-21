@@ -1,11 +1,52 @@
-<div class="container color_black">
-  <%= form_tag dashboard_set_timesheets_path, multipart: true,
-    method: :post do %>
-    <div class="col-md-6">
-      <%= file_field_tag :file, class: "form-control" %>
+<div class="color_black content-timesheet" ng-controller="TimesheetsCtrl" >
+  <div class="row">
+    <%= form_tag dashboard_set_timesheets_path, multipart: true,
+      method: :post do %>
+      <div class="col-md-1 pull-right">
+        <%= submit_tag t("import"), class: "btn btn-primary" %>
+      </div>
+      <div class="col-md-6 pull-right">
+        <%= file_field_tag :file, class: "form-control" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row mg-top-50">
+    <div class="inner" id="parent">
+      <table id="table-timesheet" class="table table-bordered table-hover bg-white">
+        <thead>
+          <tr class="">
+            <th class="text-center"></th>
+            <th colspan= {{retrieveTimesheet.content.date_of_month.length*2}} class="text-center" >
+              {{retrieveTimesheet.content.month| date:'MM/yyyy'}}
+            </th>
+          </tr>
+          <tr>
+            <th class="text-center"></th>
+            <th ng-repeat="day in retrieveTimesheet.content.date_of_month" class="text-center" ng-class="{'brg-blue': (day | date:'EEE') == 'Sat', 'bg-orange': (day | date:'EEE') == 'Sun' }">
+              {{ day | date:'EEE dd' }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="object in retrieveTimesheet.content.usertimesheets" ng-class="{'info': ($index%2)}">
+            <td ng-class="{'pg-blue-line': ($index%2)}" class="users">
+              <div class="wth-200"> {{object.user.name}} </div>
+            </td>
+            <td ng-repeat="(key, value) in object.timesheets">
+              <div class="wth-100">
+                <div class="time-in" ng-class="{'brg-red': value.timesheet_inlate, 'bg-green': value.holiday}">
+                  {{value.time_sheet_date.time_in | date: 'hh:mm'}}
+                </div>
+                <div class="time-out" ng-class="{'brg-red': value.timesheet_early_leave, 'bg-green': value.holiday}">
+                  {{value.time_sheet_date.time_out | date: 'hh:mm'}}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="col-md-2">
-      <%= submit_tag t("import"), class: "btn btn-primary" %>
-    </div>
-  <% end %>
+  </div>
+  <timesheet-directive data="retrieveTimesheet.content"></timesheet-directive>
 </div>
+<div class="loader hide"></div>

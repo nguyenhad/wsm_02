@@ -23,7 +23,13 @@
 //= require gojs/release/go-debug.js
 //= require app
 //= require modernizr-2.7.1-respond-1.4.2.min
+//= require angular/angular.min.js
+//= require angular-resource/angular-resource.min.js
 //= require login.js
 //= require plugins
 //= require jquery.validate
 //= require jquery-ui
+//= require cable
+//= require angular_app
+//= require_tree ./angular
+//= require tableheaderfixer-fork/tableHeadFixer.js

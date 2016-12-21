@@ -1,6 +1,7 @@
 require "json_response"
 
 class ApplicationController < ActionController::Base
+  serialization_scope :view_context
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -38,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   JsonResponse::STATUS_CODE.keys.each do |status|
     define_method "response_#{status}" do |message = "", content = {}|
-      render json: JsonResponse.send(status, message, content) && return
+      render json: JsonResponse.send(status, message, content)
     end
   end
 end

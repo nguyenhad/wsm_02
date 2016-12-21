@@ -57,12 +57,17 @@ class User < ApplicationRecord
       header = spreadsheet.row(Settings.row_excel_header)
       (Settings.row_excel_data_first..spreadsheet.last_row).each do |i|
         row = Hash[[header, spreadsheet.row(i)].transpose]
-        user = User.load_by_company(row["company_id"])
-          .find_by(employee_code: row["employee_code"]) || User.new
-        user.attributes = row.to_hash
-        user.password = User.random_password
-        user.save
+        store_user row
       end
+    end
+
+    private
+    def store_user data
+      user = User.load_by_company(data["company_id"])
+              .find_by(employee_code: data["employee_code"]) || User.new
+      user.attributes = data.to_hash
+      user.password = User.random_password
+      user.save
     end
 
     def random_password

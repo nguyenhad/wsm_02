@@ -15,37 +15,45 @@ class TimeSheet < ApplicationRecord
 
   class << self
     def import file
-      spreadsheet = open_spreadsheet file
-      return false unless spreadsheet
-      text_title = spreadsheet.row Settings.row_title
+      @spreadsheet = open_spreadsheet file
+      return false unless @spreadsheet
+      text_title = @spreadsheet.row Settings.row_title
       month_year_of_timesheet = text_title[0].to_date
-      header = spreadsheet.row Settings.row_header
-      read_each_line spreadsheet, header, month_year_of_timesheet.month, month_year_of_timesheet.year
+      @header = spreadsheet.row Settings.row_header
+      @month = month_year_of_timesheet.month
+      @year = month_year_of_timesheet.year
+      read_each_line
     end
 
     private
-    def add_timesheet spreadsheet, row, header, month, year
-      num_col_inprocess =
-        spreadsheet.last_column - Settings.num_col_not_process
-      (Settings.col_date_first...num_col_inprocess).step(2) do |j|
-        time_in = CustomCommon.format_unix_time_to_date(row[j])
-        time_out = CustomCommon.format_unix_time_to_date(row[j + 1])
-        date = build_date(header[j].to_i, month, year)
-        employee_code = row[Settings.col_employee_code]
-        add_data_to_timesheet time_in, time_out, date, employee_code
+    def add_timesheet row
+      num_col_inprocess = @spreadsheet.last_column - Settings.num_col_not_process
+      (Settings.col_date_first...num_col_inprocess).step(2) do |i|
+        time_in, time_out = load_time_in_out(row, i)
+        add_data_to_timesheet time_in,
+          time_out, build_date(@header[i]), row[Settings.col_employee_code]
       end
     end
 
-    def read_each_line spreadsheet, header, month, year
-      (Settings.data_row_first..spreadsheet.last_row).step(2) do |i|
-        row = spreadsheet.row i
+    def load_time_in_out row, i
+      [
+        CustomCommon.format_unix_time_to_date(row[i]),
+        CustomCommon.format_unix_time_to_date(row[i + 1])
+      ]
+    end
+
+    def read_each_line
+      (Settings.data_row_first..@spreadsheet.last_row).step(2) do |i|
+        row = @spreadsheet.row i
         user = User.find_by employee_code: row[Settings.col_employee_code]
         next if user.nil?
-        add_timesheet spreadsheet, row, header, month, year
+        add_timesheet row
       end
     end
 
-    def build_date hdate, month, year
+    def build_date hdate
+      month = @month
+      year = @year
       if hdate > Settings.end_day_pay && hdate <= Settings.end_of_month
         month, year = CustomCommon.calculated_month_year(month, year)
       end
@@ -56,13 +64,12 @@ class TimeSheet < ApplicationRecord
       timesheet = TimeSheet.load_by_date(date)
         .find_by employee_code: employee_code
 
-      if timesheet.present?
-        timesheet.reset_time_in time_in
-        timesheet.reset_time_out time_out
-      else
-        TimeSheet.create date: date, time_in: time_in,
-          time_out: time_out, employee_code: employee_code
+      if timesheet.blank?
+        return TimeSheet.create date: date, time_in: time_in,
+                  time_out: time_out, employee_code: employee_code
       end
+      timesheet.reset_time_in time_in
+      timesheet.reset_time_out time_out
     end
   end
 

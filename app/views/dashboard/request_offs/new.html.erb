@@ -1,49 +1,8 @@
-<% provide :title, t("request_offs.new.personal.title") %>
-<div class="form-personal-off">
-  <div class="form-content">
-    <div class="form-title">
-      <h3><%= t "request_offs.new.personal.title" %></h3>
-    </div>
-    <div class="form-group">
-      <%= form_tag request_off_path(:user_id), method: :post do %>
-        <%= label_tag :staff_name %>
-        <%= text_field_tag :staff_name, nil, class: "select-name" %>
-
-        <%= label_tag :staff_code %>
-        <%= text_field_tag :staff_code, nil, class: "select-code" %>
-
-        <%= label_tag :division %>
-        <%= select_tag :division, nil, class: "select-division" %>
-
-        <%= label_tag :phone_number %>
-        <%= number_field_tag :phone_number, nil, class: "select-phone" %>
-
-        <div class="require">
-          <%= t "request_offs.new.personal.require" %>
-        </div>
-
-        <%= label_tag :in_time %>
-        <%= number_field_tag :in_time, nil, class: "select-time" %>
-        <%= select_tag :unit, options_for_select([ "days", "months", "years" ], "years" ) %>
-        <%= label_tag :from_time_off %>
-        <%= date_select :from_time_off, class: "select-from-time-off" %>
-        <%= label_tag :to_time_off %>
-        <%= date_select :to_time_off, class: "select-to-time-off" %>
-
-        <%= label_tag :reason %>
-        <%= text_area_tag :reason, nil, class: "select-reason" %>
-
-        <%= label_tag :work_handover %>
-        <%= text_field_tag :work_handover, nil, class: "select-handover-person" %>
-        <%= select_tag :division, nil, class: "select-division" %>
-
-        <%= label_tag :work_type %>
-        <%= text_area_tag :work_type, nil, class: "select-work-type" %>
-
-        <div class = "button_save">
-          <%= submit_tag :save  %>
-        </div>
-      <% end %>
-    </div>
-  </div>
+<div class="page-header">
+  <h1>
+    <%= t ".title", default: [:"helpers.titles.new", "New %{model}"],
+      model: RequestOff.model_name.human.titleize %>
+  </h1>
 </div>
+
+<%= render partial: "form" %>

@@ -1,4 +1,4 @@
-<%= simple_form_for @request_off do |f| %>
+<%= simple_form_for [:dashboard, @request_off] do |f| %>
   <div class="form-group">
     <%= label_tag :employee_name %>
     <%= text_field_tag :employee_name,

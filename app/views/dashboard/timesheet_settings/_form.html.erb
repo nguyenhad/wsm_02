@@ -1,0 +1,97 @@
+<%= javascript_include_tag "dashboard/timesheet_settings",
+  "data-turbolinks-track": true %>
+<div class="container form-horizontal">
+  <%= form_for [:dashboard, @workspace, @timesheet_setting] do |f| %>
+    <%= render "shared/error_messages", object: f.object %>
+      <div class="form-group">
+        <%= f.label :layout_type, class: "col-md-3 control-label" %>
+        <div class="col-md-6 selectContainer">
+          <%= f.radio_button :layout_type,
+            t("dashboard.form_timesheet_setting.vertical"),
+            checked: "checked", class: "layout_type" %>
+          <%= t "dashboard.form_timesheet_setting.vertical" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= f.radio_button :layout_type,
+            t("dashboard.form_timesheet_setting.horizontal"),
+            class: "layout_type" %>
+          <%= t "dashboard.form_timesheet_setting.horizontal" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :value_type, class: "col-md-3 control-label" %>
+        <div class="col-md-6 selectContainer">
+          <%= f.radio_button :value_type,
+            t("dashboard.form_timesheet_setting.title"), checked: "checked",
+            class: "value_type" %>
+          <%= t "dashboard.form_timesheet_setting.title" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= f.radio_button :value_type,
+            t("dashboard.form_timesheet_setting.serial"),
+            class: "value_type" %>
+          <%= t "dashboard.form_timesheet_setting.serial" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_format_type, class: "col-md-3 control-label" %>
+        <div class="col-md-5 select-container">
+          <%= f.select :date_format_type,
+            Settings.format_date_type, {},
+            class: "form-control selectpicker" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :start_row_data, class: "col-md-3 control-label" %>
+        <div class="col-md-5">
+          <%= f.number_field :start_row_data, class: "form-control" %>
+        </div>
+        <%= t "open_parenthesis" %>
+        <span class="color-red"><%= t "symbol_star" %></span>
+        <%= t "close_parenthesis" %>
+      </div>
+      <%= f.fields_for :optional_settings do |optional_setting| %>
+        <div class="form-group" id="field_time_in">
+          <%= optional_setting.label :title_time_in, id: "time_in_label",
+            class: "col-md-3 control-label" %>
+          <div class="col-md-5">
+            <%= optional_setting.text_field :time_in,
+              value: @timesheet_setting.optional_settings[:time_in],
+              class: "col-md-12 form-control" %>
+          </div>
+          <%= t "open_parenthesis" %>
+          <span class="color-red"><%= t "symbol_star" %></span>
+          <%= t "close_parenthesis" %>
+        </div>
+        <div class="form-group" id="field_time_out">
+          <%= optional_setting.label :title_time_out, id: "time_out_label",
+            class: "col-md-3 control-label" %>
+          <div class="col-md-5">
+            <%= optional_setting.text_field :time_out,
+              value: @timesheet_setting.optional_settings[:time_out],
+              class: "form-control col-md-12" %>
+          </div>
+          <%= t "open_parenthesis" %>
+          <span class="color-red"><%= t "symbol_star" %></span>
+          <%= t "close_parenthesis" %>
+        </div>
+        <div class="form-group">
+          <%= optional_setting.label :title_date, id: "date_label",
+            class: "col-md-3 control-label" %>
+          <div class="col-md-5">
+            <%= optional_setting.text_field :date,
+              value: @timesheet_setting.optional_settings[:date],
+              class: "form-control col-md-12" %>
+          </div>
+          <%= t "open_parenthesis" %>
+          <span class="color-red"><%= t "symbol_star" %></span>
+          <%= t "close_parenthesis" %>
+        </div>
+        <%= render "optional_settings", optional_setting: optional_setting %>
+      <% end %>
+      <div class="form-group row" >
+        <div class="col-md-offset-3">
+          <%= f.submit yield(:button_text),
+            class: "col-md-6 btn btn-primary" %>
+        </div>
+      </div>
+  <% end %>
+</div>

@@ -1,0 +1,12 @@
+<tr>
+  <td><%= timesheet_setting.layout_type %></td>
+  <td><%= timesheet_setting.value_type %></td>
+  <td>
+    <%= link_to t("show"),
+      dashboard_workspace_timesheet_setting_path(@workspace, timesheet_setting),
+      class: "btn btn-success btn-xs" %>
+    <%= link_to t("edit"),
+      edit_dashboard_workspace_timesheet_setting_path(@workspace, timesheet_setting),
+      class: "btn btn-primary btn-xs" %>
+  </td>
+</tr>

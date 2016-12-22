@@ -7,6 +7,9 @@ project:
 time_sheet:
   employee_code: 7
   staff_name: 50
+timesheet_setting:
+  horizontal: 0
+  title: 0
 image_format_accept: "image/jpeg,image/gif,image/png"
 image_width: 200
 image_height: 200
@@ -19,6 +22,7 @@ per_page:
     company_page: 10
     request_off: 5
     workspace: 10
+    timesheet_setting: 10
   request_off: 5
 min_password: 6
 workspace:
@@ -52,3 +56,12 @@ slash: "/"
 hour_minutes: "%H:%M"
 employee_code_attribute: "employee_code"
 name_attribute: "name"
+format_date_type:
+  mm/dd/yyyy: "%m/%d/%Y"
+  dd/mm/yyyy: "%d/%m/%Y"
+  dd-mm-yyyy: "%d-%m-%Y"
+  mm-dd-yyyy: "%m-%d-%Y"
+  yyyy/mm/dd: "%Y/%m%/%d"
+  yyyy/dd/mm: "%Y/%d%/%m"
+  yyyy-mm-dd: "%Y-%m%-%d"
+  yyyy-dd-mm: "%Y-%d%-%m"

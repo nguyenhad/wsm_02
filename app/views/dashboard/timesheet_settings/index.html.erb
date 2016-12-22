@@ -1,0 +1,26 @@
+<% provide :title, t("dashboard.timesheet_settings.list_timesheet_settings") %>
+<div class="row">
+  <div class="row ">
+    <%= link_to t("dashboard.timesheet_settings.new_timesheet_settings"),
+      new_dashboard_workspace_timesheet_setting_path,
+      class: "btn btn-primary" %>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>
+            <%= t "dashboard.form_timesheet_setting.layout_type" %>
+          </th>
+          <th>
+            <%= t "dashboard.form_timesheet_setting.value_type" %>
+          </th>
+          <th><%= t "action" %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "timesheet_setting",
+          collection: @timesheet_settings %>
+      </tbody>
+    </table>
+    <center><%= paginate @timesheet_settings %></center>
+  </div>
+</div>

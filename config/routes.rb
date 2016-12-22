@@ -17,5 +17,6 @@ Rails.application.routes.draw do
     resources :companies do
       resources :time_sheets, only: :index
     end
+    resources :personal_issues
   end
 end

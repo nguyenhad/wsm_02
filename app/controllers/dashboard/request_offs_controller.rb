@@ -41,7 +41,7 @@ class Dashboard::RequestOffsController < ApplicationController
     else
       flash[:error] = flash_message(:destroy, RequestOff, false)
     end
-    redirect_to dashboard_user_request_offs_path
+    redirect_to dashboard_request_offs_url
   end
 
   private

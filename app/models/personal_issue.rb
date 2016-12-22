@@ -1,0 +1,2 @@
+class PersonalIssue < ApplicationRecord
+end

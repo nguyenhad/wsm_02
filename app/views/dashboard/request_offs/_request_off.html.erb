@@ -11,11 +11,11 @@
 
   <td>
     <% if can? :manage, request_off %>
-      <%= link_to request_off do %>
+      <%= link_to dashboard_request_off_path(request_off) do %>
         <span class="glyphicon glyphicon-edit" %></span>
       <% end %>
 
-      <%= link_to [:dashboard, request_off.user, request_off],
+      <%= link_to [:dashboard, request_off],
         method: :delete, data: {confirm: t("are_you_sure")} do %>
         <span class="glyphicon glyphicon-trash" %></span>
       <% end %>

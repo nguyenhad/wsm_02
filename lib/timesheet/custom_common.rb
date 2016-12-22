@@ -1,18 +1,20 @@
 class CustomCommon
   class << self
-    def calculated_month_year month, year
-      if month == 1
-        month = 12
-        year -= 1
-      else
-        month -= 1
-      end
-      [month, year]
+    def format_unix_to_time num
+      Time.at(num).in_time_zone
+    rescue StandardError
+      ""
     end
 
-    def format_unix_time_to_date num
-      Time.at(num).utc.strftime Settings.format_date_to_timeline
-    rescue StandardError
+    def format_string_to_time string
+      string.in_time_zone
+    rescue TypeError
+      ""
+    end
+
+    def format_string_to_date string, format_setting
+      Date.strptime string, format_setting
+    rescue TypeError
       ""
     end
   end

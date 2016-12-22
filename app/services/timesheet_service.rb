@@ -21,7 +21,7 @@ class TimesheetService
   end
 
   def timesheet_early_leave?
-    if @timesheet.time_in.blank? || @timesheet.time_out < @shift.time_out
+    if @timesheet.time_out.blank? || @timesheet.time_out < @shift.time_out
       if holiday? @timesheet
         false
       end

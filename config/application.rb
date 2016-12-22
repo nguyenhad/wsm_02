@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 
 module Wsm02
   class Application < Rails::Application
-    config.autoload_paths << Rails.root.join("lib/timesheet")
+    config.i18n.default_locale = :vi
+    config.i18n.available_locales = [:vi, :en, :ja]
   end
 end

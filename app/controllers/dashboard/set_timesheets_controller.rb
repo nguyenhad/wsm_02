@@ -1,4 +1,4 @@
-class Dashboard::SetTimesheetsController < ApplicationController
+class Dashboard::SetTimesheetsController < DashboardController
   before_action :authenticate_user!
   before_action :authenticate_manager!
   before_action :load_company, only: :create

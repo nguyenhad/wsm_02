@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="AngularCasts">
+  <head>
+    <title><%= full_title yield :title %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application", media: "all",
+      "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "application",
+      "data-turbolinks-track": "reload" %>
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+    <div class="icon_header_after_login">
+      <%= link_to "javascript:void(0)", onclick: "App.sidebar('toggle-sidebar');" do %>
+        <i class="fa fa-bars fa-fw icon_color_white" ></i>
+      <% end %>
+    </div>
+    <div id="page-wrapper">
+      <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+        <%= render "layouts/sidebar" %>
+        <div id="main-container">
+          <div class="header-content">
+            <%= render "shared/navbar" %>
+          </div>
+          <div id="page-content" class="color_black">
+            <%= render "shared/flash" %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render "layouts/footer" %>
+  </body>
+</html>

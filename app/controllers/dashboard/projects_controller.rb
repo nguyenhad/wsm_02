@@ -1,4 +1,4 @@
-class Dashboard::ProjectsController < ApplicationController
+class Dashboard::ProjectsController < DashboardController
   before_action :authenticate_user!
   before_action :authenticate_manager!
   load_and_authorize_resource only: [:edit, :update, :destroy]
@@ -22,8 +22,7 @@ class Dashboard::ProjectsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @project.update_attributes project_params

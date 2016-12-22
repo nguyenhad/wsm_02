@@ -10,11 +10,9 @@ class Dashboard::WorkspacesController < DashboardController
     @workspace = Workspace.new
   end
 
-  def show
-  end
+  def show; end
 
-  def new
-  end
+  def new; end
 
   def create
     @workspace = current_user.owned_workspaces.new workspace_params
@@ -26,8 +24,7 @@ class Dashboard::WorkspacesController < DashboardController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     build_results = build_workspace_data(params[:nodeDataArray])

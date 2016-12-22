@@ -1,4 +1,4 @@
-class Dashboard::UsersController < ApplicationController
+class Dashboard::UsersController < DashboardController
   load_and_authorize_resource
   before_action :authenticate_user!
   before_action :load_company, only: [:new, :edit, :create]
@@ -23,11 +23,9 @@ class Dashboard::UsersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update_attributes user_params

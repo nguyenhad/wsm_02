@@ -3,6 +3,7 @@ class CreateRequestOts < ActiveRecord::Migration[5.0]
     create_table :request_ots do |t|
       t.time :from_time
       t.time :end_time
+      t.string :phone_number
       t.string :reason
       t.integer :status
       t.references :user, foreign_key: true

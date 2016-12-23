@@ -205,14 +205,14 @@ namespace :db do
       off_have_salary_from: "06/09/2016",
       off_have_salary_to: "09/10/2016",
       reason: "Tired",
-      user_id: 5},
+      user_id: 1},
 
      {phone_number: "01255060994",
       address_contact: "Newyork stress",
       off_have_salary_from: "15/09/2016",
       off_have_salary_to: "06/10/2016",
       reason: "Tired",
-      user_id: 5},
+      user_id: 1},
 
      {phone_number: "01255060994",
       address_contact: "ND stress",
@@ -466,33 +466,42 @@ namespace :db do
 
     puts "create user manager of Framgia DN"
     User.create!([
-                   {name: "Le Thi Hong Thuy",
-                    company_id: company_dn.id,
-                    employee_code: "B500001",
-                    gender: 0,
-                    birthday: "1990-01-01",
-                    role: 1,
-                    email: "manager@dn.com",
-                    password: "123456"},
+     {name: "Le Thi Hong Thuy",
+      company_id: company_dn.id,
+      employee_code: "B500001",
+      gender: 0,
+      birthday: "1990-01-01",
+      role: 1,
+      email: "manager@dn.com",
+      password: "123456"},
 
-      {name: "Pham Manh Hieu",
-       company_id: company_dn.id,
-       employee_code: "B500002",
-       gender: 0,
-       birthday: "1990-02-02",
-       role: 2,
-       email: "user1@dn.com",
-       password: "123456"},
+     {name: "Pham Manh Hieu",
+      company_id: company_dn.id,
+      employee_code: "B500002",
+      gender: 0,
+      birthday: "1990-02-02",
+      role: 2,
+      email: "user1@dn.com",
+      password: "123456"},
 
-      {name: "Nguyen Thi Quynh Mai",
-       company_id: company_dn.id,
-       employee_code: "B500003",
-       gender: 0,
-       birthday: "1990-03-03",
-       role: 2,
-       email: "user2@dn.com",
-       password: "123456"}
-                 ])
+     {name: "Nguyen Thi Quynh Mai",
+      company_id: company_dn.id,
+      employee_code: "B500003",
+      gender: 0,
+      birthday: "1990-03-03",
+      role: 2,
+      email: "user2@dn.com",
+      password: "123456"}
+    ])
+
+    puts "create timesheets"
+    (10..12).each do |month|
+      User.all.each do |user|
+        30.times do |m|
+          TimeSheet.create user_id: user.id , date: "#{m+1}/#{month}/2016", time_in: "8:00", time_out: "17:00", type: ""
+        end
+      end
+    end
 
     puts "create company_settings"
     Company.all.each do |company|

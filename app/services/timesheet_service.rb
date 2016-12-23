@@ -1,10 +1,10 @@
 class TimesheetService
 
-  def initialize timesheet, shift, company
+  def initialize timesheet, shift, company, leave_type
     @timesheet = timesheet
     @shift = shift
     @company = company
-    @leave_type = LeaveType.all
+    @leave_type = leave_type
     @holidays = company.holidays
     @request_leaves = RequestLeave.find_by_date timesheet.date
   end

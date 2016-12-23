@@ -5,6 +5,7 @@ class UserTimeSheetService
     @month = month
     @year = year
     @company = company
+    @leave_type = LeaveType.all
   end
 
   def build_hash_timesheet
@@ -50,12 +51,12 @@ class UserTimeSheetService
   def time_sheet_hash time_sheet_user, shift, company
     {
       time_sheet_date: TimeSheetSerializer.new(time_sheet_user),
-      timesheet_inlate: TimesheetService.new(time_sheet_user, shift, company)
+      timesheet_inlate: TimesheetService.new(time_sheet_user, shift, company, @leave_type)
                                         .timesheet_inlate?,
       timesheet_early_leave: TimesheetService.new(time_sheet_user,
-                                                  shift, company)
+                                                  shift, company, @leave_type)
                                              .timesheet_early_leave?,
-      holiday: TimesheetService.new(time_sheet_user, shift, company)
+      holiday: TimesheetService.new(time_sheet_user, shift, company, @leave_type)
                                .holiday?(time_sheet_user)
     }
   end

@@ -513,13 +513,13 @@ namespace :db do
       Shift.create company_id: company.id, time_in: "7:45", time_out: "16:45"
     end
 
-    # puts "create timesheets"
-    # (10..12).each do |month|
-    #   User.all.each do |user|
-    #     30.times do |m|
-    #       TimeSheet.create user_id: user.id , date: "#{m+1}/#{month}/2016", time_in: "8:00", time_out: "17:00", type: ""
-    #     end
-    #   end
-    # end
+    puts "create timesheets"
+    (10..12).each do |month|
+      User.all.each do |user|
+        30.times do |m|
+          TimeSheet.create user_id: user.id , date: "#{m+1}/#{month}/2016", time_in: "8:00", time_out: "17:00", type: ""
+        end
+      end
+    end
   end
 end

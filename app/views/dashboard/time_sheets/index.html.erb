@@ -1,9 +1,11 @@
 <div class="color_black content-timesheet" ng-controller="TimesheetsCtrl" >
   <div class="row">
-    <%= form_tag dashboard_set_timesheets_path(company_id: @company.id), multipart: true,
-      method: :post do %>
+    <%= form_tag dashboard_set_timesheets_path(company_id: @company.id,
+      month: @month, year: @year), multipart: true,
+      method: :post, id: "import-form" do %>
       <div class="col-md-1 pull-right">
-        <%= submit_tag t("import"), data: {confirm: t("confirm_import")}, class: "btn btn-primary" %>
+        <%= submit_tag t("import"), class: "btn btn-primary",
+          id: "confirm-import" %>
       </div>
       <div class="col-md-5 pull-right">
         <%= file_field_tag :file, class: "form-control" %>

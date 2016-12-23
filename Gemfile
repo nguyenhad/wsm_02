@@ -29,6 +29,7 @@ gem "kaminari-bootstrap", "~> 3.0.1"
 gem "active_model_serializers", "~> 0.10.0"
 
 gem "twitter-bootstrap-rails"
+gem "data-confirm-modal"
 
 group :development, :test do
   gem "byebug", platform: :mri

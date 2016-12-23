@@ -17,10 +17,12 @@ class TimeSheet < ApplicationRecord
   end
 
   class << self
-    def import file, timesheet_setting
-      @timesheet_setting = timesheet_setting
+    def import file, timesheet_setting, month, year
       @spreadsheet = open_spreadsheet file
       return false unless @spreadsheet
+      @timesheet_setting = timesheet_setting
+      @month = month
+      @year = year
       @optional_settings = @timesheet_setting.optional_settings
       import_follow_setting
     end
@@ -28,6 +30,7 @@ class TimeSheet < ApplicationRecord
     private
 
     def import_follow_setting
+      get_arange_date_end_start
       if @timesheet_setting.horizontal?
         check_type_import_horizontal
       else
@@ -36,6 +39,7 @@ class TimeSheet < ApplicationRecord
     end
 
     def check_type_import_horizontal
+      @list_dates = @arange_dates.to_a
       if @timesheet_setting.title?
         read_file_horizontal_with_title
       else
@@ -51,6 +55,13 @@ class TimeSheet < ApplicationRecord
       end
     end
 
+    def get_arange_date_end_start
+      @arange_dates = UserTimeSheetService.new(@timesheet_setting.company,
+        @month, @year).get_begin_and_end_of_cut_off(
+        @timesheet_setting.company.company_setting.cutoff_date,
+        @month, @year)
+    end
+
     def read_each_line_header_horizontal row_header
       row_header.each_with_index do |item, index|
         check_horizontal_title_optional item, index
@@ -61,7 +72,6 @@ class TimeSheet < ApplicationRecord
 
     def read_file_horizontal_with_title
       get_title_horizontal_optional_settings
-      @list_dates = (@timesheet_setting.start_date..@timesheet_setting.end_date).to_a
       (@spreadsheet.first_row..(@timesheet_setting.start_row_data - 1)).each do |i|
         record_header = @spreadsheet.row i
         next unless record_header.blank?
@@ -115,7 +125,6 @@ class TimeSheet < ApplicationRecord
     end
 
     def set_num_col_process_horizontal_serial
-      @list_dates = (@timesheet_setting.start_date..@timesheet_setting.end_date).to_a
       @num_col_start_date = @optional_settings[:date] - 1
       return if @num_col_start_date.blank? || @list_dates.blank?
       @num_col_end_date = @list_dates.length * 2 + @num_col_start_date - 1
@@ -223,15 +232,25 @@ class TimeSheet < ApplicationRecord
       CustomCommon.format_string_to_time(string_time)
     end
 
+    def load_date_time_in_out_vertical row_data
+      [
+        valid_date?(row_data[@num_col_date]),
+        format_time_vertical(row_data[@num_col_time_in]),
+        format_time_vertical(row_data[@num_col_time_out])
+      ]
+    end
+
+    def invalid_data_import_vertical? date, time_in, time_out
+      !@arange_dates.include?(date) || (time_in.blank? && time_out.blank?)
+    end
+
     def import_data_vertical
       (@timesheet_setting.start_row_data..@spreadsheet.last_row).each do |i|
         record_data_timesheet = @spreadsheet.row i
         user = find_by_user record_data_timesheet[@num_col_key]
         next unless user
-        date = valid_date? record_data_timesheet[@num_col_date]
-        time_in = format_time_vertical(record_data_timesheet[@num_col_time_in])
-        time_out = format_time_vertical(record_data_timesheet[@num_col_time_out])
-        next if time_in.blank? && time_out.blank?
+        date, time_in, time_out = load_date_time_in_out_vertical record_data_timesheet
+        next if invalid_data_import_vertical?(date, time_in, time_out)
         add_timesheet user, date, time_in, time_out
       end
     end
@@ -251,8 +270,6 @@ class TimeSheet < ApplicationRecord
         next if invalid_optinal?
         import_data_vertical
       end
-      timesheet.reset_time_in time_in
-      timesheet.reset_time_out time_out
     end
 
     def set_number_column_process_vertical

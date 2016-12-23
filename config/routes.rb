@@ -8,13 +8,14 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :workspaces
-    resources :time_sheets
-    resources :set_timesheets, only: :create
+    resources :set_timesheets, only: [:create, :index]
     resources :projects, except: :show
     resources :users
     resources :request_offs
     resources :request_leaves
     resources :set_users, only: :create
-    resources :companies
+    resources :companies do
+      resources :time_sheets, only: :index
+    end
   end
 end

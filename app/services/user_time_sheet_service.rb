@@ -32,6 +32,18 @@ class UserTimeSheetService
     user_time_sheets
   end
 
+  def get_begin_and_end_of_cut_off(day, month, year)
+    date = Date.new(year.to_i, month.to_i).end_of_month.strftime("%d").to_i
+    if(day.to_i < date.to_i)
+      if (month.to_i == 1)
+        cut_off_first_month day, month, year
+      else
+        month_cut_off_not_jan day, month, year
+      end
+    else
+      day_cut_off_more_today day, month, year
+    end
+  end
 
   private
 
@@ -54,19 +66,6 @@ class UserTimeSheetService
       month: Date.new(@year, @month),
       usertimesheets: []
     }
-  end
-
-  def get_begin_and_end_of_cut_off(day, month, year)
-    date = Date.new(year.to_i, month.to_i).end_of_month.strftime("%d").to_i
-    if(day.to_i < date.to_i)
-      if (month.to_i == 1)
-        cut_off_first_month day, month, year
-      else
-        month_cut_off_not_jan day, month, year
-      end
-    else
-      day_cut_off_more_today day, month, year
-    end
   end
 
   def month_cut_off_jan day, month, year

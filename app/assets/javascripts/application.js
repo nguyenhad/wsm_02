@@ -33,3 +33,5 @@
 //= require angular_app
 //= require_tree ./angular
 //= require tableheaderfixer-fork/tableHeadFixer.js
+//= require angular-bootstrap-datetimepicker/src/js/datetimepicker.js
+//= require angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js

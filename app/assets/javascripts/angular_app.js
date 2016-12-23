@@ -1,1 +1,1 @@
-var myApp = angular.module("AngularCasts", ["ngResource"]);
+var myApp = angular.module("AngularCasts", ["ngResource", "ui.bootstrap.datetimepicker"]);

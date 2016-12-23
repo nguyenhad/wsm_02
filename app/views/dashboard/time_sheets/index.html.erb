@@ -9,7 +9,10 @@
         <%= file_field_tag :file, class: "form-control" %>
       </div>
     <% end %>
-  </div>
+
+    <datetimepicker data-ng-model="retrieveTimesheet.content.month" data-on-set-time="onTimeSet(newDate, oldDate)"
+      data-datetimepicker-config="{startView: 'month', minView:'month'}" />
+    </div>
   <div class="row mg-top-50">
     <div class="inner" id="parent">
       <table id="table-timesheet" class="table table-bordered table-hover bg-white">

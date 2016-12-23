@@ -27,7 +27,6 @@ gem "jquery-ui-rails"
 gem "paranoia", "~> 2.2"
 gem "kaminari-bootstrap", "~> 3.0.1"
 gem "active_model_serializers", "~> 0.10.0"
-
 gem "twitter-bootstrap-rails"
 gem "data-confirm-modal"
 

@@ -36,7 +36,7 @@ class UserTimeSheetService
     date = Date.new(year.to_i, month.to_i).end_of_month.strftime("%d").to_i
     if(day.to_i < date.to_i)
       if (month.to_i == 1)
-        cut_off_first_month day, month, year
+        month_cut_off_jan day, month, year
       else
         month_cut_off_not_jan day, month, year
       end
@@ -63,7 +63,7 @@ class UserTimeSheetService
   def user_time_sheets_hash array_date_of_month
     {
       date_of_month: array_date_of_month,
-      month: Date.new(@year, @month),
+      month: "#{@year}/#{@month}",
       usertimesheets: []
     }
   end

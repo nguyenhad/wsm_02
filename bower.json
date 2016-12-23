@@ -19,6 +19,7 @@
     "gojs": "^1.6.21",
     "angular": "angular2#^1.6.0",
     "angular-resource": "^1.6.0",
-    "tableheaderfixer-fork": "TableHeadFixer-fork#*"
+    "tableheaderfixer-fork": "TableHeadFixer-fork#*",
+    "angular-bootstrap-datetimepicker": "^1.1.3"
   }
 }

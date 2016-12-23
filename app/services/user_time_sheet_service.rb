@@ -51,7 +51,7 @@ class UserTimeSheetService
   def user_time_sheets_hash array_date_of_month
     {
       date_of_month: array_date_of_month,
-      month: array_date_of_month.first,
+      month: Date.new(@year, @month),
       usertimesheets: []
     }
   end

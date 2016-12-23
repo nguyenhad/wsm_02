@@ -20,4 +20,10 @@ myApp.controller("TimesheetsCtrl", function($scope, $q, timesheetService) {
     for (var i in obj) if (obj.hasOwnProperty(i)) return false;
     return true;
   };
+
+  $scope.onTimeSet = function (newMonth) {
+    month = newMonth.getMonth() + 1;
+    year = newMonth.getFullYear();
+    $scope.retrieveTimesheet = timesheetService.index({month: month, year: year});
+  }
 });

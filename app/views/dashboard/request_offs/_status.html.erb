@@ -1,0 +1,11 @@
+<%= form_for [:dashboard, request_off] do |f| %>
+  <div class="col-md-8">
+    <%= f.hidden_field :approver_id, {value: @current_user.id} %>
+    <%= f.select :status,
+      options_for_select(RequestOff.statuses.keys, request_off.status),
+      {}, {class: "form-control"} %>
+  </div>
+  <div class="col-md-4 form-group">
+    <%= f.submit t(".change"), class: "btn btn-primary form-control" %>
+  </div>
+<% end %>

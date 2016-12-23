@@ -63,6 +63,10 @@ vi:
       update_failure: "Cập nhật không thành công, đã có lỗi xảy ra"
       not_setting_message: "Cấu hình không tồn tại!"
 
+    request_offs:
+      status:
+        change : "cập nhât"
+
     company_setting:
       name_branch: "Tên Chi nhánh"
       cutoff_date: "Ngày chốt lương hàng tháng"

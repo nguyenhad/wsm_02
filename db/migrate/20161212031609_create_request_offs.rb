@@ -18,12 +18,13 @@ class CreateRequestOffs < ActiveRecord::Migration[5.0]
       t.string :part_handover
       t.string :work_handover
       t.integer :status
-      t.integer :approve_group
+      t.integer :approver_id
       t.references :user, foreign_key: true
       t.datetime :deleted_at
       t.integer :company_id
 
       t.timestamps
     end
+    add_index :request_offs, :approver_id
   end
 end

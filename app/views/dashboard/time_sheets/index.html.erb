@@ -9,32 +9,42 @@
         <%= file_field_tag :file, class: "form-control" %>
       </div>
     <% end %>
-
-<!--     <datetimepicker data-ng-model="retrieveTimesheet.content.month" data-on-set-time="onTimeSet(newDate, oldDate)"
-      data-datetimepicker-config="{startView: 'month', minView:'month'}" />
-    </div> -->
-
-    <div class="dropdown">
-      <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-        <div class="input-group"><input type="text" class="form-control" data-ng-model="retrieveTimesheet.content.month | date:'MM/yyyy'" data-on-set-time="onTimeSet(newDate, oldDate)"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        </div>
-      </a>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <datetimepicker data-ng-model="retrieveTimesheet.content.month" data-on-set-time="onTimeSet(newDate, oldDate)"
-          data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView: 'month', minView:'month'}"/>
-      </ul>
+  </div>
+  <div class="row mg-top-50">
+    <div class="col-md-9 pull-right">
+      <div class="pull-right">
+        <p class="fload-label mg-top-label"><%= t "dashboard.leave" %></p>
+        <span class="input-group-addon height-30 width-70 fload-label brg-red"></span>
+        <p class="fload-label mg-top-label"> <%= t "dashboard.holiday" %> </p>
+        <span class="input-group-addon height-30 width-70 fload-label bg-green"></span>
+        <p class="fload-label mg-top-label"> <%= t "dashboard.sat" %> </p>
+        <span class="input-group-addon height-30 width-70 fload-label brg-blue"></span>
+        <p class="fload-label mg-top-label"> <%= t "dashboard.sun" %> </p>
+        <span class="input-group-addon height-30 width-70 fload-label bg-orange"></span>
+      </div>
     </div>
 
-  <div class="row mg-top-50">
+    <div class="col-md-3 pull-right">
+      <div class="dropdown">
+        <a class="dropdown-toggle" id="dropdown-datetime" role="button" data-toggle="dropdown" data-target="#" href="#">
+          <div class="input-group"><input type="text" class="form-control" data-ng-model="retrieveTimesheet.content.month" data-on-set-time="onTimeSet(newDate, oldDate)"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <datetimepicker data-ng-model="retrieveTimesheet.content.month" data-on-set-time="onTimeSet(newDate, oldDate)"
+            data-datetimepicker-config="{ dropdownSelector: '#dropdown-datetime', startView: 'month', minView:'month'}"/>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="text-center month-timesheet">
+      {{retrieveTimesheet.content.month}}
+    </div>
     <div class="inner" id="parent">
       <table id="table-timesheet" class="table table-bordered table-hover bg-white">
         <thead>
-          <tr class="">
-            <th class="text-center"></th>
-            <th colspan= {{retrieveTimesheet.content.date_of_month.length*2}} class="text-center" >
-              {{retrieveTimesheet.content.month| date:'MM/yyyy'}}
-            </th>
-          </tr>
           <tr>
             <th class="text-center"></th>
             <th ng-repeat="day in retrieveTimesheet.content.date_of_month" class="text-center" ng-class="{'brg-blue': (day | date:'EEE') == 'Sat', 'bg-orange': (day | date:'EEE') == 'Sun' }">
@@ -50,10 +60,10 @@
             <td ng-repeat="(key, value) in object.timesheets">
               <div class="wth-100">
                 <div class="time-in" ng-class="{'brg-red': value.timesheet_inlate, 'bg-green': value.holiday}">
-                  {{value.time_sheet_date.time_in | date: 'hh:mm'}}
+                  {{value.time_sheet_date.time_in | date: 'HH:mm'}}
                 </div>
                 <div class="time-out" ng-class="{'brg-red': value.timesheet_early_leave, 'bg-green': value.holiday}">
-                  {{value.time_sheet_date.time_out | date: 'hh:mm'}}
+                  {{value.time_sheet_date.time_out | date: 'HH:mm'}}
                 </div>
               </div>
             </td>

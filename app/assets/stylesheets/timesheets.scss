@@ -16,6 +16,10 @@ $color-red: #f00;
   margin-top: 50px !important;
 }
 
+.mg-top-20 {
+  margin-top: 20px;
+}
+
 .time-in {
   border: 1px solid $color-dd;
   float: left;
@@ -90,4 +94,45 @@ $color-red: #f00;
 @keyframes spin {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}
+}
+
+.heigth-form {
+  height: 50px;
+}
+
+.mg-right {
+  margin-right: 40px;
+}
+
+.fload-label {
+  float: left;
+  margin-left: 10px;
+}
+
+.with-picker {
+  width: 340px;
+}
+
+.height-30 {
+  height: 30px;
+}
+
+.width-70 {
+  width: 70px;
+}
+
+.mg-top-label {
+  margin-top: 5px;
+}
+
+.month-timesheet {
+  background: White;
+  font-size: 17px;
+  font-weight: bold;
+  height: 40px;
+  padding-top: 8px;
+}
+
+.pd-left-120 {
+  padding-right: 0px;
 }

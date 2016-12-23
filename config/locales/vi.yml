@@ -1,5 +1,10 @@
 vi:
   dashboard:
+    leave: "LI/LO"
+    none: "None"
+    holiday: "Holiday"
+    sat: "Saturday"
+    sun: "Sunday"
     load_timesheet_success: "Tải thành công dữ liệu TimeSheet"
     users:
       index:

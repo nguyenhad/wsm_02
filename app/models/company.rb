@@ -13,8 +13,6 @@ class Company < ApplicationRecord
 
   enum status: {pending: 0, active: 1, block: 2}
 
-  has_one :company_setting
-
   delegate :timezone, to: :company_setting, prefix: :company_setting
 
   accepts_nested_attributes_for :company_setting

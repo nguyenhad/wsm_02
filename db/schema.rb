@@ -250,6 +250,7 @@ ActiveRecord::Schema.define(version: 20161222043216) do
   create_table "request_ots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.time     "from_time"
     t.time     "end_time"
+    t.string   "phone_number"
     t.string   "reason"
     t.integer  "status"
     t.integer  "user_id"

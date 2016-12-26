@@ -23,11 +23,18 @@ user = User.create! name: "Son Tran", email: "sontd.it@gmail.com",
     employee_code: "MS#{n.to_s.rjust(4, '0')}"
 end
 
+company = Company.create!(
+  name: "Framgia Viet Nam",
+  parent_id: nil,
+  status: 1
+)
+
 5.times do |n|
   Workspace.create! name: "Workspace-#{n}",
     description: "nothing",
     status: 1,
     user_id: user.id,
+    company_id: company.id,
     created_at: Time.now,
     updated_at: Time.now
 end

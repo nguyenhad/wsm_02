@@ -18,6 +18,7 @@ per_page:
     user: 10
     company_page: 10
     request_off: 5
+    workspace: 10
   request_off: 5
 min_password: 6
 workspace:

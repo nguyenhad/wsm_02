@@ -3,7 +3,7 @@
     <div class="toppad col-md-12" >
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h2 class="panel-title"><%= t "dashboard.companies.branch" %></h2>
+          <h2 class="panel-title"><%= t "dashboard.companies.workspace" %></h2>
         </div>
         <div class="panel-body">
           <div class="row">
@@ -12,18 +12,23 @@
                 <thead>
                   <tr>
                     <th></th>
-                    <th><%= t "dashboard.company_setting.name_branch" %></th>
+                    <th></th>
+                    <th><%= t "dashboard.time_sheet.name_workspace" %></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% @companies.each_with_index do |company, index| %>
+                  <% @workspaces.each_with_index do |workspace, index| %>
                     <tr>
                       <td>
-                        <%= current_index @companies.current_page,
-                          Settings.per_page.dashboard.company_page, index %>
+                        <%= current_index @workspaces.current_page,
+                          Settings.per_page.dashboard.workspace, index %>
+                      </td>
+                      <td class="text-center">
+                        <%= image_tag workspace.image.url, class: "img-circle" %>
                       </td>
                       <td>
-                        <%= link_to company.name, dashboard_company_time_sheets_path(company) %>
+                        <%= link_to workspace.name,
+                          dashboard_workspace_time_sheets_path(workspace) %>
                       </td>
                     </tr>
                   <% end %>

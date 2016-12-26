@@ -1,20 +1,21 @@
 class Dashboard::SetTimesheetsController < DashboardController
   before_action :authenticate_user!
-  before_action :authenticate_manager!
-  before_action :load_company, only: :create
+  # before_action :authenticate_manager!
+  before_action :load_company, only: [:index, :create]
+  before_action :load_workspace, only: [:create]
   before_action :load_file, only: :create
   before_action :load_timesheet_setting, only: :create
   before_action :load_month_year, only: :create
 
   def index
-    @companies = Company.parent_company(current_user.id)
-      .recent.page(params[:page])
-      .per Settings.per_page.dashboard.company_page
+    @workspaces = @company.workspaces.alphabe_name.page(params[:page])
+      .per Settings.per_page.dashboard.workspace
   end
 
   def create
     begin
-      if TimeSheet.import params[:file], @timesheet_setting, @month, @year
+      if TimeSheet.import params[:file], @timesheet_setting,
+        @workspace, @month, @year
         flash[:success] = t ".import_success"
       else
         flash[:error] = t ".error_format_file"
@@ -22,7 +23,7 @@ class Dashboard::SetTimesheetsController < DashboardController
     rescue StandardError
       flash[:error] = t ".file_format_not_right"
     end
-    redirect_to dashboard_company_time_sheets_path(@company,
+    redirect_to dashboard_workspace_time_sheets_path(@workspace,
       month: @month, year: @year)
   end
 
@@ -31,7 +32,7 @@ class Dashboard::SetTimesheetsController < DashboardController
   def load_file
     return if params[:file].present?
     flash[:notice] = t ".please_you_choose_file"
-    redirect_to dashboard_company_time_sheets_path(@company,
+    redirect_to dashboard_workspace_time_sheets_path(@workspace,
       month: @month, year: @year)
   end
 
@@ -39,14 +40,28 @@ class Dashboard::SetTimesheetsController < DashboardController
     @timesheet_setting = @company.timesheet_setting
     return if @timesheet_setting
     flash[:error] = t ".you_must_setting_timesheet"
-    redirect_to dashboard_company_time_sheets_path(@company,
+    redirect_to dashboard_workspace_time_sheets_path(@workspace,
       month: @month, year: @year)
   end
 
+  # def load_company
+  #   @company = Company.find_by id: params[:company_id]
+  #   return if @company
+  #   flash[:error] = t ".company_not_found"
+  #   redirect_to dashboard_set_timesheets_path
+  # end
+
   def load_company
-    @company = Company.find_by id: params[:company_id]
+    @company = Company.find_by id: current_user.company_id
     return if @company
     flash[:error] = t ".company_not_found"
+    redirect_to root_path
+  end
+
+  def load_workspace
+    @workspace = Workspace.find_by id: params[:workspace_id]
+    return if @workspace
+    flash[:error] = t ".workspace_not_found"
     redirect_to dashboard_set_timesheets_path
   end
 

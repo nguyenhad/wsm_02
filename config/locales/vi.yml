@@ -73,7 +73,6 @@ vi:
         status: "Trạng thái"
       status:
         change : "cập nhât"
-
     company_setting:
       name_branch: "Tên Chi nhánh"
       cutoff_date: "Ngày chốt lương hàng tháng"
@@ -89,9 +88,15 @@ vi:
       update_setting: "Cập nhật Cài đặt"
       edit_setting: "Chỉnh sửa Cài đặt"
       create_setting: "Tạo mới Cài đặt"
-    set_timesheets:
+    import_timesheets:
+      index:
+        name: "Tên: "
+        description: "Mô tả: "
+        title: "Timesheets"
+        list_workspace: "Danh sách Văn Phòng"
       create:
         company_not_found: "Không tìm thấy Công ty!"
+        workspace_not_found: "Không tìm thấy văn phòng!"
         you_must_setting_timesheet: "Vui lòng thực hiện cài đặt trước khi Import dữ liệu Timesheets"
         please_you_choose_file: "Vui lòng chọn tệp để import!"
         file_format_not_right: "Định dạng của tệp là không hợp lệ, vui lòng kiểm tra lại tệp tin!"

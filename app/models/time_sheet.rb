@@ -59,7 +59,7 @@ class TimeSheet < ApplicationRecord
     end
 
     def get_arange_date_end_start
-      company = @timesheet_setting.company
+      company = @workspace.company
       company_setting = company.company_setting
       @arange_dates = UserTimeSheetService.new(company, @month, @year)
         .get_begin_and_end_of_cut_off(company_setting.cutoff_date, @month, @year)
@@ -95,9 +95,9 @@ class TimeSheet < ApplicationRecord
     def import_data_horizontal
       (@timesheet_setting.start_row_data..@spreadsheet.last_row).each do |i|
         record_data_timesheet = @spreadsheet.row i
-        user = find_user record_data_timesheet[@num_col_key]
-        next unless user
-        import_data_horizontal_of_user user, record_data_timesheet
+        user_workspace = find_user_workspace record_data_timesheet[@num_col_key]
+        next unless user_workspace
+        import_data_horizontal_of_user user_workspace, record_data_timesheet
       end
     end
 
@@ -108,22 +108,23 @@ class TimeSheet < ApplicationRecord
       ]
     end
 
-    def import_data_horizontal_of_user user, record_data_timesheet
+    def import_data_horizontal_of_user user_workspace, record_data_timesheet
       (@num_col_start_date..@num_col_end_date).step(2) do |j|
         time_in, time_out = load_time_in_out(record_data_timesheet, j)
         next if time_in.blank? && time_out.blank?
         date = get_date_of_timesheet j
-        add_timesheet user, date, time_in, time_out
+        add_timesheet user_workspace, date, time_in, time_out
       end
     end
 
-    def add_timesheet user, date, time_in, time_out
-      timesheet_by_date = user.time_sheets.find_by date: date
+    def add_timesheet user_workspace, date, time_in, time_out
+      timesheet_by_date = user_workspace.time_sheets.find_by date: date
       if timesheet_by_date.present?
         timesheet_by_date.reset_time_in time_in
         timesheet_by_date.reset_time_out time_out
       else
-        user.time_sheets.create date: date, time_in: time_in, time_out: time_out
+        user_workspace.time_sheets.create date: date, time_in: time_in,
+          time_out: time_out
       end
     end
 
@@ -211,14 +212,15 @@ class TimeSheet < ApplicationRecord
         @num_col_time_in.blank? || @num_col_time_out.blank?
     end
 
-    def find_user value
+    def find_user_workspace value
       case @optional_settings[:key]
       when Settings.employee_code_attribute
-        User.find_by employee_code: value,
-          company_id: @timesheet_setting.company_id
+        user = @workspace.users.find_by employee_code: value
       when Settings.name_attribute
-        User.find_by name: value, company_id: @timesheet_setting.company_id
+        user = @workspace.users.find_by name: value
       end
+      return nil unless user
+      user.user_workspaces.find_by workspace_id: @workspace.id
     end
 
     def valid_date? date
@@ -250,11 +252,11 @@ class TimeSheet < ApplicationRecord
     def import_data_vertical
       (@timesheet_setting.start_row_data..@spreadsheet.last_row).each do |i|
         record_data_timesheet = @spreadsheet.row i
-        user = find_user record_data_timesheet[@num_col_key]
-        next unless user
+        user_workspace = find_user_workspace record_data_timesheet[@num_col_key]
+        next unless user_workspace
         date, time_in, time_out = load_date_time_in_out_vertical record_data_timesheet
         next if invalid_data_import_vertical?(date, time_in, time_out)
-        add_timesheet user, date, time_in, time_out
+        add_timesheet user_workspace, date, time_in, time_out
       end
     end
 
@@ -290,7 +292,8 @@ class TimeSheet < ApplicationRecord
 
   def reset_time_in time_in
     if (self.time_in.present? && time_in.present? &&
-      CustomCommon.format_string_to_time(time_in) < self.time_in) ||
+      CustomCommon.format_string_to_time(time_in) < self.time_in.in_time_zone
+        .strftime(Settings.hour_minutes).in_time_zone) ||
        (self.time_in.blank? && time_in.present?)
       update_attributes time_in: time_in
     end
@@ -298,7 +301,8 @@ class TimeSheet < ApplicationRecord
 
   def reset_time_out time_out
     if (self.time_out.present? && time_out.present? &&
-      CustomCommon.format_string_to_time(time_out) > self.time_out) ||
+      CustomCommon.format_string_to_time(time_out) > self.time_out.in_time_zone
+        .strftime(Settings.hour_minutes).in_time_zone) ||
        (self.time_out.blank? && time_out.present?)
       update_attributes time_out: time_out
     end

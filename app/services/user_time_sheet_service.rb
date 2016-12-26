@@ -19,7 +19,7 @@ class UserTimeSheetService
       times = {}
       array_date_of_month.each do |time|
         time_sheet_user = all_timesheets.find do |k|
-          k.date == time && k.user_id == user.id
+          k.date == time && k.user.id == user.id
         end
         time_sheet = if time_sheet_user
           time_sheet_hash time_sheet_user, shift, @company

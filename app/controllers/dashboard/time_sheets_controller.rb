@@ -28,7 +28,7 @@ class Dashboard::TimeSheetsController < DashboardController
     @workspace = Workspace.find_by id: params[:workspace_id]
     return if @workspace
     flash[:error] = t ".company_not_found"
-    redirect_to dashboard_set_timesheets_path
+    redirect_to dashboard_import_timesheets_path
   end
 
   def load_month_year

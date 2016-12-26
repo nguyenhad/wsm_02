@@ -1,4 +1,4 @@
-class Dashboard::SetTimesheetsController < DashboardController
+class Dashboard::ImportTimesheetsController < DashboardController
   before_action :load_company, only: [:index, :create]
   before_action :load_workspace, only: [:create]
   before_action :load_file, only: :create
@@ -7,7 +7,7 @@ class Dashboard::SetTimesheetsController < DashboardController
 
   def index
     @workspaces = @company.workspaces.alphabe_name.page(params[:page])
-      .per Settings.per_page.dashboard.workspace
+      .per Settings.per_page.dashboard.workspace_timesheet
   end
 
   def create
@@ -35,19 +35,12 @@ class Dashboard::SetTimesheetsController < DashboardController
   end
 
   def load_timesheet_setting
-    @timesheet_setting = @company.timesheet_setting
+    @timesheet_setting = @workspace.timesheet_setting
     return if @timesheet_setting
     flash[:error] = t ".you_must_setting_timesheet"
     redirect_to dashboard_workspace_time_sheets_path(@workspace,
       month: @month, year: @year)
   end
-
-  # def load_company
-  #   @company = Company.find_by id: params[:company_id]
-  #   return if @company
-  #   flash[:error] = t ".company_not_found"
-  #   redirect_to dashboard_set_timesheets_path
-  # end
 
   def load_company
     @company = Company.find_by id: current_user.company_id
@@ -60,7 +53,7 @@ class Dashboard::SetTimesheetsController < DashboardController
     @workspace = Workspace.find_by id: params[:workspace_id]
     return if @workspace
     flash[:error] = t ".workspace_not_found"
-    redirect_to dashboard_set_timesheets_path
+    redirect_to dashboard_import_timesheets_path
   end
 
   def load_month_year

@@ -25,6 +25,9 @@
 //= require jquery.validate
 //= require cable
 //= require app
+//= require i18n
+//= require i18n.js
+//= require i18n/translations
 
 /* libraries bower*/
 //= require gojs/release/go.js
@@ -32,13 +35,14 @@
 //= require angular/angular.min.js
 //= require angular-resource/angular-resource.min.js
 //= require tableheaderfixer-fork/tableHeadFixer.js
+//= require sweetalert/dist/sweetalert.min.js
 
 /* angular */
 //= require angular_app
 //= require_tree ./angular
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker.js
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js
-//= require data-confirm-modal
 
 /* File */
 //= require login.js
+//= require timesheet.js

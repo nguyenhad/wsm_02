@@ -22,6 +22,7 @@
  *= require shortcodes
  *= require style
  *= require angular-bootstrap-datetimepicker/src/css/datetimepicker.css
+ *= require sweetalert/dist/sweetalert.css
  *= require_self
  */
 @import 'bootstrap-sprockets';

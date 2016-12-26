@@ -3,8 +3,8 @@ class Dashboard::SetTimesheetsController < ApplicationController
   before_action :authenticate_manager!
   before_action :load_company, only: :create
   before_action :load_file, only: :create
-  before_action :load_company, only: :create
   before_action :load_timesheet_setting, only: :create
+  before_action :load_month_year, only: :create
 
   def index
     @companies = Company.parent_company(current_user.id)
@@ -14,8 +14,7 @@ class Dashboard::SetTimesheetsController < ApplicationController
 
   def create
     begin
-      if TimeSheet.import params[:file], @timesheet_setting,
-        Time.current.month, Time.current.year
+      if TimeSheet.import params[:file], @timesheet_setting, @month, @year
         flash[:success] = t ".import_success"
       else
         flash[:error] = t ".error_format_file"
@@ -23,7 +22,8 @@ class Dashboard::SetTimesheetsController < ApplicationController
     rescue StandardError
       flash[:error] = t ".file_format_not_right"
     end
-    redirect_to dashboard_company_time_sheets_path(@company)
+    redirect_to dashboard_company_time_sheets_path(@company,
+      month: @month, year: @year)
   end
 
   private
@@ -31,14 +31,16 @@ class Dashboard::SetTimesheetsController < ApplicationController
   def load_file
     return if params[:file].present?
     flash[:notice] = t ".please_you_choose_file"
-    redirect_to dashboard_company_time_sheets_path(@company)
+    redirect_to dashboard_company_time_sheets_path(@company,
+      month: @month, year: @year)
   end
 
   def load_timesheet_setting
     @timesheet_setting = @company.timesheet_setting
     return if @timesheet_setting
     flash[:error] = t ".you_must_setting_timesheet"
-    redirect_to dashboard_company_time_sheets_path(@company)
+    redirect_to dashboard_company_time_sheets_path(@company,
+      month: @month, year: @year)
   end
 
   def load_company
@@ -46,5 +48,11 @@ class Dashboard::SetTimesheetsController < ApplicationController
     return if @company
     flash[:error] = t ".company_not_found"
     redirect_to dashboard_set_timesheets_path
+  end
+
+  def load_month_year
+    current_time = Time.current
+    @month = params[:month] ? params[:month].to_i : current_time.month
+    @year = params[:year] ? params[:year].to_i : current_time.year
   end
 end

@@ -1,6 +1,7 @@
 class Dashboard::TimeSheetsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_company, only: :index
+  before_action :load_company, only: :index
 
   def index
     respond_to do |format|
@@ -23,5 +24,11 @@ class Dashboard::TimeSheetsController < ApplicationController
     return if @company
     flash[:error] = t ".company_not_found"
     redirect_to dashboard_set_timesheets_path
+  end
+
+  def load_month_year
+    current_time = Time.current
+    @month = params[:month] ? params[:month].to_i : current_time.month
+    @year = params[:year] ? params[:year].to_i : current_time.year
   end
 end

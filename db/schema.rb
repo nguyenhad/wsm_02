@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 20161222043216) do
     t.datetime "off_no_salary_to"
     t.string   "reason"
     t.integer  "user_id"
+    t.integer  "company_id"
     t.integer  "user_handover"
     t.string   "part_handover"
     t.string   "work_handover"
@@ -240,6 +241,7 @@ ActiveRecord::Schema.define(version: 20161222043216) do
     t.integer  "approve_group"
     t.integer  "user_id"
     t.datetime "deleted_at"
+    t.integer  "company_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.index ["special_dayoff_setting_id"], name: "index_request_offs_on_special_dayoff_setting_id", using: :btree

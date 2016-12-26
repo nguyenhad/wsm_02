@@ -1,0 +1,22 @@
+<tr>
+  <td>
+    <%= current_index @request_offs.current_page,
+      Settings.per_page.request_off, request_off_counter %>
+  </td>
+
+  <td><%= l request_off.off_have_salary_from, format: :date_month_year %></td>
+  <td><%= l request_off.off_have_salary_to, format: :date_month_year %></td>
+
+  <td><%= request_off.reason %></td>
+
+  <td>
+    <%= link_to request_offs_path(request_off) do %>
+      <span class="glyphicon glyphicon-edit" %></span>
+    <% end %>
+
+    <%= link_to request_off_path(request_off.id),
+      method: :delete, data: {confirm: t("are_you_sure")} do %>
+      <span class="glyphicon glyphicon-trash" %></span>
+  <% end %>
+  </td>
+</tr>

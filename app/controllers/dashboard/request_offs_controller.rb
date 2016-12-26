@@ -28,8 +28,9 @@ class Dashboard::RequestOffsController < ApplicationController
   end
 
   def update
-    if @request_off.update request_off_params
-      redirect_to @request_off, notice: flash_messsage(:update, RequestOff)
+    if @request_off.update_attributes request_off_params
+      redirect_to dashboard_request_offs_url,
+        notice: flash_message(:update, RequestOff)
     else
       render :edit
     end

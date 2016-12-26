@@ -238,7 +238,7 @@ ActiveRecord::Schema.define(version: 20161222043216) do
     t.string   "part_handover"
     t.string   "work_handover"
     t.integer  "status"
-    t.integer  "approve_group"
+    t.integer  "approver_id"
     t.integer  "user_id"
     t.datetime "deleted_at"
     t.integer  "company_id"

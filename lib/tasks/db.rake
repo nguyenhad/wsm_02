@@ -193,12 +193,12 @@ namespace :db do
 
     puts "create request_offs"
     RequestOff.create!([
-                         {phone_number: "01255060994",
-                          address_contact: "Wall stress",
-                          off_have_salary_from: "07/09/2016",
-                          off_have_salary_to: "06/10/2016",
-                          reason: "Tired",
-                          user_id: 5},
+     {phone_number: "01255060994",
+      address_contact: "Wall stress",
+      off_have_salary_from: "07/09/2016",
+      off_have_salary_to: "06/10/2016",
+      reason: "Tired",
+      user_id: 5},
 
      {phone_number: "01255060994",
       address_contact: "American stress",
@@ -240,8 +240,29 @@ namespace :db do
       off_have_salary_from: "06/09/2016",
       off_have_salary_to: "06/10/2016",
       reason: "So Tired",
-      user_id: 5}
-                       ])
+      user_id: 5},
+
+     {phone_number: "0984977822",
+      address_contact: "Framgia stress",
+      off_have_salary_from: "09/09/2016",
+      off_have_salary_to: "10/10/2016",
+      reason: "Sick",
+      user_id: 3},
+
+     {phone_number: "01255060992",
+      address_contact: "Framgia stress",
+      off_have_salary_from: "06/06/2016",
+      off_have_salary_to: "06/11/2016",
+      reason: "tomache",
+      user_id: 3},
+
+     {phone_number: "01255060995",
+      address_contact: "Framgia stress",
+      off_have_salary_from: "06/09/2016",
+      off_have_salary_to: "06/10/2016",
+      reason: "Tired",
+      user_id: 3}
+    ])
 
     User.update_all company_id: Company.first.id
 

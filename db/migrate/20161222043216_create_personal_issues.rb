@@ -7,6 +7,7 @@ class CreatePersonalIssues < ActiveRecord::Migration[5.0]
       t.datetime :off_no_salary_to
       t.string :reason
       t.integer :user_id
+      t.integer :company_id
       t.integer :user_handover
       t.string :part_handover
       t.string :work_handover

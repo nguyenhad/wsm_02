@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   root "static_pages#home"
   namespace :admin do
@@ -19,4 +20,6 @@ Rails.application.routes.draw do
     end
     resources :personal_issues
   end
+  resources :request_offs, only: [:index, :destroy]
+
 end

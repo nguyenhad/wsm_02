@@ -15,7 +15,7 @@ class User < ApplicationRecord
   belongs_to :company
   belongs_to :position
 
-  has_many :time_sheets
+  has_many :time_sheets, through: :user_workspaces
   has_many :project_members, dependent: :destroy
   has_many :user_workspaces, dependent: :destroy
   has_many :workspaces, through: :user_workspaces
@@ -28,6 +28,7 @@ class User < ApplicationRecord
   has_many :request_offs
   has_many :request_leaves, class_name: RequestLeave.name
   has_many :personal_issues
+  has_many :while_lists
 
   has_one :location
 

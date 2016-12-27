@@ -7,7 +7,7 @@ class CreateTimeSheets < ActiveRecord::Migration[5.0]
       t.integer :type
       t.datetime :deleted_at
       t.integer :type
-      t.references :user, foreign_key: true
+      t.references :user_workspace, foreign_key: true
 
       t.timestamps
     end

@@ -4,9 +4,10 @@ class Company < ApplicationRecord
   has_many :users
   has_many :holidays
   has_many :dayoff_settings
+  has_many :workspaces
+  has_many :white_lists
 
   has_one :ot_setting
-  has_one :timesheet_setting
   has_one :leave_setting
   has_one :shift
   has_one :company_setting

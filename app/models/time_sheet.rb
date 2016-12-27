@@ -2,7 +2,8 @@ require "roo"
 class TimeSheet < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :user
+  belongs_to :user_workspace
+  delegate :user, to: :user_workspace
 
   scope :order_date_desc, ->{order created_at: :desc}
   scope :search_staff_name, ->staff_name do
@@ -17,10 +18,11 @@ class TimeSheet < ApplicationRecord
   end
 
   class << self
-    def import file, timesheet_setting, month, year
+    def import file, timesheet_setting, workspace, month, year
       @spreadsheet = open_spreadsheet file
       return false unless @spreadsheet
       @timesheet_setting = timesheet_setting
+      @workspace = workspace
       @month = month
       @year = year
       @optional_settings = @timesheet_setting.optional_settings

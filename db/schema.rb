@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222043216) do
+ActiveRecord::Schema.define(version: 20161226065543) do
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -318,10 +318,10 @@ ActiveRecord::Schema.define(version: 20161222043216) do
     t.time     "time_out"
     t.integer  "type"
     t.datetime "deleted_at"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_time_sheets_on_user_id", using: :btree
+    t.integer  "user_workspace_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["user_workspace_id"], name: "index_time_sheets_on_user_workspace_id", using: :btree
   end
 
   create_table "timesheet_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -333,10 +333,10 @@ ActiveRecord::Schema.define(version: 20161222043216) do
     t.integer  "start_row_data"
     t.string   "date_format_type",  default: "%d/%m/%Y"
     t.datetime "deleted_at"
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.index ["company_id"], name: "index_timesheet_settings_on_company_id", using: :btree
+    t.index ["workspace_id"], name: "index_timesheet_settings_on_workspace_id", using: :btree
   end
 
   create_table "user_dayoffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -409,15 +409,26 @@ ActiveRecord::Schema.define(version: 20161222043216) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "white_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_white_lists_on_company_id", using: :btree
+    t.index ["user_id"], name: "index_white_lists_on_user_id", using: :btree
+  end
+
   create_table "workspaces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "description"
     t.string   "image"
     t.boolean  "status",      default: false
     t.integer  "user_id"
+    t.integer  "company_id"
     t.datetime "deleted_at"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.index ["company_id"], name: "index_workspaces_on_company_id", using: :btree
     t.index ["user_id"], name: "index_workspaces_on_user_id", using: :btree
   end
 
@@ -444,8 +455,8 @@ ActiveRecord::Schema.define(version: 20161222043216) do
   add_foreign_key "shifts", "companies"
   add_foreign_key "special_dayoff_settings", "dayoff_settings"
   add_foreign_key "special_dayoff_settings", "special_dayoff_types"
-  add_foreign_key "time_sheets", "users"
-  add_foreign_key "timesheet_settings", "companies"
+  add_foreign_key "time_sheets", "user_workspaces"
+  add_foreign_key "timesheet_settings", "workspaces"
   add_foreign_key "user_dayoffs", "special_dayoff_types"
   add_foreign_key "user_dayoffs", "users"
   add_foreign_key "user_groups", "groups"
@@ -454,5 +465,8 @@ ActiveRecord::Schema.define(version: 20161222043216) do
   add_foreign_key "user_workspaces", "users"
   add_foreign_key "user_workspaces", "workspaces"
   add_foreign_key "users", "companies"
+  add_foreign_key "white_lists", "companies"
+  add_foreign_key "white_lists", "users"
+  add_foreign_key "workspaces", "companies"
   add_foreign_key "workspaces", "users"
 end

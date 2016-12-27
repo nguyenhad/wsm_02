@@ -1,6 +1,7 @@
 class Dashboard::TimeSheetsController < DashboardController
   before_action :authenticate_user!
   before_action :load_company, only: :index
+  before_action :load_workspace, only: :index
   before_action :load_month_year, only: :index
 
   def index
@@ -17,8 +18,15 @@ class Dashboard::TimeSheetsController < DashboardController
   private
 
   def load_company
-    @company = Company.find_by id: params[:company_id]
+    @company = Company.find_by id: current_user.company_id
     return if @company
+    flash[:error] = t ".company_not_found"
+    redirect_to root_path
+  end
+
+  def load_workspace
+    @workspace = Workspace.find_by id: params[:workspace_id]
+    return if @workspace
     flash[:error] = t ".company_not_found"
     redirect_to dashboard_set_timesheets_path
   end

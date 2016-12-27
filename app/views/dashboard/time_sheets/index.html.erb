@@ -1,6 +1,6 @@
 <div class="color_black content-timesheet" ng-controller="TimesheetsCtrl" >
   <div class="row">
-    <%= form_tag dashboard_set_timesheets_path(company_id: @company.id,
+    <%= form_tag dashboard_set_timesheets_path(workspace_id: @workspace.id,
       month: @month, year: @year), multipart: true,
       method: :post, id: "import-form" do %>
       <div class="col-md-1 pull-right">

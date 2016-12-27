@@ -6,6 +6,7 @@ class CreateWorkspaces < ActiveRecord::Migration[5.0]
       t.string :image
       t.boolean :status, default: false
       t.references :user, foreign_key: true
+      t.references :company, foreign_key: true
       t.datetime :deleted_at
 
       t.timestamps

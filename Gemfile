@@ -29,6 +29,7 @@ gem "kaminari-bootstrap", "~> 3.0.1"
 gem "active_model_serializers", "~> 0.10.0"
 gem "twitter-bootstrap-rails"
 gem "i18n-js", "3.0.0.rc10"
+gem "ransack"
 
 group :development, :test do
   gem "byebug", platform: :mri

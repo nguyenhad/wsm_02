@@ -3,17 +3,25 @@ vi:
     request_leaves:
       index:
         list_request_leave: "Danh sách yêu cầu IL (M), LE, LO, IL (A)"
+        no_reqquest_leave_display: "Không có yêu cầu nào được hiển thị!"
         no_num: "STT"
         created_at: "Thời gian tạo"
         leave_from: "Từ"
         leave_to: "Đến"
         reason: "Lý do"
         compensation: "Đăng ký làm bù"
+        staff_name: "Tên nhân viên"
         kind_of_leave: "Loại"
         time: "Thời gian"
         status: "Trạng thái"
         action: "Hành động"
+        search: "Tìm kiếm"
+        created_from: "Ngày tạo từ..."
+        create_to: "Đến..."
+        choose_leave_type: "Chọn IL, LE, LO..."
+        choose_status: "Chọn trạng thái"
       request_leave:
         tooltip_approve: "Chấp nhận"
         tooltip_reject: "Loại bỏ"
         time_unit: "p"
+

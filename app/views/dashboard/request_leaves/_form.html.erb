@@ -1,6 +1,6 @@
 <p><%= t "request_form.content_of_title_html" %></p>
 
-<%= simple_form_for @request_leave,
+<%= simple_form_for [:dashboard, @request_leave],
   html: {class: "simple_form col-md-6 col-md-offset-3"} do |f| %>
   <div class="form-group">
     <%= label_tag :employee_name %>

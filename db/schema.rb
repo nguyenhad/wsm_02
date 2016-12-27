@@ -210,12 +210,13 @@ ActiveRecord::Schema.define(version: 20161222043216) do
     t.datetime "leave_to"
     t.string   "reason"
     t.integer  "status",        default: 0
-    t.integer  "approve_group"
+    t.integer  "approver_id"
     t.integer  "leave_type_id"
     t.integer  "user_id"
     t.datetime "deleted_at"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.index ["approver_id"], name: "index_request_leaves_on_approver_id", using: :btree
     t.index ["leave_type_id"], name: "index_request_leaves_on_leave_type_id", using: :btree
     t.index ["user_id"], name: "index_request_leaves_on_user_id", using: :btree
   end

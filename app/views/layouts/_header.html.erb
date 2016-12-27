@@ -1,28 +1,38 @@
-<div tabindex="1000" class="header_overflow" id="boxscroll">
-  <section id="home">
-    <div>
-      <div class="w-container container">
-        <div class="w-row">
-          <div class="w-col w-col-3 logo">
-            <a href="#"><%= image_tag("logo.png") %></a>
-          </div>
-          <div class="w-col w-col-9">
-            <div class="w-nav navbar" data-collapse="medium"
-              data-animation="default" data-duration="400" data-contain="1">
-              <div class="w-container nav">
-                <nav class="w-nav-menu nav-menu" role="navigation">
+<section tabindex="1000" class="header_overflow page-not-login" id="boxscroll">
+  <div>
+    <div class="w-container container">
+      <div class="w-row">
+        <div class="w-col w-col-3 logo">
+          <a href="/"><%= image_tag("logo.png") %></a>
+        </div>
+        <div class="w-col w-col-9">
+          <div class="w-nav navbar" data-collapse="medium"
+            data-animation="default" data-duration="400" data-contain="1">
+            <div class="w-container nav">
+              <nav class="w-nav-menu nav-menu" role="navigation">
+                <% if current_user %>
+                  <%= link_to "Personal Offs", personal_issues_path,
+                    class: "w-nav-link menu-li" %>
+                  <%= link_to "Request Offs", request_offs_path,
+                    class: "w-nav-link menu-li" %>
+                  <%= link_to "Request Leaves", request_leaves_path,
+                    class: "w-nav-link menu-li" %>
+                  <%= link_to "Sign out", destroy_user_session_path,
+                    method: :delete,
+                    class: "w-nav-link menu-li" %>
+                <% else %>
                   <%= link_to t("home"), root_path,
                     class: "w-nav-link menu-li" %>
                   <%= link_to t("about"), "#", class: "w-nav-link menu-li" %>
-                </nav>
-                <div class="w-nav-button">
-                  <div class="w-icon-nav-menu"></div>
-                </div>
+                <% end %>
+              </nav>
+              <div class="w-nav-button">
+                <div class="w-icon-nav-menu"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>

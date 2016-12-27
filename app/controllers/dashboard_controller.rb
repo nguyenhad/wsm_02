@@ -1,12 +1,14 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_workspace
-  before_action :verify_owner
+  # before_action :load_workspace
+  # before_action :verify_owner
+
+  layout "dashboard"
 
   protected
 
   def load_workspace
-    @workspace = Workspace.find_by_id params[:id]
+    @workspace = Workspace.find_by id: params[:id]
     return if @workspace.present?
     flash[:danger] = t "dashboard.workspaces.load_fails"
     redirect_to root_path

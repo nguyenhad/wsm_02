@@ -421,7 +421,7 @@ ActiveRecord::Schema.define(version: 20161222043216) do
   end
 
   add_foreign_key "company_settings", "companies"
-  add_foreign_key "compensations", "request_leaves", column: "request_leave_id"
+  add_foreign_key "compensations", "request_leaves"
   add_foreign_key "dayoff_settings", "companies"
   add_foreign_key "groups", "companies"
   add_foreign_key "holidays", "companies"

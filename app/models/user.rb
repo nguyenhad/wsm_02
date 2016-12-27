@@ -12,6 +12,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
     :trackable, :validatable
 
+  belongs_to :company
+  belongs_to :position
+
   has_many :time_sheets
   has_many :project_members, dependent: :destroy
   has_many :user_workspaces, dependent: :destroy
@@ -24,10 +27,9 @@ class User < ApplicationRecord
   has_many :user_leaves
   has_many :request_offs
   has_many :request_leaves, class_name: RequestLeave.name
+  has_many :personal_issues
 
   has_one :location
-
-  belongs_to :company
 
   enum gender: {female: 0, male: 1, other: 2}
   enum role: {admin: 0, manager: 1, staff: 2}
@@ -41,6 +43,8 @@ class User < ApplicationRecord
 
   scope :recent, ->{order created_at: :desc}
   scope :load_by_company, ->(company_id){where company_id: company_id}
+
+  delegate :manager?, to: :position, allow_nil: true
 
   def is_user? user
     id == user.id

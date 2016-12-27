@@ -1,4 +1,4 @@
-class Dashboard::CompaniesController < ApplicationController
+class Dashboard::CompaniesController < DashboardController
   before_action :authenticate_user!
   before_action :authenticate_manager!
   load_and_authorize_resource except: [:index, :new, :create]
@@ -11,14 +11,12 @@ class Dashboard::CompaniesController < ApplicationController
 
   def show
     @company_setting = CompanySetting.find_by id: params[:id]
-    unless @company_setting
-      flash[:warning] = t "dashboard.company.not_setting_message"
-      redirect_to dashboard_companies_path
-    end
+    return if @company_setting
+    flash[:warning] = t "dashboard.company.not_setting_message"
+    redirect_to dashboard_companies_path
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @company.update_attributes company_params

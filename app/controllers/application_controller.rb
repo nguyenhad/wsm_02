@@ -31,6 +31,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for resource
+    if resource.manager?
+      dashboard_company_time_sheets_path(current_user.company)
+    else
+      request_offs_path
+    end
+  end
+
   def authenticate_manager!
     return if current_user.manager?
     flash[:warning] = t "you_do_not_have_access"

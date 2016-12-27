@@ -22,4 +22,8 @@ module ApplicationHelper
     when :success then "alert-success"
     end
   end
+
+  def handle_sign_class
+    @hclass ||= user_signed_in? ? "w-container container" : "page-not-login"
+  end
 end

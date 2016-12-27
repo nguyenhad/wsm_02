@@ -12,7 +12,7 @@ class TimeSheet < ApplicationRecord
     where "employee_code LIKE ?", "#{employee_code}%"
   end
   scope :load_by_date, ->date{where date: date}
-  scope :by_period_days, -> period_dates do
+  scope :by_period_days, ->period_dates do
     where date: period_dates
   end
 
@@ -56,10 +56,10 @@ class TimeSheet < ApplicationRecord
     end
 
     def get_arange_date_end_start
-      @arange_dates = UserTimeSheetService.new(@timesheet_setting.company,
-        @month, @year).get_begin_and_end_of_cut_off(
-        @timesheet_setting.company.company_setting.cutoff_date,
-        @month, @year)
+      company = @timesheet_setting.company
+      company_setting = company.company_setting
+      @arange_dates = UserTimeSheetService.new(company, @month, @year)
+        .get_begin_and_end_of_cut_off(company_setting.cutoff_date, @month, @year)
     end
 
     def read_each_line_header_horizontal row_header
@@ -92,7 +92,7 @@ class TimeSheet < ApplicationRecord
     def import_data_horizontal
       (@timesheet_setting.start_row_data..@spreadsheet.last_row).each do |i|
         record_data_timesheet = @spreadsheet.row i
-        user = find_by_user record_data_timesheet[@num_col_key]
+        user = find_user record_data_timesheet[@num_col_key]
         next unless user
         import_data_horizontal_of_user user, record_data_timesheet
       end
@@ -208,7 +208,7 @@ class TimeSheet < ApplicationRecord
         @num_col_time_in.blank? || @num_col_time_out.blank?
     end
 
-    def find_by_user value
+    def find_user value
       case @optional_settings[:key]
       when Settings.employee_code_attribute
         User.find_by employee_code: value,
@@ -247,7 +247,7 @@ class TimeSheet < ApplicationRecord
     def import_data_vertical
       (@timesheet_setting.start_row_data..@spreadsheet.last_row).each do |i|
         record_data_timesheet = @spreadsheet.row i
-        user = find_by_user record_data_timesheet[@num_col_key]
+        user = find_user record_data_timesheet[@num_col_key]
         next unless user
         date, time_in, time_out = load_date_time_in_out_vertical record_data_timesheet
         next if invalid_data_import_vertical?(date, time_in, time_out)

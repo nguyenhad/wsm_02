@@ -1,0 +1,23 @@
+<tr>
+  <td>
+    <%= current_index @request_leaves.current_page,
+      Settings.per_page.request_off, request_leave_counter %>
+  </td>
+
+  <td><%= l request_leave.leave_from, format: :date_month_year %></td>
+  <td><%= l request_leave.leave_to, format: :date_month_year %></td>
+
+  <td><%= request_leave.reason %></td>
+
+  <td>
+    <%= link_to request_leave do %>
+      <span class="glyphicon glyphicon-edit" %></span>
+    <% end %>
+
+    <%= link_to request_leave,
+      method: :delete,
+      data: {confirm: t("are_you_sure")} do %>
+      <span class="glyphicon glyphicon-trash" %></span>
+    <% end %>
+  </td>
+</tr>

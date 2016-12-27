@@ -1,4 +1,4 @@
-class Dashboard::SetUsersController < ApplicationController
+class Dashboard::SetUsersController < DashboardController
   before_action :authenticate_user!
   before_action :authenticate_manager!
   before_action :load_file, only: :create

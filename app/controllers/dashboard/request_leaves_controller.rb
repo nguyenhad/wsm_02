@@ -1,4 +1,4 @@
-class Dashboard::RequestLeavesController < ApplicationController
+class Dashboard::RequestLeavesController < DashboardController
   load_and_authorize_resource class: RequestLeave.name
 
   def index
@@ -6,6 +6,5 @@ class Dashboard::RequestLeavesController < ApplicationController
       .per Settings.user.user_request_leave.per_page
   end
 
-  def new
-  end
+  def new; end
 end

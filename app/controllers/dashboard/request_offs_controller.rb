@@ -1,6 +1,5 @@
-class Dashboard::RequestOffsController < ApplicationController
+class Dashboard::RequestOffsController < DashboardController
   load_and_authorize_resource class: RequestOff.name
-  load_and_authorize_resource :user
   include ApplicationHelper
 
   def index
@@ -8,14 +7,11 @@ class Dashboard::RequestOffsController < ApplicationController
       .per Settings.per_page.dashboard.request_off
   end
 
-  def show
-  end
+  def show; end
 
-  def new
-  end
+  def new; end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @request_off = RequestOff.new request_off_params
@@ -34,15 +30,6 @@ class Dashboard::RequestOffsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def destroy
-    if @request_off.destroy
-      flash[:notice] = flash_message(:destroy, RequestOff)
-    else
-      flash[:error] = flash_message(:destroy, RequestOff, false)
-    end
-    redirect_to dashboard_request_offs_url
   end
 
   private

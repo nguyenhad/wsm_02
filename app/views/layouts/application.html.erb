@@ -10,12 +10,11 @@
   </head>
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
-    <% if user_signed_in? %>
-      <%= render "layouts/header_after_login" %>
-    <% else %>
-      <%= render "layouts/header" %>
+    <%= render "layouts/header" %>
+    <section class="<%= handle_sign_class %>">
+      <%= render "shared/flash" %>
       <%= yield %>
-    <% end %>
-    <%= render "layouts/footer" %>
+      <%= render "layouts/footer" unless user_signed_in? %>
+    </section>
   </body>
 </html>

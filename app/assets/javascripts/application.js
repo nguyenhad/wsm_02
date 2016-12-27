@@ -28,6 +28,7 @@
 //= require i18n
 //= require i18n.js
 //= require i18n/translations
+//= require_self
 
 /* libraries bower*/
 //= require gojs/release/go.js
@@ -46,3 +47,9 @@
 /* File */
 //= require login.js
 //= require timesheet.js
+
+$(document).ready(function() {
+  $('#flash-message').delay(2000).slideUp(500, function() {
+    $(this).remove();
+  });
+});

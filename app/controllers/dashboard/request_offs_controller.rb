@@ -3,8 +3,10 @@ class Dashboard::RequestOffsController < DashboardController
   include ApplicationHelper
 
   def index
-    @request_offs = @request_offs.page(params[:page])
+    @search = RequestOff.ransack params[:q]
+    @request_offs = @search.result.order(created_at: :desc).page(params[:page])
       .per Settings.per_page.dashboard.request_off
+    @statuses = RequestOff.statuses
   end
 
   def show; end

@@ -3,9 +3,23 @@
     <%= current_index @request_offs.current_page,
       Settings.per_page.dashboard.request_off, request_off_counter %>
   </td>
+  <td><%= l request_off.created_at, format: :date_month_year %></td>
+  <td><%= request_off.user_name %></td>
 
-  <td><%= l request_off.off_have_salary_from, format: :date_month_year %></td>
-  <td><%= l request_off.off_have_salary_to, format: :date_month_year %></td>
+  <td>
+    <% if request_off.off_have_salary_from.nil? %>
+      <%= t(".empty") %>
+    <% else %>
+      <%= l request_off.off_have_salary_from, format: :date_month_year %>
+    <% end %>
+  </td>
+  <td>
+    <% if request_off.off_have_salary_to.nil? %>
+      <%= t(".empty") %>
+    <% else %>
+      <%= l request_off.off_have_salary_to, format: :date_month_year %>
+    <% end %>
+  </td>
 
   <td><%= request_off.reason %></td>
 

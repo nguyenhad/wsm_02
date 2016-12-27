@@ -1,0 +1,26 @@
+vi:
+  dashboard:
+    request_offs:
+      index:
+        title: "Danh sách yêu cầu nghỉ phép"
+        index: "STT"
+        time_off_from: "Ngày nghỉ từ"
+        time_off_from: "Đến"
+        reason: "Lý do"
+        edit_request_off: "Sửa"
+        delete_request_off: "Xóa"
+        staff_name: "Tên nhân viên"
+        action: "Hành động"
+        no_request_off_displayed: "Không có yêu cầu nào được hiển thị!"
+        choose_status: "Chọn trạng thái"
+        create_from: "Ngày tạo từ"
+        create_to: "Đến"
+        search: "Tìm kiếm"
+      request_off:
+        empty: "rỗng"
+        status:
+          change: "Thay đổi"
+      new:
+        personal:
+          title: "Yêu cầu nghỉ phép vắng mặt (Nghỉ cá nhân)"
+          require: "Tôi muốn nộp mẫu đơn này để được phê duyệt nghỉ phép tôi vắng mặt (nghỉ không có lương)"

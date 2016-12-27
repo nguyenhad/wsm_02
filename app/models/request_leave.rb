@@ -5,6 +5,7 @@ class RequestLeave < ApplicationRecord
 
   has_one :compensation
 
+  belongs_to :approver, class_name: User.name
   belongs_to :leave_type
   belongs_to :user
 
@@ -17,4 +18,6 @@ class RequestLeave < ApplicationRecord
   def time_leave
     ((compensation.to - compensation.from) / 60).round
   end
+
+  ATTR_PARAMS = [:status, :approver_id].freeze
 end

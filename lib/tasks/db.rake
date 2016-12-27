@@ -555,19 +555,19 @@ namespace :db do
     puts "create request_leaves"
     RequestLeave.create!([
       {leave_from: "2016-12-11 07:45:00", leave_to: "2016-12-11 08:15:00",
-        reason: "I have been sick", approve_group: 1, leave_type_id: 1,
+        reason: "I have been sick", approver_id: 1, leave_type_id: 1,
         user_id: 1},
 
       {leave_from: "2016-12-12 16:15:00", leave_to: "2016-12-12 16:45:00",
-        reason: "Personal issue", approve_group: 1, leave_type_id: 2,
+        reason: "Personal issue", approver_id: 1, leave_type_id: 2,
         user_id: 1},
 
       {leave_from: "2016-12-13 09:00:00", leave_to: "2016-12-13 09:30:00",
-        reason: "Personal issue", approve_group: 1, leave_type_id: 3,
+        reason: "Personal issue", approver_id: 1, leave_type_id: 3,
         user_id: 1},
 
       {leave_from: "2016-12-14 12:45:00", leave_to: "2016-12-14 13:15:00",
-        reason: "Personal issue", approve_group: 1, leave_type_id: 4,
+        reason: "Personal issue", approver_id: 1, leave_type_id: 4,
         user_id: 1}
       ])
 

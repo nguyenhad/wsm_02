@@ -64,6 +64,13 @@ vi:
       not_setting_message: "Cấu hình không tồn tại!"
 
     request_offs:
+      index:
+        title: "Danh sách xin nghỉ"
+        index: "STT"
+        time_off_from: "Từ"
+        time_off_to: "Đến"
+        reason: "Lý do"
+        status: "Trạng thái"
       status:
         change : "cập nhât"
 

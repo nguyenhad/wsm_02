@@ -17,35 +17,6 @@
     <%= request_leave.time_leave %> <%= t(".time_unit") %>
   </td>
   <td>
-    <% if request_leave.pendding? %>
-      <a data-toggle="tooltip" class="tooltipLink"
-        title="<%= request_leave.status %>">
-        <i class="fa fa-circle-o"></i>
-      </a>
-    <% elsif request_leave.approve? %>
-      <a data-toggle="tooltip" class="tooltipLink"
-        title="<%= request_leave.status %>">
-        <i class="fa fa-check"></i>
-      </a>
-    <% elsif request_leave.reject? %>
-      <a data-toggle="tooltip" class="tooltipLink"
-        title="<%= request_leave.status %>">
-        <i class="fa fa-times-circle-o"></i>
-      </a>
-    <% end %>
-  </td>
-  <td>
-    <ul class="menu-action">
-      <li>
-        <%= link_to "#", title: t(".tooltip_approve") do %>
-          <span class="fa fa-check-circle-o"></span>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to "#", title: t(".tooltip_reject") do %>
-          <span class="fa fa-trash-o"></span>
-        <% end %>
-      </li>
-    </ul>
+    <%= render "status", request_leave: request_leave %>
   </td>
 </tr>

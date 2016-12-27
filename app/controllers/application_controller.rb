@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for resource
     if resource.manager?
-      dashboard_company_time_sheets_path(current_user.company)
+      dashboard_root_path
     else
       request_offs_path
     end

@@ -11,6 +11,7 @@
     <%= l request_leave.compensation.from, format: :format_datetime %> -
     <%= l request_leave.compensation.to, format: :format_datetime %>
   </td>
+  <td><%= request_leave.user_name %></td>
   <td><%= request_leave.leave_type_name %></td>
   <td>
     <%= request_leave.time_leave %> <%= t(".time_unit") %>

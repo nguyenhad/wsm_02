@@ -9,6 +9,7 @@ class RequestLeave < ApplicationRecord
   belongs_to :user
 
   delegate :name, to: :leave_type, prefix: true
+  delegate :name, to: :user, prefix: true
 
   enum status: {pendding: 0, approve: 1, reject: 2}
   scope :find_by_date, ->(date){where "DATE(leave_to) = ?", date}

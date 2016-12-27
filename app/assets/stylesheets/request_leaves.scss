@@ -70,4 +70,17 @@ $d-color: #000;
     list-style: none;
     margin-left: 10px;
   }
+
+  .search-created-at,
+  .inline {
+    display: inline;
+    float: left;
+    margin-left: 20px;
+  }
+
+  .colum-text-field-search,
+  .form-inline select {
+    height: 30px;
+    min-width: 200px;
+  }
 }

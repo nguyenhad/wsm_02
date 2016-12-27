@@ -1,6 +1,5 @@
 class RequestOffsController < ApplicationController
   load_and_authorize_resource class: RequestOff.name, except: [:index]
-  include ApplicationHelper
 
   def index
     @request_offs = current_user.request_offs.page(params[:page])

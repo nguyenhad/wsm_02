@@ -1,6 +1,5 @@
 class Dashboard::RequestLeavesController < DashboardController
   load_and_authorize_resource class: RequestLeave.name
-  include ApplicationHelper
 
   def index
     @search = RequestLeave.ransack params[:q]

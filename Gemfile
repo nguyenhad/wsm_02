@@ -58,6 +58,7 @@ group :test do
   gem "reek"
   gem "bundler-audit"
   gem "rails_best_practices"
+  gem "eslint-rails"
 
   gem "simplecov"
   gem "simplecov-rcov"

@@ -1,6 +1,6 @@
 <div class="container container_content">
   <center><h3><%= t "devise.mailer.password_change.subject" %></h3></center>
-  <div class="form_center">
+  <div class="form-center">
     <%= form_for resource, as: resource_name,
       url: password_path(resource_name), html: {method: :put} do |f| %>
       <%= devise_error_messages! %>

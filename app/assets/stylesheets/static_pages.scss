@@ -1,60 +1,56 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
 
-/* forms */
-.form_center {
-  margin: 0 300px 0 300px;
+$hcontent-color: #f9f9f9;
+$pcontent-color: #fff;
+$navlink-color: #155363;
+$lihover-color: #27ae60;
 
-  input, textarea, select {
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    box-sizing: border-box;
-    margin-bottom: 15px;
-    width: 100% !important;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-  }
-
-  input {
-    height: auto !important;
-  }
-
-  #error_explanation {
-    color: red;
-
-    ul {
-      color: red;
-      margin: 0 0 30px 0;
-    }
-  }
-
-  .field_with_errors {
-    @extend .has-error;
-
-    .form-control {
-      color: $state-danger-text;
-    }
-  }
-}
-
-.margin_bottom_50 {
+.margin-bottom-50 {
   margin-bottom: 50px;
 }
 
-.margin_right_20 {
-  margin-right: 20px;
+.main-container {
+  background-color: $pcontent-color;
+
+  .header-content {
+    background: $hcontent-color;
+    height: 50px;
+    text-align: center;
+  }
+
+  .page-content {
+    min-height: 860px;
+  }
 }
 
-.header-content {
-  background: #f9f9f9;
-  height: 50px;
-  text-align: center;
+.icon-header-after-login {
+  left: 20px;
+  position: absolute;
+  top: 12px;
+  z-index: 1;
 }
 
-.container {
-  width: 100%;
+
+.w-nav-link.menu-li,
+.w-nav-link.menu-li a {
+  color: $navlink-color;
+  font-size: 18px;
+  line-height: 18px;
 }
 
-#page-content {
-  min-height: 860px;
+.w-nav-link.menu-li:hover {
+  text-decoration: none;
+}
+
+.menu-li {
+  padding-bottom: 30px;
+  padding-top: 26px;
+}
+
+.menu-li:hover {
+  background-color: $lihover-color;
+  border-top-style: none;
+  color: $pcontent-color;
+  transition: background, .7s;
 }

@@ -1,6 +1,6 @@
 <% provide :title, t("list_user") %>
 <% if current_user.manager? %>
-  <div class="row">
+  <div class="col-md-12">
     <%= link_to t("new_user"), new_dashboard_user_path,
       class: "btn btn-primary col-md-2" %>
     <div class="color_black  col-md-offset-5 col-md-5">
@@ -16,9 +16,9 @@
     </div>
   </div>
 <% end %>
-<br>
-<div class="row ">
-  <table class="table table-striped table-hover color_black">
+
+<div class="col-md-12">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th><%= t "index" %></th>

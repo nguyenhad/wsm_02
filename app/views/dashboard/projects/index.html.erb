@@ -1,46 +1,42 @@
 <% provide :title, t("dashboard.projects.index.list_project") %>
-<div class="container color_black">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-    <center><h3><%= t "dashboard.projects.index.list_project" %></h3></center>
-    <%= link_to t("new_project"), new_dashboard_project_path,
-      class: "btn btn-primary" %>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th><%= t "index" %></th>
-            <th><%= t "name_project" %></th>
-            <th><%= t "start_date" %></th>
-            <th><%= t "end_date" %></th>
-            <th><%= t "action" %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @projects.each_with_index do |project, index| %>
-            <tr>
-              <td>
-                <%= current_index @projects.current_page,
-                  Settings.per_page.dashboard.project, index %>
-              </td>
-              <td><%= project.name %></td>
-              <td>
-                <%= l project.start_date, format: :date_month_year if project.start_date %>
-              </td>
-              <td>
-                <%= l project.end_date, format: :date_month_year if project.end_date %>
-              </td>
-              <td>
-                <%= link_to t("edit"), edit_dashboard_project_path(project),
-                  class: "btn btn-primary" %>
-                <%= link_to t("delete"), dashboard_project_path(project),
-                  method: :delete, data: {confirm: t("are_you_sure")},
-                  class: "btn btn-danger" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <center><%= paginate @projects %></center>
-    </div>
-  </div>
+<div class="col-md-12">
+  <h3 class="text-center"><%= t "dashboard.projects.index.list_project" %></h3>
+  <%= link_to t("new_project"),
+    new_dashboard_project_path, class: "btn btn-primary" %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= t "index" %></th>
+        <th><%= t "name_project" %></th>
+        <th><%= t "start_date" %></th>
+        <th><%= t "end_date" %></th>
+        <th><%= t "action" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each_with_index do |project, index| %>
+        <tr>
+          <td>
+            <%= current_index @projects.current_page,
+              Settings.per_page.dashboard.project, index %>
+          </td>
+          <td><%= project.name %></td>
+          <td>
+            <%= l project.start_date, format: :date_month_year if project.start_date %>
+          </td>
+          <td>
+            <%= l project.end_date, format: :date_month_year if project.end_date %>
+          </td>
+          <td>
+            <%= link_to t("edit"), edit_dashboard_project_path(project),
+              class: "btn btn-primary" %>
+            <%= link_to t("delete"), dashboard_project_path(project),
+              method: :delete, data: {confirm: t("are_you_sure")},
+              class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <center><%= paginate @projects %></center>
 </div>

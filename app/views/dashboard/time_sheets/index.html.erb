@@ -1,6 +1,6 @@
-<div class="color_black content-timesheet" ng-controller="TimesheetsCtrl" >
-  <div class="row">
-    <%= form_tag dashboard_set_timesheets_path(workspace_id: @workspace.id,
+<div class="content-timesheet" ng-controller="TimesheetsCtrl" >
+  <div class="col-md-12 form-group">
+    <%= form_tag dashboard_set_timesheets_path(company_id: @company.id,
       month: @month, year: @year), multipart: true,
       method: :post, id: "import-form" do %>
       <div class="col-md-1 pull-right">
@@ -12,17 +12,18 @@
       </div>
     <% end %>
   </div>
-  <div class="row mg-top-50">
+
+  <div class="col-md-12">
     <div class="col-md-9 pull-right">
       <div class="pull-right">
         <p class="fload-label mg-top-label"><%= t "dashboard.leave" %></p>
-        <span class="input-group-addon height-30 width-70 fload-label brg-red"></span>
+        <span class="brg-red input-group-addon height-30 width-70 fload-label"></span>
         <p class="fload-label mg-top-label"> <%= t "dashboard.holiday" %> </p>
-        <span class="input-group-addon height-30 width-70 fload-label bg-green"></span>
+        <span class="bg-green input-group-addon height-30 width-70 fload-label"></span>
         <p class="fload-label mg-top-label"> <%= t "dashboard.sat" %> </p>
-        <span class="input-group-addon height-30 width-70 fload-label brg-blue"></span>
+        <span class="brg-blue input-group-addon height-30 width-70 fload-label"></span>
         <p class="fload-label mg-top-label"> <%= t "dashboard.sun" %> </p>
-        <span class="input-group-addon height-30 width-70 fload-label bg-orange"></span>
+        <span class="bg-orange input-group-addon height-30 width-70 fload-label"></span>
       </div>
     </div>
 
@@ -40,7 +41,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="col-md-12">
     <div class="text-center month-timesheet">
       {{retrieveTimesheet.content.month}}
     </div>

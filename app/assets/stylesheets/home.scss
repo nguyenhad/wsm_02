@@ -10,20 +10,8 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require animate
- *= require emerald
- *= require goSamples
- *= require plugins
- *= require main
- *= require normal
- *= require angular-bootstrap-datetimepicker/src/css/datetimepicker.css
- *= require sweetalert/dist/sweetalert.css
- *= require static_pages
- *= require timesheets
- *= require workspaces
- *= require dashboard/workspaces
- *= require_self
+ *= require fontello
+ *= require magnific-popup
+ *= require shortcodes
+ *= require style
  */
-
-@import 'bootstrap-sprockets';
-@import 'bootstrap';

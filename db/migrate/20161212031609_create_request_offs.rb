@@ -17,7 +17,7 @@ class CreateRequestOffs < ActiveRecord::Migration[5.0]
       t.integer :user_handover
       t.string :part_handover
       t.string :work_handover
-      t.integer :status
+      t.integer :status, default: 0
       t.integer :approver_id
       t.references :user, foreign_key: true
       t.datetime :deleted_at

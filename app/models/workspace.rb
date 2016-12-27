@@ -5,9 +5,8 @@ class Workspace < ApplicationRecord
   has_many :users, through: :user_workspaces
   has_many :sections
 
-  belongs_to :user
+  belongs_to :owner, class_name: User.name, foreign_key: :user_id
   belongs_to :company
-
   has_one :timesheet_setting
 
   mount_uploader :image, WorkspaceImageUploader
@@ -17,7 +16,7 @@ class Workspace < ApplicationRecord
 
   validates :description, presence: true,
     length: {maximum: Settings.validation.workspace.des_max_len}
-  validates :user, presence: true
+  validates :owner, presence: true
 
   validates :company, presence: true
 
@@ -27,6 +26,10 @@ class Workspace < ApplicationRecord
 
   scope :by_company, ->company_id{where company_id: company_id}
   scope :alphabe_name, ->{order name: :asc}
+
+  def owner_by? user
+    owner == user
+  end
 
   protected
   def build_user_workspaces

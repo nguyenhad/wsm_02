@@ -1,6 +1,6 @@
 class Dashboard::WorkspacesController < DashboardController
   before_action :load_workspace, except: [:index, :new, :create]
-  before_action :verify_owner, only: :show
+  before_action :verify_owner_workspace, only: :show
   before_action :load_service, only: [:show, :edit]
   protect_from_forgery with: :null_session
 

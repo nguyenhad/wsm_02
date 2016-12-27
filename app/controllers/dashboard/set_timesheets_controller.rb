@@ -1,6 +1,4 @@
 class Dashboard::SetTimesheetsController < DashboardController
-  before_action :authenticate_user!
-  # before_action :authenticate_manager!
   before_action :load_company, only: [:index, :create]
   before_action :load_workspace, only: [:create]
   before_action :load_file, only: :create

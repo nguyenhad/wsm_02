@@ -3,6 +3,7 @@ class TimeSheet < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :user_workspace
+
   delegate :user, to: :user_workspace
 
   scope :order_date_desc, ->{order created_at: :desc}

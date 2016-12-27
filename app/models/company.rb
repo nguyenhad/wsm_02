@@ -1,7 +1,7 @@
 class Company < ApplicationRecord
   acts_as_paranoid
 
-  has_many :users
+  has_many :users, foreign_key: :company_id
   has_many :holidays
   has_many :dayoff_settings
   has_many :workspaces
@@ -11,6 +11,8 @@ class Company < ApplicationRecord
   has_one :leave_setting
   has_one :shift
   has_one :company_setting
+
+  belongs_to :owner, class_name: User.name
 
   enum status: {pending: 0, active: 1, block: 2}
 

@@ -7,6 +7,8 @@ class RequestOff < ApplicationRecord
 
   enum status: {pending: 0, approve: 1, reject: 2}
 
+  delegate :name, to: :user, prefix: true
+
   ATTR_PARAMS = [
     :company_id,
     :project_name,

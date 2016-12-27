@@ -16,7 +16,7 @@ class RequestOffsController < ApplicationController
     @request_off.user = current_user
 
     if @request_off.save
-      redirect_to @request_off, notice: flash_messsage(:create, RequestOff)
+      redirect_to request_offs_path, notice: flash_message(:create, RequestOff)
     else
       render :new
     end
@@ -24,7 +24,7 @@ class RequestOffsController < ApplicationController
 
   def update
     if @request_off.update request_off_params
-      redirect_to @request_off, notice: flash_messsage(:update, RequestOff)
+      redirect_to request_offs_path, notice: flash_message(:update, RequestOff)
     else
       render :edit
     end

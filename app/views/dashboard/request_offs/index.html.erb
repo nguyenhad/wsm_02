@@ -1,20 +1,19 @@
 <% provide :title, t("request_offs.index.title") %>
-<div class="color_black row">
-  <div class="row">
-    <table class="table table-striped table-hover color_black">
-      <thead>
-        <tr>
-          <th><%= t "index" %></th>
-          <th><%= t "time_off_from" %></th>
-          <th><%= t "time_off_to" %></th>
-          <th><%= t "reason" %></th>
-          <th><%= t "status" %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render partial: "request_off", collection: @request_offs %>
-      </tbody>
-    </table>
-    <center><%= paginate @request_offs %></center>
-  </div>
+
+<div class="row">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><%= t "index" %></th>
+        <th><%= t "time_off_from" %></th>
+        <th><%= t "time_off_to" %></th>
+        <th><%= t "reason" %></th>
+        <th><%= t "status" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "request_off", collection: @request_offs %>
+    </tbody>
+  </table>
+  <center><%= paginate @request_offs %></center>
 </div>

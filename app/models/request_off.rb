@@ -7,7 +7,20 @@ class RequestOff < ApplicationRecord
 
   enum status: {pending: 0, approve: 1, reject: 2}
 
-  ATTR_PARAMS = [:name, :uid, :project, :position, :department, :requeset_date,
-    :start_off_on, :finish_off_on, :reason, :start_off_without_pay_on,
-    :status, :approver_id, :finish_off_without_pay].freeze
+  ATTR_PARAMS = [
+    :company_id,
+    :project_name,
+    :position_name,
+    :department,
+    :request_date,
+    :off_no_salary_from,
+    :off_no_salary_to,
+    :off_have_salary_from,
+    :off_have_salary_to,
+    :special_dayoff_setting_id,
+    :special_dayoff_type_id,
+    :reason,
+    :status,
+    :approver_id
+  ].freeze
 end

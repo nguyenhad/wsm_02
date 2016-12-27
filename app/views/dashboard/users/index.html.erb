@@ -1,67 +1,65 @@
 <% provide :title, t("list_user") %>
-<div class="color_black row">
-  <% if current_user.manager? %>
-    <div class="row">
-      <%= link_to t("new_user"), new_dashboard_user_path,
-        class: "btn btn-primary col-md-2" %>
-      <div class="color_black  col-md-offset-5 col-md-5">
-        <%= form_tag dashboard_set_users_path, multipart: true,
-          method: :post do %>
-          <div class="col-md-10">
-            <%= file_field_tag :file, class: "form-control" %>
-          </div>
-          <div class="col-md-2">
-            <%= submit_tag t("import"), class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
+<% if current_user.manager? %>
+  <div class="row">
+    <%= link_to t("new_user"), new_dashboard_user_path,
+      class: "btn btn-primary col-md-2" %>
+    <div class="color_black  col-md-offset-5 col-md-5">
+      <%= form_tag dashboard_set_users_path, multipart: true,
+        method: :post do %>
+        <div class="col-md-10">
+          <%= file_field_tag :file, class: "form-control" %>
+        </div>
+        <div class="col-md-2">
+          <%= submit_tag t("import"), class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  <br>
-  <div class="row ">
-    <table class="table table-striped table-hover color_black">
-      <thead>
-        <tr>
-          <th><%= t "index" %></th>
-          <th><%= t "employee_code" %></th>
-          <th><%= t "name" %></th>
-          <th><%= t "email" %></th>
-          <th><%= t "role" %></th>
-          <th><%= t "dashboard.users.index.company" %></th>
-          <th><%= t "gender" %></th>
-          <th><%= t "birthday" %></th>
-          <th><%= t "action" %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each_with_index do |user, index| %>
-          <tr>
-            <td>
-              <%= current_index @users.current_page,
-                Settings.per_page.dashboard.user, index %>
-            </td>
-            <td><%= user.employee_code %></td>
-            <td><%= user.name %></td>
-            <td><%= user.email %></td>
-            <td><%= user.role %></td>
-            <td><%= user.company.name if user.company %></td>
-            <td><%= user.gender %></td>
-            <td>
-              <%= l user.birthday, format: :date_month_year if user.birthday %>
-            </td>
-            <td>
-              <%= link_to t("show"), dashboard_user_path(user),
-                class: "btn btn-success btn-xs" %>
-              <%= link_to t("edit"), edit_dashboard_user_path(user),
-                class: "btn btn-primary btn-xs" %>
-              <%= link_to t("delete"), dashboard_user_path(user),
-                method: :delete, data: {confirm: t("are_you_sure")},
-                class: "btn btn-danger btn-xs" %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <center><%= paginate @users %></center>
   </div>
+<% end %>
+<br>
+<div class="row ">
+  <table class="table table-striped table-hover color_black">
+    <thead>
+      <tr>
+        <th><%= t "index" %></th>
+        <th><%= t "employee_code" %></th>
+        <th><%= t "name" %></th>
+        <th><%= t "email" %></th>
+        <th><%= t "role" %></th>
+        <th><%= t "dashboard.users.index.company" %></th>
+        <th><%= t "gender" %></th>
+        <th><%= t "birthday" %></th>
+        <th><%= t "action" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each_with_index do |user, index| %>
+        <tr>
+          <td>
+            <%= current_index @users.current_page,
+              Settings.per_page.dashboard.user, index %>
+          </td>
+          <td><%= user.employee_code %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.role %></td>
+          <td><%= user.company.name if user.company %></td>
+          <td><%= user.gender %></td>
+          <td>
+            <%= l user.birthday, format: :date_month_year if user.birthday %>
+          </td>
+          <td>
+            <%= link_to t("show"), dashboard_user_path(user),
+              class: "btn btn-success btn-xs" %>
+            <%= link_to t("edit"), edit_dashboard_user_path(user),
+              class: "btn btn-primary btn-xs" %>
+            <%= link_to t("delete"), dashboard_user_path(user),
+              method: :delete, data: {confirm: t("are_you_sure")},
+              class: "btn btn-danger btn-xs" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <center><%= paginate @users %></center>
 </div>

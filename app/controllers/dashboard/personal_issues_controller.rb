@@ -5,4 +5,6 @@ class Dashboard::PersonalIssuesController < DashboardController
     @personal_issues = @personal_issues.page(params[:page])
       .per Settings.per_page.dashboard.request_off
   end
+
+  def new; end
 end

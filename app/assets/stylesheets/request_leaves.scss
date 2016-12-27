@@ -1,24 +1,29 @@
+$a-color: #f5f5f5;
+$b-color: #d2691e;
+$c-color: #808080;
+$d-color: #000;
+
 .form-request {
-  width: 45%;
-  float: none;
-  margin: 0 auto ;
-  color: black;
+  background-color: $a-color;
   border-style: groove;
-  background-color: #F5F5F5;
+  color: $d-color;
+  float: none;
+  margin: 0 auto;
+  width: 45%;
 
   .form-title {
-  font-style: normal;
-  color: #D2691E;
-  font-size: 1em;
-  text-align: center;
+    color: $b-color;
+    font-size: 1em;
+    font-style: normal;
+    text-align: center;
 
     .title-content {
-      width: 120%;
-      height: 140px;
-      margin-left: 13px;
-      color: #808080;
+      color: $c-color;
       font-size: 1.1em;
+      height: 140px;
       margin: 20px;
+      margin-left: 13px;
+      width: 120%;
     }
 
     .require {
@@ -28,44 +33,30 @@
   }
 
   .form-group {
-    width: 100%;
     float: none;
-    margin: 0 auto ;
+    margin: 0 auto;
     margin-left: 15px;
-
-    label {
-      color: #D2691E;
-      font-size: 1rem;
-      margin-top: 15px;
-    }
-    .notice-text {
-      font-size: 0.7em;
-      color: #808080;
-      margin-top: -10px;
-    }
-    .select {
-      font-size: 1rem;
-    }
-    .button_save {
-      margin-top: 20px;
-      margin-bottom: 30px;
-    }
+    width: 100%;
 
     .select-branch {
       width: 50px;
     }
+
     .select-division {
       width: 80px;
     }
+
     .select-section {
       width: 180px;
     }
+
     .select-time {
       width: 130px;
     }
+
     .select-reason {
-      width: 500px;
       height: 100px;
+      width: 500px;
     }
   }
 }

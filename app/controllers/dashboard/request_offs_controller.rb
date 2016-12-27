@@ -17,7 +17,7 @@ class Dashboard::RequestOffsController < DashboardController
     @request_off = RequestOff.new request_off_params
 
     if @request_off.save
-      redirect_to @request_off, notice: flash_messsage(:create, RequestOff)
+      redirect_to @request_off, notice: flash_message(:create, RequestOff)
     else
       render :new
     end

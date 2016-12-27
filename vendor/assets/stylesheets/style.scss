@@ -731,13 +731,6 @@
     text-decoration: none;
   }
 
-  .icon_header_after_login {
-    position: absolute;
-    z-index: 1;
-    top: 12px;
-    left: 20px
-  }
-
   .icon_color_white {
     color: white
   }
@@ -788,4 +781,11 @@
     text-align: center;
   }
 
+}
+
+.icon-header-after-login {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 20px
 }

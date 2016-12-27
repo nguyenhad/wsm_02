@@ -225,13 +225,11 @@ vi:
   reset_password: "Đặt lại mật khẩu"
   forgot_password: "Quên mật khẩu"
   request_form:
-    title: Requirement for leave Development Division
     content_of_title_html: "Vui lòng điền vào các thông tin dưới đây để yêu cầu rời khỏi văn phòng.
       Sau đó, xin vui lòng gửi link này cho các nhà quản lý và lãnh đạo nhóm để được approved: ...<br/>Chú ý:<br/>
       - Xin lưu ý hình thức này trên điện thoại của bạn ở trong trường hợp khẩn cấp.<br/>
       - Hình thức này có thể không được sử dụng để thay thế cho việc làm đơn xin vắng mặt nữa ngày hoặc một ngày <br/>
       Cám ơn bạn rất nhiều!"
-    require: "*Bắt buộc điền*"
     content:
       staff_name: "Tên nhân viên *"
       staff_code: "Mã nhân viên *"

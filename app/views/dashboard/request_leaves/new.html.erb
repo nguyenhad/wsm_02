@@ -1,77 +1,8 @@
-<div class="form-request">
-  <div class="form-content">
-    <div class="form-title">
-      <h3><%= t "request_form.title" %></h3>
-      <div class="title-content">
-        <p><%= t "request_form.content_of_title_html" %></p>
-      </div>
-      <div class="require">
-        <%= t "request_form.require" %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= form_tag request_leaves_path, method: :post do %>
-        <%= label_tag t("request_form.content.staff_name") %>
-        <div class="notice-text">
-          <%= t("request_form.content.example_name") %>
-        </div>
-        <%= text_field_tag :name, nil, class: "select-name" %>
-
-        <%= label_tag t("request_form.content.staff_code") %>
-        <div class="notice-text">
-          <%= t("request_form.content.example_code") %>
-        </div>
-        <%= text_field_tag :code, nil, class: "select-code" %>
-
-        <%= label_tag t("request_form.content.branch") %>
-        <%= select_tag "credit_card", options_for_select([ 1, 2 ], 3),
-          class: "select-branch" %>
-
-        <%= label_tag t("request_form.content.division") %>
-        <%= select_tag :division, nil, class: "select-division" %>
-
-        <%= label_tag t("request_form.content.section") %>
-        <%= select_tag :division, nil, class: "select-section" %>
-
-        <%= label_tag t("request_form.content.leave_from") %>
-        <div class="notice-text">
-          <%= t("request_form.content.example_leave_from") %>
-        </div>
-        <%= datetime_local_field_tag :leave_from, class: "select-datetime" %>
-
-        <%= label_tag t("request_form.content.leave_to") %>
-        <div class="notice-text">
-          <%= t("request_form.content.example_leave_to") %>
-        </div>
-        <%= datetime_local_field_tag :leave_to, class: "select-deatetime" %>
-
-        <%= label_tag t("request_form.content.leave_kinds") %>
-        <div class="notice-text">
-          <%= t("request_form.content.example_kinds") %>
-        </div>
-        <%= select_tag :leave_kinds, options_for_select([ "IL", "LE" ], "IL"),
-          class: "select-kinds" %>
-
-        <%= label_tag t("request_form.content.leave_time") %>
-        <div class="notice-text">
-          <%= t("request_form.content.example_time") %>
-        </div>
-        <%= select_tag :leave_time, nil, class: "select-time" %>
-
-        <%= label_tag t("request_form.content.leave_reason") %>
-        <%= text_area_tag :leave_reason, nil, class: "select-reason" %>
-
-        <%= label_tag t("request_form.content.compensation_time") %>
-        <div class="notice-text">
-          <%= t("request_form.content.example_compensation") %>
-        </div>
-        <%= text_field_tag :compensation_time %>
-
-        <div class = "button_save">
-          <%= submit_tag :save  %>
-        </div>
-
-      <% end %>
-    </div>
-  </div>
+<div class="page-header">
+  <h1>
+    <%= t ".title", default: [:"helpers.titles.new", "New %{model}"],
+      model: RequestLeave.model_name.human.titleize %>
+  </h1>
 </div>
+
+<%= render partial: "form" %>

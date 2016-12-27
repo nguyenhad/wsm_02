@@ -8,8 +8,10 @@ class Ability
       admin_permission user
     when user.manager?
       manager_permission user
-    else
+    when user.staff
       normal_user_permission user
+    else
+      cannot :manage, :all
     end
   end
 

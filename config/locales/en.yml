@@ -215,14 +215,12 @@ en:
   reset_password: "Reset password"
   forgot_password: "Forgot password"
   request_form:
-    title: Requirement for leave Development Division
     content_of_title_html: "Please fill in the information below to require to
       leave the office. After that, please send this link to your managers and
       group leaders to have their aprroval: ...<br/>Notice:<br/>
       - Please note this form on your phones in in case of emergency.<br/>
       - This form CANNOT be used to replace the paper of one day or half a day absence form <br/>
       Thank you very much!"
-    require: "*Must fill*"
     content:
       staff_name: "Staff name *"
       staff_code: "Staff_code *"

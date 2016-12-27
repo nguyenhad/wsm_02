@@ -44,8 +44,6 @@ class User < ApplicationRecord
   scope :recent, ->{order created_at: :desc}
   scope :load_by_company, ->(company_id){where company_id: company_id}
 
-  delegate :manager?, to: :position, allow_nil: true
-
   def is_user? user
     id == user.id
   end

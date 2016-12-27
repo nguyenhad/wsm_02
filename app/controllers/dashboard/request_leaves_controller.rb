@@ -9,7 +9,9 @@ class Dashboard::RequestLeavesController < DashboardController
     @statuses = RequestLeave.statuses
   end
 
-  def new; end
+  def new
+    @request_leave.build_compensation
+  end
 
   def update
     if @request_leave.update request_leave_params

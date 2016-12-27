@@ -15,6 +15,8 @@ class RequestLeave < ApplicationRecord
   enum status: {pendding: 0, approve: 1, reject: 2}
   scope :find_by_date, ->(date){where "DATE(leave_to) = ?", date}
 
+  accepts_nested_attributes_for :compensation
+
   def time_leave
     ((compensation.to - compensation.from) / 60).round
   end

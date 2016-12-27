@@ -81,6 +81,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     commonjs (0.2.7)
     composite_primary_keys (9.0.4)
       activerecord (~> 5.0.0)
@@ -103,6 +104,10 @@ GEM
     docile (1.1.5)
     equalizer (0.0.11)
     erubis (2.7.0)
+    eslint-rails (1.2.1)
+      colorize
+      execjs
+      railties (>= 3.2)
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
@@ -358,6 +363,7 @@ DEPENDENCIES
   config
   database_cleaner (~> 1.5)
   devise
+  eslint-rails
   factory_girl
   factory_girl_rails
   faker

@@ -1,29 +1,28 @@
-<div class="form_center">
-  <%= form_for [:dashboard, @company], url: dashboard_company_path do |f| %>
-    <%= render "shared/error_messages", object: f.object %>
-    <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
-    <div class="field">
-      <%= f.fields_for :company_setting do |ff| %>
-        <div class="field">
-          <%= f.label :cutoff_date %>
-          <%= ff.text_field :cutoff_date %>
-        </div>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= f.fields_for :company_setting do |ff| %>
-        <div class="field">
-          <%= f.label :timezone %>
-          <%= ff.time_zone_select :timezone, nil, {},
-            {include_blank: true, class: "form-control"} %>
-        </div>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<%= form_for [:dashboard, @company],
+  url: dashboard_company_path, class: "col-md-6 col-md-offset-3" do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <%= f.fields_for :company_setting do |ff| %>
+    <div class="form-group">
+      <%= f.label :cutoff_date %>
+      <%= ff.text_field :cutoff_date %>
     </div>
   <% end %>
-</div>
+
+  <%= f.fields_for :company_setting do |ff| %>
+    <div class="form-group">
+      <%= f.label :timezone %>
+      <%= ff.time_zone_select :timezone, nil, {},
+        {include_blank: true, class: "form-control"} %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  </div>
+<% end %>

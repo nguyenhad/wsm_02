@@ -18,11 +18,11 @@
     <div id="page-wrapper">
       <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
         <%= render "layouts/sidebar" %>
-        <div id="main-container">
+        <div id="main-container" class="main-container">
           <div class="header-content">
             <%= render "shared/navbar" %>
           </div>
-          <div id="page-content" class="color_black">
+          <div class="page-content">
             <%= render "shared/flash" %>
             <%= yield %>
           </div>

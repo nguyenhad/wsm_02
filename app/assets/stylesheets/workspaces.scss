@@ -1,0 +1,50 @@
+$dia-color: #000;
+
+.my-palet {
+  height: 360px;
+  width: 140px;
+}
+
+.my-diagra {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: top;
+  width: 80%;
+}
+
+.my-diagra-div {
+  border: solid 1px #dia-color;
+  height: 500px;
+}
+
+.savemod {
+  height: 250px;
+}
+
+.ui-accordion
+.ui-accordion-content {
+  padding: 1px;
+}
+
+.workspace {
+  white-space: nowrap;
+  width: 100%;
+}
+
+.work-span {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: top;
+}
+
+.my-diagram {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: top;
+  width: 80%;
+}
+
+.g-div {
+  border: solid 1px $dia-color;
+  height: 500px;
+}

@@ -1,7 +1,10 @@
-.space{
+$mconfig-color: #221e23;
+
+.space {
   margin-top: 50px;
 }
-.modal_config{
+
+.modal-config {
+  color: $mconfig-color;
   padding: 20px;
-  color: #221e23;
 }

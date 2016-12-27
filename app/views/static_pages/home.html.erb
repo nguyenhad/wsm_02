@@ -1,4 +1,6 @@
 <% unless user_signed_in? %>
+  <%= stylesheet_link_tag "home", media: "all",
+    "data-turbolinks-track": "reload" %>
   <% provide :title, t("home") %>
   <div class="header-banner" data-stellar-background-ratio="0.5">
     <div class="slidersection">
@@ -8,7 +10,7 @@
             <h1 class="underline animated fadeInDown">
               <%= t "working_space" %>
             </h1>
-            <h4 class="animated fadeInUp delay-05s margin_bottom_50">
+            <h4 class="animated fadeInUp delay-05s margin-bottom-50">
               <%= t "an_exclusive_management_working_space_by" %>
               <strong class="green"><%= t "education_framgia" %></strong>
             </h4>

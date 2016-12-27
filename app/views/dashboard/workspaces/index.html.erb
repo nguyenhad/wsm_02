@@ -1,7 +1,6 @@
 <% provide :title, t(".workspaces") %>
-<div class="center">
-  <h3><%= t ".workspaces" %></h3>
-</div>
+<h3 class="text-center"><%= t ".workspaces" %></h3>
+
 <div class="container">
   <div class="row">
     <button class="btn btn-primary" data-toggle="modal"
@@ -19,11 +18,12 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" tabindex="-1" role="dialog"
   aria-labelledby="myLargeModalLabel" aria-hidden="true" id ="new_workspace">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal_config">
+      <div class="modal-config">
         <h3 class="text-center"><%= t ".new_workspace" %></h3>
         <div id="workspace_form">
           <%= render "form" %>

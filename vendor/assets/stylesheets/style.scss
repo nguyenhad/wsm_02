@@ -288,18 +288,6 @@
     margin-top: 0;
   }
 
-  .menu-li {
-    padding-top: 26px;
-    padding-bottom: 30px;
-  }
-
-  .menu-li:hover {
-    border-top-style: none;
-    background-color: #27AE60;
-    color: #FFF;
-    transition: background, .7s;
-  }
-
   .banner--clone {
     opacity: 0.8;
     background: #FFFFFF !important;
@@ -720,17 +708,6 @@
     font-size: 15px !important;
   }
 
-  .w-nav-link.menu-li,
-  .w-nav-link.menu-li a {
-    color: #155363 !important;
-    font-size: 18px;
-    line-height: 18px;
-  }
-
-  .w-nav-link.menu-li:hover {
-    text-decoration: none;
-  }
-
   .icon_color_white {
     color: white
   }
@@ -781,11 +758,4 @@
     text-align: center;
   }
 
-}
-
-.icon-header-after-login {
-  position: absolute;
-  z-index: 1;
-  top: 12px;
-  left: 20px
 }

@@ -1,0 +1,20 @@
+en:
+  dashboard:
+    request_leaves:
+      index:
+        list_request_leave: "List requests leave"
+        no_num: "Index"
+        created_at: "Created at"
+        leave_from: "Leave from"
+        leave_to: "To"
+        reason: "Reason"
+        compensation: "Register for compensation"
+        kind_of_leave: "Kind of leave"
+        time: "Time"
+        status: "Status"
+        action: "Action"
+        are_you_sure: "Are you sure?"
+      request_leave:
+        tooltip_approve: "approve"
+        tooltip_reject: "reject"
+        time_unit: "m"

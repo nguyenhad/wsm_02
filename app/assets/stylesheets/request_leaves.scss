@@ -72,3 +72,14 @@
     }
   }
 }
+
+.request-leaves {
+  padding: 10px;
+
+  .menu-action li {
+    display: inline;
+    float: left;
+    list-style: none;
+    margin-left: 10px;
+  }
+}

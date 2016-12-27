@@ -104,6 +104,7 @@ vi:
   time:
     formats:
       date_month_year: "%d/%m/%Y"
+      format_datetime: "%d/%m/%Y %H:%M"
   home: "Home"
   users: "Người dùng"
   projects: "Dự án"

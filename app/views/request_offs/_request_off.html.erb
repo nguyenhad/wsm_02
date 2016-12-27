@@ -4,19 +4,60 @@
       Settings.per_page.request_off, request_off_counter %>
   </td>
 
-  <td><%= l request_off.off_have_salary_from, format: :date_month_year %></td>
-  <td><%= l request_off.off_have_salary_to, format: :date_month_year %></td>
+  <td><%= l request_off.created_at, format: :date_month_year %></td>
+
+  <td>
+    <% if request_off.off_have_salary_from.nil? %>
+      <%= t(".empty") %>
+    <% else %>
+      <%= l request_off.off_have_salary_from, format: :date_month_year %>
+    <% end %>
+  </td>
+  <td>
+    <% if request_off.off_have_salary_to.nil? %>
+      <%= t(".empty") %>
+    <% else %>
+      <%= l request_off.off_have_salary_to, format: :date_month_year %>
+    <% end %>
+  </td>
 
   <td><%= request_off.reason %></td>
 
   <td>
-    <%= link_to [:edit, request_off] do %>
-      <span class="glyphicon glyphicon-edit" %></span>
+    <% if request_off.pending? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_off.status %>">
+        <i class="fa fa-circle-o"></i>
+      </a>
+    <% elsif request_off.approve? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_off.status %>">
+        <i class="fa fa-check"></i>
+      </a>
+    <% elsif request_off.reject? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_off.status %>">
+        <i class="fa fa-times-circle-o"></i>
+      </a>
     <% end %>
+  </td>
 
-    <%= link_to request_off,
-      method: :delete, data: {confirm: t("are_you_sure")} do %>
-      <span class="glyphicon glyphicon-trash" %></span>
-  <% end %>
+  <td>
+    <ul class="menu-action">
+      <% if can? :manage, request_off %>
+        <li>
+          <%= link_to [:edit, request_off], title: t(".tooltip_edit") do %>
+            <span class="fa fa-pencil-square-o"></span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to request_off,
+            method: :delete, data: {confirm: t(".are_you_sure")},
+            title: t(".tooltip_cancel") do %>
+            <span class="fa fa-trash-o"></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </td>
 </tr>

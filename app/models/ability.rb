@@ -34,7 +34,9 @@ class Ability
     can :update, User, id: user.id
     can :read, :all
     can :create, User
-    can :manage, RequestOff, user_id: user.id
+    can :manage, RequestOff do |request_off|
+      !request_off.approve? && request_off.user_id = user.id
+    end
     can :manage, RequestLeave, user_id: user.id
     can :manage, PersonalIssue, user_id: user.id
   end

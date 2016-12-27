@@ -25,7 +25,7 @@ class Workspace < ApplicationRecord
 
   after_create :build_user_workspaces
 
-  scope :by_company, -> company_id{where company_id: company_id}
+  scope :by_company, ->company_id{where company_id: company_id}
   scope :alphabe_name, ->{order name: :asc}
 
   protected

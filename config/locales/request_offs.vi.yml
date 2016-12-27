@@ -24,3 +24,25 @@ vi:
         personal:
           title: "Yêu cầu nghỉ phép vắng mặt (Nghỉ cá nhân)"
           require: "Tôi muốn nộp mẫu đơn này để được phê duyệt nghỉ phép tôi vắng mặt (nghỉ không có lương)"
+
+  request_offs:
+    index:
+      title: "Danh sách yêu cầu nghỉ phép"
+      index: "STT"
+      time_off_from: "Ngày nghỉ từ"
+      time_off_from: "Đến"
+      reason: "Lý do"
+      edit_request_off: "Sửa"
+      delete_request_off: "Xóa"
+      status: "Trạng thái"
+      action: "Hành động"
+      no_request_off_displayed: "Không có yêu cầu nào được hiển thị!"
+    request_off:
+      empty: "rỗng"
+      tooltip_edit: "Sửa"
+      tooltip_cancel: "Hủy"
+      are_you_sure: "Bạn chắc chắn muốn hủy yêu cầu này?"
+    new:
+      personal:
+        title: "Yêu cầu nghỉ phép vắng mặt (Nghỉ cá nhân)"
+        require: "Tôi muốn nộp mẫu đơn này để được phê duyệt nghỉ phép tôi vắng mặt (nghỉ không có lương)"

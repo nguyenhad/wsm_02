@@ -37,7 +37,9 @@ class Ability
     can :manage, RequestOff do |request_off|
       !request_off.approve? && request_off.user_id = user.id
     end
-    can :manage, RequestLeave, user_id: user.id
+    can :manage, RequestLeave do |request_leave|
+      !request_leave.approve? && request_leave.user_id = user.id
+    end
     can :manage, PersonalIssue, user_id: user.id
   end
 end

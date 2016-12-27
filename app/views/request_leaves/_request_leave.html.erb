@@ -10,14 +10,40 @@
   <td><%= request_leave.reason %></td>
 
   <td>
-    <%= link_to request_leave do %>
-      <span class="glyphicon glyphicon-edit" %></span>
+    <% if request_leave.pending? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_leave.status %>">
+        <i class="fa fa-circle-o"></i>
+      </a>
+    <% elsif request_leave.approve? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_leave.status %>">
+        <i class="fa fa-check"></i>
+      </a>
+    <% elsif request_leave.reject? %>
+      <a data-toggle="tooltip" class="tooltipLink"
+        title="<%= request_leave.status %>">
+        <i class="fa fa-times-circle-o"></i>
+      </a>
     <% end %>
+  </td>
 
-    <%= link_to request_leave,
-      method: :delete,
-      data: {confirm: t("are_you_sure")} do %>
-      <span class="glyphicon glyphicon-trash" %></span>
-    <% end %>
+  <td>
+    <ul class="menu-action">
+      <% if can? :manage, request_leave %>
+        <li>
+          <%= link_to [:edit, request_leave], title: t(".tooltip_edit") do %>
+            <span class="fa fa-pencil-square-o"></span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to request_leave,
+            method: :delete, data: {confirm: t(".are_you_sure")},
+            title: t(".tooltip_cancel") do %>
+            <span class="fa fa-trash-o"></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </td>
 </tr>

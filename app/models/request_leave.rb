@@ -12,7 +12,7 @@ class RequestLeave < ApplicationRecord
   delegate :name, to: :leave_type, prefix: true
   delegate :name, to: :user, prefix: true
 
-  enum status: {pendding: 0, approve: 1, reject: 2}
+  enum status: {pending: 0, approve: 1, reject: 2}
   scope :find_by_date, ->(date){where "DATE(leave_to) = ?", date}
 
   accepts_nested_attributes_for :compensation

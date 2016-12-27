@@ -43,15 +43,14 @@
       </th>
       <th class="col-sm-1"><%= t ".leave_from" %></th>
       <th class="col-sm-1"><%= t ".leave_to" %></th>
-      <th class="col-sm-2"><%= t ".reason" %></th>
+      <th class="col-sm-1"><%= t ".reason" %></th>
       <th class="col-sm-2"><%= t ".compensation" %></th>
-      <th class="col-sm-2">
+      <th class="col-sm-1">
         <%= sort_link @search, "users.name", t(".staff_name") %>
       </th>
-      <th class="col-sm-2"><%= t ".kind_of_leave" %></th>
+      <th class="col-sm-1"><%= t ".kind_of_leave" %></th>
       <th class="col-sm-1"><%= t ".time" %></th>
-      <th class="col-sm-1"><%= t ".status" %></th>
-      <th class="col-sm-1"><%= t ".action" %></th>
+      <th class="col-sm-2"><%= t ".status" %></th>
     </thead>
     <tbody>
       <%= render(partial: "request_leave", collection: @request_leaves) || t(".no_reqquest_leave_display") %>

@@ -24,4 +24,5 @@ vi:
         tooltip_approve: "Chấp nhận"
         tooltip_reject: "Loại bỏ"
         time_unit: "p"
-
+      status:
+        change: "thay đổi"

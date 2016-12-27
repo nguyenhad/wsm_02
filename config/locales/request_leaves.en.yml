@@ -25,4 +25,5 @@ en:
         tooltip_approve: "approve"
         tooltip_reject: "reject"
         time_unit: "m"
-
+      status:
+        change: "change"

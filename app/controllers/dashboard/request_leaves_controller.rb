@@ -1,5 +1,6 @@
 class Dashboard::RequestLeavesController < DashboardController
   load_and_authorize_resource class: RequestLeave.name
+  include ApplicationHelper
 
   def index
     @search = RequestLeave.ransack params[:q]
@@ -9,4 +10,19 @@ class Dashboard::RequestLeavesController < DashboardController
   end
 
   def new; end
+
+  def update
+    if @request_leave.update request_leave_params
+      redirect_to dashboard_request_leaves_url,
+        notice: flash_message(:update, RequestLeave)
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  def request_leave_params
+    params.require(:request_leave).permit RequestLeave::ATTR_PARAMS
+  end
 end

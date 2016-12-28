@@ -48,7 +48,7 @@ end
 group :test do
   gem "rspec-rails", "~> 3.4"
   gem "rspec-collection_matchers"
-  gem "shoulda-matchers", "~> 3.0", require: false
+  gem "shoulda-matchers", "~> 3.0"
   gem "database_cleaner", "~> 1.5"
   gem "rubocop", require: false
   gem "rubocop-checkstyle_formatter", require: false

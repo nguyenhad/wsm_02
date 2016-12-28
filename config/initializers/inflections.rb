@@ -17,4 +17,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular "leave", "leaves"
+  inflect.irregular "request_leave", "request_leaves"
 end

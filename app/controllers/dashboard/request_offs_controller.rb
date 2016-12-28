@@ -1,6 +1,5 @@
 class Dashboard::RequestOffsController < DashboardController
   load_and_authorize_resource class: RequestOff.name
-  include ApplicationHelper
 
   def index
     @search = RequestOff.ransack params[:q]

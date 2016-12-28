@@ -164,18 +164,22 @@ ActiveRecord::Schema.define(version: 20161226065543) do
   end
 
   create_table "personal_issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "division_name"
     t.string   "phone_number"
     t.string   "address_contact"
     t.datetime "off_no_salary_from"
     t.datetime "off_no_salary_to"
+    t.integer  "in_time",            default: 1
+    t.integer  "unit"
     t.string   "reason"
     t.integer  "user_id"
     t.integer  "company_id"
     t.integer  "user_handover"
     t.string   "part_handover"
     t.string   "work_handover"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["user_id", "company_id"], name: "index_personal_issues_on_user_id_and_company_id", using: :btree
   end
 
   create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

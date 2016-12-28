@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   serialization_scope :view_context
   protect_from_forgery with: :exception
 
+  include ApplicationHelper
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_time_zone, if: :current_user
 

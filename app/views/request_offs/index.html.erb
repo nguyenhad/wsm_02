@@ -1,26 +1,22 @@
 <% provide :title, t("request_offs.index.title") %>
 
-<div class="request-offs">
-  <div class="row">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th><%= t "index" %></th>
-          <th><%= t "created_at" %></th>
-          <th><%= t "time_off_from" %></th>
-          <th><%= t "time_off_to" %></th>
-          <th><%= t "reason" %></th>
-          <th><%= t "status" %></th>
-          <th><%= t "action" %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render(partial: "request_off", collection: @request_offs) || t(".no_request_off_displayed") %>
-      </tbody>
-    </table>
-    <center><%= paginate @request_offs %></center>
-  </div>
-</div>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th><%= t "index" %></th>
+      <th><%= t "created_at" %></th>
+      <th><%= t "time_off_from" %></th>
+      <th><%= t "time_off_to" %></th>
+      <th><%= t "reason" %></th>
+      <th><%= t "status" %></th>
+      <th><%= t "action" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(partial: "request_off", collection: @request_offs) || t(".no_request_off_displayed") %>
+  </tbody>
+</table>
+<center><%= paginate @request_offs %></center>
 
 <%= link_to t(".new", default: t("helpers.links.new")),
   new_request_off_path,

@@ -1,1 +1,21 @@
-index.html.erb
+<% provide :title, t("personal_issues.index.title") %>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th><%= t "index" %></th>
+      <th><%= t "time_off_from" %></th>
+      <th><%= t "time_off_to" %></th>
+      <th><%= t "reason" %></th>
+      <th><%= t "action" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "personal_issue", collection: @personal_issues %>
+  </tbody>
+</table>
+<center><%= paginate @personal_issues %></center>
+
+<%= link_to t(".new", default: t("helpers.links.new")),
+  new_dashboard_personal_issue_path,
+  class: "btn btn-primary" %>

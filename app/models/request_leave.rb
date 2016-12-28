@@ -33,4 +33,12 @@ class RequestLeave < ApplicationRecord
   def time_leave
     ((compensation.to - compensation.from) / 60).round
   end
+
+  after_update :update_remaining_time_of_user_leave, if: :approve?
+
+  private
+
+  def update_remaining_time_of_user_leave
+    TrackingTime.new(self).update_remaining_time_of_user_leave
+  end
 end

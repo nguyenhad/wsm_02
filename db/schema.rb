@@ -369,6 +369,8 @@ ActiveRecord::Schema.define(version: 20161226065543) do
 
   create_table "user_leaves", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.float    "remain",     limit: 24
+    t.integer  "month"
+    t.integer  "year"
     t.datetime "deleted_at"
     t.integer  "user_id"
     t.datetime "created_at",            null: false

@@ -1,0 +1,14 @@
+en:
+  dashboard:
+    whitelist:
+      index:
+        add_employee: "Add Employee"
+        list_employee: "List Employee"
+        find_whitelist_fail: "Can not find your whitelist"
+        whitelist_users: "WhiteList Users"
+      destroy:
+        delete_success: "Delete Success"
+        delete_fail: "Can not delete employee"
+      update:
+        update_success: "Update whitelist success"
+        update_fail: "Can not update whitelist"

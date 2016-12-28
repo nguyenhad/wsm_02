@@ -29,7 +29,6 @@ class User < ApplicationRecord
   has_many :request_offs
   has_many :request_leaves, class_name: RequestLeave.name
   has_many :personal_issues
-  has_many :while_lists
 
   has_one :location
 
@@ -45,6 +44,8 @@ class User < ApplicationRecord
 
   scope :recent, ->{order created_at: :desc}
   scope :load_by_company, ->(company_id){where company_id: company_id}
+  scope :of_ids, ->ids{where id: ids}
+  scope :without_ids, ->ids{where.not id: ids}
 
   def is_user? user
     id == user.id

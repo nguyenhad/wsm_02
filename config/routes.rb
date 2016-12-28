@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :set_users, only: :create
     resources :companies
     resources :personal_issues
+    resources :white_lists, only: [:index, :update, :destroy]
   end
   resources :request_offs
   resources :request_leaves

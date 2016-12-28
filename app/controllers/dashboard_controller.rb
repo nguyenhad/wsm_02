@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
-  # before_action :load_workspace
-  # before_action :verify_owner
+  before_action :authenticate_manager!
 
   layout "dashboard"
 
@@ -14,8 +13,8 @@ class DashboardController < ApplicationController
     redirect_to root_path
   end
 
-  def verify_owner
-    return if current_user.is_owner? @workspace
+  def verify_owner_workspace
+    return if current_user.is_owner_workspace? @workspace
     flash[:danger] = t "dashboard.workspaces.unauthorized"
     redirect_to root_path
   end

@@ -6,22 +6,20 @@ namespace :db do
     if Rails.env.production?
       puts "Not running in 'Production' task"
     else
-      %w(db:drop db:create db:migrate db:seed db:test:prepare).each do |task|
+      %w(db:drop db:create db:migrate db:test:prepare).each do |task|
         Rake::Task[task].invoke
       end
 
-      puts "create companies"
-      Company.create!(
-        [
-          {name: "Framgia Viet Nam",
-           parent_id: 1,
-           status: 1},
 
-          {name: "Framgia Ha Noi",
-           parent_id: 0,
-           status: 1}
-        ]
-      )
+      puts "create companies"
+      company = Company.create!(name: "Framgia Viet Nam", status: 1)
+      manager_fr = User.create!({name: "Manager Framgia VN",
+                                 company_id: company.id,
+                                 employee_code: "B100000",
+                                 role: 1,
+                                 email: "manager@framgia.com",
+                                 password: "123456"})
+      company.update!(owner: manager_fr)
 
       puts "create users"
       [
@@ -38,12 +36,11 @@ namespace :db do
         "Nguyen Binh Dieu",
         "Hoang Nhac Trung",
         "Chu Anh Tuan",
-        "Doan Thi Phuong Thao",
-        "Nguyen Van Dat"
+        "Doan Thi Phuong Thao"
       ].each do |name|
         FactoryGirl.create :user, name: name,
           email: "#{name.split(' ').join('.').downcase}@framgia.com",
-          company: Company.first
+          company: company
       end
 
       FactoryGirl.create(:manager)
@@ -165,25 +162,6 @@ namespace :db do
       )
     end
 
-    puts "create positions"
-    Position.create!([{name: "CEO",
-                       description: "ceo"},
-
-      {name: "DivisonManager",
-       description: "dm"},
-
-      {name: "SectionManager",
-       description: "sm"},
-
-      {name: "GroupLeader",
-       description: "gl"},
-
-      {name: "Leader",
-       description: "l"},
-
-      {name: "Staff",
-       description: "s"}])
-
     puts "create request_offs"
     RequestOff.create!([
      {phone_number: "01255060994",
@@ -257,119 +235,19 @@ namespace :db do
       user_id: 3}
     ])
 
-
-    User.update_all company_id: Company.first.id
-
-    puts "create companies"
-    Company.create!(
-      [{name: "Framgia Toong",
-       parent_id: 7,
-       status: 1},
-
-      {name: "Framgia TKC",
-       parent_id: 7,
-       status: 1},
-
-      {name: "Framgia HCM",
-       parent_id: 7,
-       status: 1},
-
-      {name: "Framgia DN",
-       parent_id: 7,
-       status: 1},
-
-      {name: "Framgia HN",
-       parent_id: nil,
-       status: 1}]
-    )
-
-    company_hn = Company.find_by name: "Framgia HN"
-    company_toong = Company.find_by name: "Framgia Toong"
-    company_tkc = Company.find_by name: "Framgia TKC"
-    company_hcm = Company.find_by name: "Framgia HCM"
-    company_dn = Company.find_by name: "Framgia DN"
-
-    day_month_year = "%d/%m/%Y"
-    month_day_year = "%m/%d/%Y"
-
-    optional_title_hn = {date: "Date", time_in: "Clock In", time_out: "Clock Out",
-                         employee_code: "No.", key: "employee_code"}
-    optional_serial_hn = {date: 6, time_in: 10, time_out: 11,
-                          employee_code: 3, key: "employee_code"}
-
-    optional_title_toong = {date: "Ngày QT", time_in: "Giờ vào",
-                            time_out: "Giờ ra", name: "Họ và Tên", key: "name"}
-    optional_serial_toong = {date: 2, time_in: 6, time_out: 7,
-                             name: 4, key: "name"}
-
-    optional_title_hcm = {date: "Ngày", time_in: "Giờ vào", time_out: "Giờ ra",
-                          employee_code: "Mã NV", key: "employee_code"}
-    optional_serial_hcm = {date: 5, time_in: 7, time_out: 8,
-                           employee_code: 2, key: "employee_code"}
-
-    optional_title_dn = {date: "NGÀY TRONG THÁNG", employee_code: "MÃ NHÂN VIÊN",
-                         key: "employee_code"}
-    optional_serial_dn = {date: 5, employee_code: 2, key: "employee_code"}
-
-    puts "create company_settings"
-    Company.all.each do |company|
-      CompanySetting.create!(
-        company_id: company.id,
-        cutoff_date: 5,
-        timezone: "Hanoi"
-      )
-      Shift.create company_id: company.id, time_in: "7:45", time_out: "16:45"
-    end
-
-    puts "create timesheet_setting"
-    TimesheetSetting.create!(
-      [{layout_type: 1,
-        value_type: 1,
-        optional_settings: optional_serial_hn,
-        start_row_data: 2,
-        date_format_type: month_day_year,
-        company_id: company_hn.id},
-
-        {layout_type: 1,
-         value_type: 1,
-         optional_settings: optional_serial_toong,
-         start_row_data: 10,
-         date_format_type: month_day_year,
-         company_id: company_toong.id},
-
-        {layout_type: 1,
-         value_type: 1,
-         optional_settings: optional_serial_hn,
-         start_row_data: 2,
-         date_format_type: day_month_year,
-         company_id: company_tkc.id},
-
-        {layout_type: 1,
-         value_type: 1,
-         optional_settings: optional_serial_hcm,
-         start_row_data: 4,
-         date_format_type: day_month_year,
-         company_id: company_hcm.id},
-
-        {layout_type: 0,
-         value_type: 1,
-         optional_settings: optional_serial_dn,
-         start_row_data: 9,
-         date_format_type: day_month_year,
-         company_id: company_dn.id}]
-    )
-
     puts "create user manager of Framgia Ha Noi"
     User.create!([
-     {name: "Manager Framgia HN",
-      employee_code: "B100001",
-      gender: 0,
-      birthday: "1990-01-01",
-      role: 1,
-      email: "manager.hn@framgia.com",
-      password: "123456"},
+                   {name: "Manager Framgia HN",
+                    company_id: company.id,
+                    employee_code: "B100001",
+                    gender: 0,
+                    birthday: "1990-01-01",
+                    role: 1,
+                    email: "manager.hn@framgia.com",
+                    password: "123456"},
 
       {name: "User1 Framgia HN",
+       company_id: company.id,
        employee_code: "B100002",
        gender: 0,
        birthday: "1990-02-02",
@@ -378,6 +256,7 @@ namespace :db do
        password: "123456"},
 
       {name: "User2 Framgia HN",
+       company_id: company.id,
        employee_code: "B100003",
        gender: 0,
        birthday: "1990-03-03",
@@ -393,10 +272,11 @@ namespace :db do
        gender: 0,
        birthday: "1990-01-01",
        role: 1,
-       email: "manager@toong.com",
+       email: "manager.toong@framgia.com",
        password: "123456"},
 
       {name: "Nguyễn Huy Hùng",
+       company_id: company.id,
        employee_code: "B200002",
        gender: 0,
        birthday: "1990-02-02",
@@ -405,6 +285,7 @@ namespace :db do
        password: "123456"},
 
       {name: "Nguyễn Thị Phương",
+       company_id: company.id,
        employee_code: "B200003",
        gender: 0,
        birthday: "1990-03-03",
@@ -420,10 +301,11 @@ namespace :db do
       gender: 0,
       birthday: "1990-01-01",
       role: 1,
-      email: "manager@tkc.com",
+      email: "manager.tkc@framgia.com",
       password: "123456"},
 
       {name: "TrungNT",
+       company_id: company.id,
        employee_code: "B300002",
        gender: 0,
        birthday: "1990-02-02",
@@ -432,6 +314,7 @@ namespace :db do
        password: "123456"},
 
       {name: "HaTD",
+       company_id: company.id,
        employee_code: "B300003",
        gender: 0,
        birthday: "1990-03-03",
@@ -447,10 +330,11 @@ namespace :db do
       gender: 0,
       birthday: "1990-01-01",
       role: 1,
-      email: "manager@hcm.com",
+      email: "manager.hcm@framgia.com",
       password: "123456"},
 
       {name: "TrungNT",
+       company_id: company.id,
        employee_code: "B400002",
        gender: 0,
        birthday: "1990-02-02",
@@ -459,6 +343,7 @@ namespace :db do
        password: "123456"},
 
       {name: "HaTD",
+       company_id: company.id,
        employee_code: "B400003",
        gender: 0,
        birthday: "1990-03-03",
@@ -470,14 +355,16 @@ namespace :db do
     puts "create user manager of Framgia DN"
     User.create!([
      {name: "Le Thi Hong Thuy",
+      company_id: company.id,
       employee_code: "B500001",
       gender: 0,
       birthday: "1990-01-01",
       role: 1,
-      email: "manager@dn.com",
+      email: "manager.dn@framgia.com",
       password: "123456"},
 
      {name: "Pham Manh Hieu",
+      company_id: company.id,
       employee_code: "B500002",
       gender: 0,
       birthday: "1990-02-02",
@@ -486,6 +373,7 @@ namespace :db do
       password: "123456"},
 
      {name: "Nguyen Thi Quynh Mai",
+      company_id: company.id,
       employee_code: "B500003",
       gender: 0,
       birthday: "1990-03-03",
@@ -494,42 +382,53 @@ namespace :db do
       password: "123456"}
     ])
 
-    User.update_all company_id: Company.first.id
-    user = User.first
+    manager_hn = User.find_by(email: "manager.hn@framgia.com") || company.owner
+    manager_hcm = User.find_by(email: "manager.hcm@framgia.com") || company.owner
+    manager_dn = User.find_by(email: "manager.dn@framgia.com") || company.owner
+    manager_toong = User.find_by(email: "manager.toong@framgia.com") || company.owner
+    manager_tkc = User.find_by(email: "manager.tkc@framgia.com") || company.owner
+    manager_shibuya = User.find_by(email: "manager.shibuya@framgia.com") || company.owner
 
     puts "create workspaces"
-    Workspace.create!(
+    company.workspaces.create!(
       [{name: "Toong Office",
-        description: "Toong Office" ,
-        user_id: user.id,
-        company_id: 1},
+       description: "Toong Office",
+       owner: manager_toong,
+       status: 1},
 
       {name: "Tran Khat Chan",
-        description: "Tran Khat Chan" ,
-        user_id: user.id,
-        company_id: 1},
+       description: "Tran Khat Chan",
+       owner: manager_tkc,
+       status: 1},
 
       {name: "HCMC Office",
-        description: "HCMC Office" ,
-        user_id: user.id,
-        company_id: 1},
+       description: "HCMC Office",
+       owner: manager_hcm,
+       status: 1},
 
       {name: "Da Nang Office",
-        description: "Da Nang Office",
-        user_id: user.id,
-        company_id: 1},
+       description: "Da Nang Office",
+       owner: manager_dn,
+       status: 1},
+
+      {name: "Shibuya Office",
+       description: "Shibuya Office",
+       owner: manager_shibuya,
+       status: 1},
 
       {name: "Hanoi Office",
-        description: "Hanoi Office",
-        user_id: user.id,
-        company_id: 1}]
+       description: "Hanoi Office",
+       owner: manager_hn,
+       status: 1}]
     )
 
-    workspace_hn = Workspace.find_by name: "Hanoi Office"
-    workspace_toong = Workspace.find_by name: "Toong Office"
-    workspace_tkc = Workspace.find_by name: "Tran Khat Chan"
-    workspace_hcm = Workspace.find_by name: "HCMC Office"
-    workspace_dn = Workspace.find_by name: "Da Nang Office"
+    hn_office = Workspace.find_by name: "Hanoi Office"
+    toong_office = Workspace.find_by name: "Toong Office"
+    tkc_office = Workspace.find_by name: "Tran Khat Chan"
+    hcm_office = Workspace.find_by name: "HCMC Office"
+    dn_office = Workspace.find_by name: "Da Nang Office"
+
+    User.update_all company_id: company.id
 
     day_month_year = "%d/%m/%Y"
     month_day_year = "%m/%d/%Y"
@@ -562,7 +461,7 @@ namespace :db do
         end_date: "2016-12-25",
         start_row_data: 2,
         date_format_type: month_day_year,
-        workspace_id: workspace_hn.id},
+        workspace_id: hn_office.id},
 
         {layout_type: 1,
          value_type: 1,
@@ -571,7 +470,7 @@ namespace :db do
          end_date: "2016-12-25",
          start_row_data: 10,
          date_format_type: month_day_year,
-         workspace_id: workspace_toong.id},
+         workspace_id: toong_office.id},
 
         {layout_type: 1,
          value_type: 1,
@@ -580,7 +479,7 @@ namespace :db do
          end_date: "2016-12-25",
          start_row_data: 2,
          date_format_type: day_month_year,
-         workspace_id: workspace_tkc.id},
+         workspace_id: tkc_office.id},
 
         {layout_type: 1,
          value_type: 1,
@@ -589,7 +488,7 @@ namespace :db do
          end_date: "2016-12-25",
          start_row_data: 4,
          date_format_type: day_month_year,
-         workspace_id: workspace_hcm.id},
+         workspace_id: hcm_office.id},
 
         {layout_type: 0,
          value_type: 1,
@@ -598,10 +497,18 @@ namespace :db do
          end_date: "2016-12-14",
          start_row_data: 9,
          date_format_type: day_month_year,
-         workspace_id: workspace_dn.id}]
+         workspace_id: dn_office.id}]
     )
 
-
+    puts "create company_settings"
+    Company.all.each do |company|
+      CompanySetting.create!(
+        company_id: company.id,
+        cutoff_date: 5,
+        timezone: "Hanoi"
+      )
+      Shift.create company_id: company.id, time_in: "7:45", time_out: "16:45"
+    end
 
     puts "create request_leaves"
     RequestLeave.create!([
@@ -632,66 +539,66 @@ namespace :db do
 
     puts("create user_workspaces Hanoi Office")
     UserWorkspace.create!([
-      {workspace_id: workspace_hn.id,
+      {workspace_id: hn_office.id,
       user_id: User.find_by(employee_code: "B100001").id,
       is_manager: true},
 
-      {workspace_id: workspace_hn.id,
+      {workspace_id: hn_office.id,
       user_id: User.find_by(employee_code: "B100002").id},
 
-      {workspace_id: workspace_hn.id,
+      {workspace_id: hn_office.id,
       user_id: User.find_by(employee_code: "B100003").id},
     ])
 
     puts("create user_workspaces Toong Office")
     UserWorkspace.create!([
-      {workspace_id: workspace_toong.id,
+      {workspace_id: toong_office.id,
       user_id: User.find_by(employee_code: "B200001").id,
       is_manager: true},
 
-      {workspace_id: workspace_toong.id,
+      {workspace_id: toong_office.id,
       user_id: User.find_by(employee_code: "B200002").id},
 
-      {workspace_id: workspace_toong.id,
+      {workspace_id: toong_office.id,
       user_id: User.find_by(employee_code: "B200003").id},
     ])
 
     puts("create user_workspaces Tran Khat Chan")
     UserWorkspace.create!([
-      {workspace_id: workspace_tkc.id,
+      {workspace_id: tkc_office.id,
       user_id: User.find_by(employee_code: "B300001").id,
       is_manager: true},
 
-      {workspace_id: workspace_tkc.id,
+      {workspace_id: tkc_office.id,
       user_id: User.find_by(employee_code: "B300002").id},
 
-      {workspace_id: workspace_tkc.id,
+      {workspace_id: tkc_office.id,
       user_id: User.find_by(employee_code: "B300003").id},
     ])
 
     puts("create user_workspaces HCMC Office")
     UserWorkspace.create!([
-      {workspace_id: workspace_hcm.id,
+      {workspace_id: hcm_office.id,
       user_id: User.find_by(employee_code: "B400001").id,
       is_manager: true},
 
-      {workspace_id: workspace_hcm.id,
+      {workspace_id: hcm_office.id,
       user_id: User.find_by(employee_code: "B400002").id},
 
-      {workspace_id: workspace_hcm.id,
+      {workspace_id: hcm_office.id,
       user_id: User.find_by(employee_code: "B400003").id},
     ])
 
     puts("create user_workspaces Da Nang Office")
     UserWorkspace.create!([
-      {workspace_id: workspace_dn.id,
+      {workspace_id: dn_office.id,
       user_id: User.find_by(employee_code: "B500001").id,
       is_manager: true},
 
-      {workspace_id: workspace_dn.id,
+      {workspace_id: dn_office.id,
       user_id: User.find_by(employee_code: "B500002").id},
 
-      {workspace_id: workspace_dn.id,
+      {workspace_id: dn_office.id,
       user_id: User.find_by(employee_code: "B500003").id},
     ])
 

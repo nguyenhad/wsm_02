@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for resource
-    if resource.manager?
+    if resource.is_manager?
       dashboard_root_path
     else
       request_offs_path
@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_manager!
-    return if current_user.manager?
+    return if current_user.is_manager?
     flash[:warning] = t "you_do_not_have_access"
     redirect_to :back
   end

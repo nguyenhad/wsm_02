@@ -4,6 +4,7 @@ class CreateCompanies < ActiveRecord::Migration[5.0]
       t.string :name
       t.integer :parent_id
       t.integer :status, default: 1
+      t.integer :owner_id
       t.datetime :deleted_at
 
       t.timestamps

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
-    root "users#index"
+    root "set_timesheets#index"
     resources :workspaces do
       resources :time_sheets, only: :index
       resources :timesheet_settings, except: :destroy

@@ -50,8 +50,16 @@ class User < ApplicationRecord
     id == user.id
   end
 
-  def is_owner? workspace
-    id == workspace.user_id
+  def is_manager?
+    is_owner? || is_owner_workspace?
+  end
+
+  def is_owner?
+    id == company.owner_id if company.present?
+  end
+
+  def is_owner_workspace?
+    workspaces.pluck(:user_id).include? id
   end
 
   class << self

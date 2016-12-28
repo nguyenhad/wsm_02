@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_time_zone, if: :current_user
+  before_action :set_time_zone, if: :user_signed_in?
+  before_action :load_company, if: :user_signed_in?
 
   rescue_from CanCan::AccessDenied do
     render file: "#{Rails.root}/public/404.html", status: 404, layout: false
@@ -18,6 +19,10 @@ class ApplicationController < ActionController::Base
   def set_time_zone
     session[:timezone] = current_user.company.company_setting_timezone
     Time.zone = ActiveSupport::TimeZone[session[:timezone]] if session[:timezone]
+  end
+
+  def load_company
+    @company ||= current_user.company
   end
 
   protected

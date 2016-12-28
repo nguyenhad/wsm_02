@@ -4,9 +4,12 @@ class CreateLeaveTypes < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :description
       t.string :code
+      t.integer :company_id
       t.datetime :deleted_at
 
       t.timestamps
     end
+
+    add_index :leave_types, :company_id
   end
 end

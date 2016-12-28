@@ -16,7 +16,7 @@
 
   <div class="form-group">
     <%= label_tag t("request_form.content.branch") %>
-    <%= select_tag "credit_card", options_for_select([ 1, 2 ], 3),
+    <%= select_tag :workspace, options_for_select([ 1, 2 ], 3),
       class: "form-control" %>
   </div>
 
@@ -27,7 +27,7 @@
 
   <div class="form-group">
     <%= label_tag t("request_form.content.section") %>
-    <%= select_tag :division, nil, class: "form-control" %>
+    <%= select_tag :section, nil, class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -51,7 +51,9 @@
     <div class="notice-text">
       <%= t("request_form.content.example_kinds") %>
     </div>
-    <%= select_tag :leave_kinds, options_for_select([ "IL", "LE" ], "IL"),
+    <%= f.select :leave_type_id,
+      options_for_select(@leave_types, @request_leave.leave_type_id),
+      {},
       class: "form-control" %>
   </div>
 
@@ -60,12 +62,15 @@
     <div class="notice-text">
       <%= t("request_form.content.example_time") %>
     </div>
-    <%= select_tag :leave_time, nil, class: "form-control" %>
+    <%= f.select :leave_setting_id,
+      options_for_select(@leave_settings, @request_leave.leave_setting_id),
+      {},
+      class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= label_tag t("request_form.content.leave_reason") %>
-    <%= text_area_tag :leave_reason, nil, class: "form-control" %>
+    <%= f.text_area :reason, class: "form-control", rows: 5 %>
   </div>
 
   <%= f.fields_for :compensation do |ff| %>
@@ -73,16 +78,17 @@
     <div class="notice-text">
       <%= t("request_form.content.example_compensation") %>
     </div>
+
     <div class="form-group">
-      <%= label_tag t("request_form.compensation.from") %>
+      <%= ff.label :from %>
       <%= ff.datetime_local_field :from, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= label_tag t("request_form.compensation.to") %>
+      <%= ff.label :to %>
       <%= ff.datetime_local_field :to, class: "form-control" %>
     </div>
   <% end %>
 
-  <%= f.submit :save %>
+  <%= f.submit :save, class: "btn btn-primary" %>
 <% end %>

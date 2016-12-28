@@ -25,4 +25,12 @@ class RequestOff < ApplicationRecord
     :status,
     :approver_id
   ].freeze
+
+  after_update :update_remaining_time_of_user_dayoffs, if: :approve?
+
+  private
+
+  def update_remaining_time_of_user_dayoffs
+    TrackingTime.new(self).update_remaining_time_of_user_dayoffs
+  end
 end

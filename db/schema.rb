@@ -344,7 +344,7 @@ ActiveRecord::Schema.define(version: 20161226065543) do
   create_table "user_dayoffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.integer  "special_dayoff_type_id"
-    t.date     "init_date"
+    t.integer  "year"
     t.float    "remain",                 limit: 24
     t.datetime "deleted_at"
     t.datetime "created_at",                        null: false

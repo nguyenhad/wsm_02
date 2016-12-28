@@ -65,3 +65,4 @@ format_date_type:
   yyyy/dd/mm: "%Y/%d%/%m"
   yyyy-mm-dd: "%Y-%m%-%d"
   yyyy-dd-mm: "%Y-%d%-%m"
+seconds_in_day: 86400

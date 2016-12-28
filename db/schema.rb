@@ -93,9 +93,11 @@ ActiveRecord::Schema.define(version: 20161226065543) do
     t.string   "name"
     t.string   "description"
     t.string   "code"
+    t.integer  "company_id"
     t.datetime "deleted_at"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["company_id"], name: "index_leave_types_on_company_id", using: :btree
   end
 
   create_table "location_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -168,14 +170,14 @@ ActiveRecord::Schema.define(version: 20161226065543) do
     t.string   "division_name"
     t.string   "phone_number"
     t.string   "address_contact"
-    t.datetime "off_no_salary_from"
-    t.datetime "off_no_salary_to"
+    t.date     "off_no_salary_from"
+    t.date     "off_no_salary_to"
     t.integer  "in_time",            default: 1
     t.integer  "unit"
     t.string   "reason"
     t.integer  "user_id"
     t.integer  "company_id"
-    t.integer  "user_handover"
+    t.string   "user_handover"
     t.string   "part_handover"
     t.string   "work_handover"
     t.datetime "created_at",                     null: false
@@ -214,15 +216,16 @@ ActiveRecord::Schema.define(version: 20161226065543) do
     t.datetime "leave_from"
     t.datetime "leave_to"
     t.string   "reason"
-    t.integer  "status",        default: 0
+    t.integer  "status",           default: 0
     t.integer  "approver_id"
     t.integer  "leave_type_id"
+    t.integer  "leave_setting_id"
     t.integer  "user_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["approver_id"], name: "index_request_leaves_on_approver_id", using: :btree
-    t.index ["leave_type_id"], name: "index_request_leaves_on_leave_type_id", using: :btree
+    t.index ["leave_type_id", "leave_setting_id"], name: "index_request_leaves_on_leave_type_id_and_leave_setting_id", using: :btree
     t.index ["user_id"], name: "index_request_leaves_on_user_id", using: :btree
   end
 
@@ -448,8 +451,6 @@ ActiveRecord::Schema.define(version: 20161226065543) do
   add_foreign_key "ot_settings", "companies"
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
-  add_foreign_key "request_leaves", "leave_types"
-  add_foreign_key "request_leaves", "users"
   add_foreign_key "request_offs", "special_dayoff_settings"
   add_foreign_key "request_offs", "special_dayoff_types"
   add_foreign_key "request_offs", "users"

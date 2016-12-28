@@ -10,6 +10,8 @@ class Dashboard::RequestLeavesController < DashboardController
 
   def new
     @request_leave.build_compensation
+    @leave_types = @company.leave_types.pluck :id, :name
+    @leave_settings = @company.leave_settings.map{|leave| [leave.id, leave.name]}
   end
 
   def update

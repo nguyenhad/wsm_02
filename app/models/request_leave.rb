@@ -7,6 +7,7 @@ class RequestLeave < ApplicationRecord
 
   belongs_to :approver, class_name: User.name
   belongs_to :leave_type
+  belongs_to :leave_setting
   belongs_to :user
 
   delegate :name, to: :leave_type, prefix: true
@@ -17,9 +18,19 @@ class RequestLeave < ApplicationRecord
 
   accepts_nested_attributes_for :compensation
 
+  ATTR_PARAMS = [
+    :leave_from,
+    :leave_to,
+    :reason,
+    :user_id,
+    :leave_type_id,
+    :leave_setting_id,
+    :status,
+    :approver_id,
+    compensation_attributes: [:id, :from, :to, :status]
+  ].freeze
+
   def time_leave
     ((compensation.to - compensation.from) / 60).round
   end
-
-  ATTR_PARAMS = [:status, :approver_id].freeze
 end

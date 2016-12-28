@@ -4,13 +4,15 @@ class Company < ApplicationRecord
   has_many :users, foreign_key: :company_id
   has_many :holidays
   has_many :dayoff_settings
-  has_many :workspaces
+  has_many :leave_types
+  has_many :leave_settings
+  has_many :holidays
   has_many :white_lists
+  has_many :workspaces
 
-  has_one :ot_setting
-  has_one :leave_setting
-  has_one :shift
   has_one :company_setting
+  has_one :ot_setting
+  has_one :shift
 
   belongs_to :owner, class_name: User.name
 

@@ -3,4 +3,8 @@ class LeaveSetting < ApplicationRecord
 
   belongs_to :company
   has_many :leave_types
+
+  def name
+    [amount, unit].join(" ")
+  end
 end

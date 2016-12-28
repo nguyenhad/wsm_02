@@ -1,11 +1,12 @@
 class LeaveType < ApplicationRecord
+  acts_as_paranoid
+
   LEAVE_CODES = {
     inlate: "IL",
     leave_out: "LO",
     leave_early: "LE",
     inlate_afternoon: "IL(A)"
   }.freeze
-  acts_as_paranoid
 
   has_many :request_leaves, class_name: RequestLeave.name
   has_one :compensation

@@ -10,6 +10,19 @@ namespace :db do
         Rake::Task[task].invoke
       end
 
+      puts "create companies"
+      Company.create!(
+        [
+          {name: "Framgia Viet Nam",
+           parent_id: 1,
+           status: 1},
+
+          {name: "Framgia Ha Noi",
+           parent_id: 0,
+           status: 1}
+        ]
+      )
+
       puts "create users"
       [
         "Nguyen Van Tran Anh B",
@@ -242,6 +255,108 @@ namespace :db do
       reason: "Tired",
       user_id: 3}
     ])
+
+
+    User.update_all company_id: Company.first.id
+
+    puts "create companies"
+    Company.create!(
+      [{name: "Framgia Toong",
+       parent_id: 7,
+       status: 1},
+
+      {name: "Framgia TKC",
+       parent_id: 7,
+       status: 1},
+
+      {name: "Framgia HCM",
+       parent_id: 7,
+       status: 1},
+
+      {name: "Framgia DN",
+       parent_id: 7,
+       status: 1},
+
+      {name: "Framgia HN",
+       parent_id: nil,
+       status: 1}]
+    )
+
+    company_hn = Company.find_by name: "Framgia HN"
+    company_toong = Company.find_by name: "Framgia Toong"
+    company_tkc = Company.find_by name: "Framgia TKC"
+    company_hcm = Company.find_by name: "Framgia HCM"
+    company_dn = Company.find_by name: "Framgia DN"
+
+    day_month_year = "%d/%m/%Y"
+    month_day_year = "%m/%d/%Y"
+
+    optional_title_hn = {date: "Date", time_in: "Clock In", time_out: "Clock Out",
+                         employee_code: "No.", key: "employee_code"}
+    optional_serial_hn = {date: 6, time_in: 10, time_out: 11,
+                          employee_code: 3, key: "employee_code"}
+
+    optional_title_toong = {date: "Ngày QT", time_in: "Giờ vào",
+                            time_out: "Giờ ra", name: "Họ và Tên", key: "name"}
+    optional_serial_toong = {date: 2, time_in: 6, time_out: 7,
+                             name: 4, key: "name"}
+
+    optional_title_hcm = {date: "Ngày", time_in: "Giờ vào", time_out: "Giờ ra",
+                          employee_code: "Mã NV", key: "employee_code"}
+    optional_serial_hcm = {date: 5, time_in: 7, time_out: 8,
+                           employee_code: 2, key: "employee_code"}
+
+    optional_title_dn = {date: "NGÀY TRONG THÁNG", employee_code: "MÃ NHÂN VIÊN",
+                         key: "employee_code"}
+    optional_serial_dn = {date: 5, employee_code: 2, key: "employee_code"}
+
+    puts "create company_settings"
+    Company.all.each do |company|
+      CompanySetting.create!(
+        company_id: company.id,
+        cutoff_date: 5,
+        timezone: "Hanoi"
+      )
+      Shift.create company_id: company.id, time_in: "7:45", time_out: "16:45"
+    end
+
+    puts "create timesheet_setting"
+    TimesheetSetting.create!(
+      [{layout_type: 1,
+        value_type: 1,
+        optional_settings: optional_serial_hn,
+        start_row_data: 2,
+        date_format_type: month_day_year,
+        company_id: company_hn.id},
+
+        {layout_type: 1,
+         value_type: 1,
+         optional_settings: optional_serial_toong,
+         start_row_data: 10,
+         date_format_type: month_day_year,
+         company_id: company_toong.id},
+
+        {layout_type: 1,
+         value_type: 1,
+         optional_settings: optional_serial_hn,
+         start_row_data: 2,
+         date_format_type: day_month_year,
+         company_id: company_tkc.id},
+
+        {layout_type: 1,
+         value_type: 1,
+         optional_settings: optional_serial_hcm,
+         start_row_data: 4,
+         date_format_type: day_month_year,
+         company_id: company_hcm.id},
+
+        {layout_type: 0,
+         value_type: 1,
+         optional_settings: optional_serial_dn,
+         start_row_data: 9,
+         date_format_type: day_month_year,
+         company_id: company_dn.id}]
+    )
 
     puts "create user manager of Framgia Ha Noi"
     User.create!([
@@ -485,15 +600,7 @@ namespace :db do
          workspace_id: workspace_dn.id}]
     )
 
-    puts "create company_settings"
-    Company.all.each do |company|
-      CompanySetting.create!(
-        company_id: company.id,
-        cutoff_date: 5,
-        timezone: "Hanoi"
-      )
-      Shift.create company_id: company.id, time_in: "7:45", time_out: "16:45"
-    end
+
 
     puts "create request_leaves"
     RequestLeave.create!([

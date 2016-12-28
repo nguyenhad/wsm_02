@@ -4,7 +4,6 @@ class Dashboard::UsersController < DashboardController
   before_action :load_company, only: [:new, :edit, :create]
 
   def index
-    User.random_password
     @users = User.includes(:company).recent.page(params[:page])
       .per Settings.per_page.dashboard.user
   end

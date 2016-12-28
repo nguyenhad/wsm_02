@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :dashboard do
     resources :workspaces do
       resources :time_sheets, only: :index
+      resources :timesheet_settings, except: :destroy
     end
     resources :set_timesheets, only: [:create, :index]
     resources :projects, except: :show

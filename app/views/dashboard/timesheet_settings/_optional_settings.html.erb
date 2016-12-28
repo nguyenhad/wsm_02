@@ -1,0 +1,26 @@
+<% TimesheetSetting::UNI_KEYS.each do |k, v| %>
+  <div class="form-group">
+    <%= optional_setting.label TimesheetSetting::UNI_KEYS[k],
+      id: TimesheetSetting::UNI_KEYS[k]+"_label",
+      class: "col-md-3 control-label" %>
+    <div class="col-md-5">
+      <%= optional_setting.text_field TimesheetSetting::UNI_KEYS[k],
+        value: @timesheet_setting.optional_settings[TimesheetSetting::UNI_KEYS[k]],
+        class: "form-control col-md-12" %>
+    </div>
+    <span class="validate_<%= TimesheetSetting::UNI_KEYS[k] %>">
+      <%= t "open_parenthesis" %>
+      <span class="color-red"><%= t "symbol_star" %></span>
+      <%= t "close_parenthesis" %>
+    </span>
+    <% if @timesheet_setting.optional_settings[:key] ==
+      TimesheetSetting::UNI_KEYS[k] %>
+      <%= optional_setting.radio_button :key,
+        TimesheetSetting::UNI_KEYS[k], checked: "checked", class: "key" %>
+    <% else %>
+      <%= optional_setting.radio_button :key,
+        TimesheetSetting::UNI_KEYS[k], class: "key" %>
+    <% end %>
+    <%= t "dashboard.form_timesheet_setting.unique" %>
+  </div>
+<% end %>

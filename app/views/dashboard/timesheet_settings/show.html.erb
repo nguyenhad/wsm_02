@@ -1,0 +1,90 @@
+<% provide :title,
+  t("dashboard.timesheet_settings.information_timesheet_settings") %>
+<div>
+  <div class="row container">
+    <div class="col-md-offset-2 col-md-8">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td><%= t "dashboard.form_timesheet_setting.workspace" %></td>
+            <td><%= @timesheet_setting.workspace.name %></td>
+          </tr>
+          <tr>
+            <td><%= t "dashboard.form_timesheet_setting.layout_type" %></td>
+            <td><%= @timesheet_setting.layout_type %></td>
+          </tr>
+          <tr>
+            <td><%= t "dashboard.form_timesheet_setting.value_type" %></td>
+            <td><%= @timesheet_setting.value_type %></td>
+          </tr>
+          <tr>
+            <td><%= t "dashboard.form_timesheet_setting.start_row_data" %></td>
+            <td><%= @timesheet_setting.start_row_data %></td>
+          </tr>
+          <tr>
+            <td><%= t "dashboard.form_timesheet_setting.unique" %></td>
+            <td><%= @timesheet_setting.optional_settings[:key] %></td>
+          </tr>
+          <tr>
+            <td>
+              <% if @timesheet_setting.title? %>
+                <%= t "dashboard.form_timesheet_setting.title_date" %>
+              <% else %>
+                <%= t "dashboard.form_timesheet_setting.col_date" %>
+              <% end %>
+            </td>
+            <td><%= @timesheet_setting.optional_settings[:date] %></td>
+          </tr>
+          <% if @timesheet_setting.optional_settings[:time_in] %>
+            <tr>
+              <td>
+                <% if @timesheet_setting.title? %>
+                  <%= t "dashboard.form_timesheet_setting.title_time_in" %>
+                <% else %>
+                  <%= t "dashboard.form_timesheet_setting.col_time_in" %>
+                <% end %>
+              </td>
+              <td><%= @timesheet_setting.optional_settings[:time_in] %></td>
+            </tr>
+          <% end %>
+          <% if @timesheet_setting.optional_settings[:time_out] %>
+            <tr>
+              <td>
+                <% if @timesheet_setting.title? %>
+                  <%= t "dashboard.form_timesheet_setting.title_time_out" %>
+                <% else %>
+                  <%= t "dashboard.form_timesheet_setting.col_time_out" %>
+                <% end %>
+              </td>
+              <td><%= @timesheet_setting.optional_settings[:time_out] %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td>
+              <% if @timesheet_setting.title? %>
+                <%= t "dashboard.form_timesheet_setting.title_employee_code" %>
+              <% else %>
+                <%= t "dashboard.form_timesheet_setting.col_employee_code" %>
+              <% end %>
+            </td>
+            <td>
+              <%= @timesheet_setting.optional_settings[:employee_code] %>
+            </td>
+          </tr>
+          <% if @timesheet_setting.optional_settings[:name] %>
+            <tr>
+              <td>
+                <% if @timesheet_setting.title? %>
+                  <%= t "dashboard.form_timesheet_setting.title_name" %>
+                <% else %>
+                  <%= t "dashboard.form_timesheet_setting.col_name" %>
+                <% end %>
+              </td>
+              <td><%= @timesheet_setting.optional_settings[:name] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

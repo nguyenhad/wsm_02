@@ -22,6 +22,7 @@ per_page:
     company_page: 10
     request_off: 5
     workspace: 10
+    workspace_timesheet: 6
     timesheet_setting: 10
   request_off: 5
 min_password: 6

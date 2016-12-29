@@ -1,5 +1,4 @@
 class TimesheetService
-
   def initialize timesheet, shift, company, leave_type
     @timesheet = timesheet
     @shift = shift
@@ -10,25 +9,28 @@ class TimesheetService
   end
 
   def timesheet_inlate?
-    if @timesheet.time_in.blank? || @timesheet.time_in > @shift.time_in
-      if holiday? @timesheet
-        false
-      end
-        !request_leave? @timesheet, LeaveType::LEAVE_CODES[:inlate]
+    if @timesheet.time_in.blank? ||
+       CustomCommon.convert_in_time_zone(@timesheet.time_in.in_time_zone) >
+       CustomCommon.convert_in_time_zone(@shift.time_in)
+      check_leave_type LeaveType::LEAVE_CODES[:inlate]
     else
       false
     end
   end
 
   def timesheet_early_leave?
-    if @timesheet.time_out.blank? || @timesheet.time_out < @shift.time_out
-      if holiday? @timesheet
-        false
-      end
-        !request_leave? @timesheet, LeaveType::LEAVE_CODES[:leave_early]
+    if @timesheet.time_out.blank? ||
+       CustomCommon.convert_in_time_zone(@timesheet.time_out.in_time_zone) <
+       CustomCommon.convert_in_time_zone(@shift.time_out)
+      check_leave_type LeaveType::LEAVE_CODES[:leave_early]
     else
       false
     end
+  end
+
+  def check_leave_type type
+    return false if holiday? @timesheet
+    !request_leave? @timesheet, type
   end
 
   def holiday? timesheet
@@ -75,16 +77,12 @@ class TimesheetService
   end
 
   def request_leave? timesheet, code_type
-    leave_type = @leave_type.find{|k| k.code == code_type }
-    if leave_type && @request_leaves
-      request_leave = @request_leaves.find do |h|
-        h.to == timesheet.date && h.leave_type_id == leave_type.id
-      end
-      if request_leave
-        valid_request? request_leave.first
-      else
-        false
-      end
+    leave_type = @leave_type.find{|k| k.code == code_type}
+    return false unless leave_type && @request_leaves
+    request_leave = @request_leaves.find do |h|
+      h.to == timesheet.date && h.leave_type_id == leave_type.id
     end
+    return false unless request_leave
+    valid_request? request_leave.first
   end
 end

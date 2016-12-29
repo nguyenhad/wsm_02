@@ -121,9 +121,15 @@ en:
       update_setting: "Update setting"
       edit_setting: "Edit Setting"
       create_setting: "New Setting"
-    set_timesheets:
+    import_timesheets:
+      index:
+        name: "Name: "
+        description: "Description: "
+        title: "Timesheets"
+        list_workspace: "List workspaces"
       create:
         company_not_found: "Company not found!"
+        workspace_not_found: "Workspace not found!"
         you_must_setting_timesheet: "Please setting timesheets for import"
         please_you_choose_file: "Please choose file to import!"
         file_format_not_right: "File format not right!"

@@ -1,0 +1,32 @@
+<% provide :title, t(".title") %>
+<div class="container">
+  <h3 class="text-center"><%= t ".list_workspace" %></h3>
+  <div class="row">
+    <div id="workspaces">
+      <% @workspaces.each do |workspace| %>
+        <div class="col-sm-6 col-md-4 ">
+          <div class="thumbnail product">
+            <div class="caption">
+              <%= link_to image_tag(workspace.image),
+                dashboard_workspace_time_sheets_path(workspace),
+                class: "widget widget-hover-effect3 themed-background" %>
+              <h5>
+                <%= t ".name" %>
+                <%= link_to workspace.name,
+                  dashboard_workspace_time_sheets_path(workspace),
+                  data: {turbolinks: false} %>
+              </h5>
+              <p>
+                <%= t ".description" %>
+                <%= workspace.description %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="center">
+        <%= paginate @workspaces %>
+      </div>
+    </div>
+  </div>
+</div>

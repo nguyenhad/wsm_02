@@ -1,0 +1,14 @@
+vi:
+  dashboard:
+    whitelist:
+      index:
+        add_employee: "Thêm mới"
+        list_employee: "Danh sách nhân viên"
+        find_whitelist_fail: "Không tìm thấy whitelist"
+        whitelist_users: "WhiteList Users"
+      destroy:
+        delete_success: "Xóa thành công"
+        delete_fail: "Xóa thất bại"
+      update:
+        update_success: "Cập nhật thành công"
+        update_fail: "Cập nhật thất bại"

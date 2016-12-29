@@ -21,6 +21,7 @@
     "angular-resource": "^1.6.0",
     "tableheaderfixer-fork": "TableHeadFixer-fork#*",
     "angular-bootstrap-datetimepicker": "^1.1.3",
-    "sweetalert": "^1.1.3"
+    "sweetalert": "^1.1.3",
+    "jquery-searchable": "^1.0.0"
   }
 }

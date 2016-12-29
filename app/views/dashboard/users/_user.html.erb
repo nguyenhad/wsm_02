@@ -1,0 +1,25 @@
+<tr id="user-#{user.id}">
+  <td>
+    <%= current_index @users.current_page,
+      Settings.per_page.dashboard.user, user_counter %>
+  </td>
+  <td><%= user.employee_code %></td>
+  <td><%= user.name %></td>
+  <td><%= user.email %></td>
+  <td><%= user.role %></td>
+  <td><%= user.company.name if user.company %></td>
+  <td><%= user.gender %></td>
+  <td>
+    <%= l user.birthday, format: :date_month_year if user.birthday %>
+  </td>
+  <% case request.path %>
+  <% when dashboard_white_lists_path %>
+    <td>
+      <%= link_to t("show"), dashboard_user_path(user),
+        class: "btn btn-success btn-xs" %>
+      <%= link_to t("delete"), dashboard_white_list_path(@whitelist, user: user.id),
+        method: :delete, data: {confirm: t("are_you_sure")},
+        class: "btn btn-danger btn-xs" %>
+    </td>
+  <% end %>
+</tr>

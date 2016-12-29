@@ -1,4 +1,4 @@
 class WhiteList < ApplicationRecord
   belongs_to :company
-  belongs_to :user
+  serialize :list_user, Array
 end

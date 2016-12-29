@@ -37,6 +37,7 @@
 //= require angular-resource/angular-resource.min.js
 //= require tableheaderfixer-fork/tableHeadFixer.js
 //= require sweetalert/dist/sweetalert.min.js
+//= require jquery-searchable/dist/jquery.searchable-1.0.0.min.js
 
 /* angular */
 //= require angular_app
@@ -47,6 +48,7 @@
 /* File */
 //= require login.js
 //= require timesheet.js
+//= require ./dashboard/white_lists.js
 
 $(document).ready(function() {
   $('#flash-message').delay(2000).slideUp(500, function() {

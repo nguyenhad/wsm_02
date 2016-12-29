@@ -7,10 +7,10 @@ class Company < ApplicationRecord
   has_many :leave_types
   has_many :leave_settings
   has_many :holidays
-  has_many :white_lists
   has_many :workspaces
 
   has_one :company_setting
+  has_one :white_list
   has_one :ot_setting
   has_one :shift
 
@@ -29,5 +29,9 @@ class Company < ApplicationRecord
       where parent_id = (select company_id from users where id = ?)
       or id = (select company_id from users where id = ?)
     )", user_id, user_id
+  end
+
+  def without_whitelist
+    users.without_ids white_list.list_user
   end
 end

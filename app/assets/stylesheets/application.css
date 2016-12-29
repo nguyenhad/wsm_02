@@ -21,6 +21,7 @@
  *= require timesheets
  *= require workspaces
  *= require dashboard/workspaces
+ *= require dashboard/white_lists
  *= require_self
  */
 

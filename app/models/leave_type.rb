@@ -11,7 +11,5 @@ class LeaveType < ApplicationRecord
   has_many :request_leaves, class_name: RequestLeave.name
   has_one :compensation
 
-  belongs_to :leave_setting
-
   validates :code, presence: true, uniqueness: {case_sensitive: false}
 end

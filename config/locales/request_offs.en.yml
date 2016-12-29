@@ -33,6 +33,7 @@ en:
       status: "Status"
       action: "Action"
       no_request_off_displayed: "No request offs displayed!"
+      you_have_time_request: "You have %{remain} times for request offs"
     request_off:
       empty: "empty"
       tooltip_edit: "edit"

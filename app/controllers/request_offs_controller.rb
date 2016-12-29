@@ -4,6 +4,7 @@ class RequestOffsController < ApplicationController
   def index
     @request_offs = current_user.request_offs.page(params[:page])
       .per Settings.per_page.dashboard.request_off
+    @user_dayoff = current_user.user_dayoffs.find_by year: Time.zone.now.year
   end
 
   def new; end

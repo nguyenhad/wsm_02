@@ -36,7 +36,8 @@ namespace :db do
         "Nguyen Binh Dieu",
         "Hoang Nhac Trung",
         "Chu Anh Tuan",
-        "Doan Thi Phuong Thao"
+        "Doan Thi Phuong Thao",
+        "Nguyen Van Dat"
       ].each do |name|
         FactoryGirl.create :user, name: name,
           email: "#{name.split(' ').join('.').downcase}@framgia.com",

@@ -13,6 +13,8 @@
     </tr>
   </thead>
   <tbody>
+    <p><%= t("request_offs.index.you_have_time_request",
+      remain: @user_dayoff.nil? ? 0 : @user_dayoff.remain) %></p>
     <%= render(partial: "request_off", collection: @request_offs) || t(".no_request_off_displayed") %>
   </tbody>
 </table>

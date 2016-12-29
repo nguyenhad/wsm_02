@@ -1,4 +1,5 @@
 FROM ruby
+RUN apt-get install autoconf libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev
 COPY Gemfile /cache/Gemfile
 COPY Gemfile.lock /cache/Gemfile.lock
 RUN cd /cache && bundle install

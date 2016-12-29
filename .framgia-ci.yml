@@ -4,6 +4,7 @@ test:
     command: bundle-audit --update | tee .framgia-ci-reports/bundle-audit.txt
   rspec:
     command: rspec --format html --out .framgia-ci-reports/rspec.html spec/
+    ignore: true
   brakeman:
     command: brakeman -o .framgia-ci-reports/brakeman.html -o .framgia-ci-reports/brakeman.json
   reek:
@@ -17,4 +18,3 @@ test:
     ignore: true
   rails_best_practices:
     command: rails_best_practices --format html --output-file .framgia-ci-reports/rails_best_practices.html app/
-    ignore: true

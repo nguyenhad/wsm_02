@@ -78,39 +78,58 @@ namespace :db do
       # end
 
       puts "create leave_settings"
-      Company.all.each do |company|
-        LeaveSetting.create!(
-          company_id: company.id,
-          amount: 2,
-          unit: "hour",
-          limit_times: 5
-        )
+      # Company.all.each do |company|
+      #   LeaveSetting.create!(
+      #     company_id: company.id,
+      #     amount: 2,
+      #     unit: "hour",
+      #     limit_times: 5
+      #   )
+      # end
+      [30, 60, 90, 120].each do |amount|
+        FactoryGirl.create :leave_setting, company_id: company.id,
+          amount: amount
       end
+      FactoryGirl.create :leave_setting_woman1, company_id: company.id
+      FactoryGirl.create :leave_setting_woman2, company_id: company.id
+      FactoryGirl.create :leave_setting_woman3, company_id: company.id
+      FactoryGirl.create :leave_setting_woman4, company_id: company.id
+      FactoryGirl.create :leave_setting_woman5, company_id: company.id
+
 
       puts "create leave_types"
       LeaveType.create!(
         [
           {name: "IL (M)",
            code: "IL (M)",
+           company_id: company.id,
            description: "Inlate morning"},
 
           {name: "LE",
            code: "LE",
+           company_id: company.id,
            description: "Leave early"},
 
           {name: "LO",
            code: "LO",
+           company_id: company.id,
            description: "Leave out"},
 
           {name: "IL (A)",
            code: "IL (A)",
-           description: "Inlate afternoon"}
+           company_id: company.id,
+           description: "Inlate afternoon"},
+
+          {name: "WO",
+           code: "WO",
+           company_id: company.id,
+           description: "Woman only"}
         ]
       )
 
       puts "create dayoff_settings"
       DayoffSetting.create!(
-        company_id: 1,
+        company_id: company.id,
         limmit_loop_year: 1,
         limmit_loop_day: 20
       )

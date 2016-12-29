@@ -79,13 +79,14 @@ ActiveRecord::Schema.define(version: 20161226065543) do
   end
 
   create_table "leave_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.float    "amount",      limit: 24
-    t.integer  "unit"
+    t.integer  "amount"
+    t.string   "unit"
+    t.string   "description"
     t.integer  "limit_times"
     t.integer  "company_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["company_id"], name: "index_leave_settings_on_company_id", using: :btree
   end
 

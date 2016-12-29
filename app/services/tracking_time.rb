@@ -42,8 +42,8 @@ class TrackingTime
   end
 
   def number_of_dayoffs
-    dayoff_from = @request_off.off_have_salary_from
-    dayoff_to = @request_off.off_have_salary_to
+    dayoff_from = @request.off_have_salary_from
+    dayoff_to = @request.off_have_salary_to
     (dayoff_to - dayoff_from) / Settings.seconds_in_day
   end
 end

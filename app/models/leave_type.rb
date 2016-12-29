@@ -9,7 +9,6 @@ class LeaveType < ApplicationRecord
   }.freeze
 
   has_many :request_leaves, class_name: RequestLeave.name
-  has_one :compensation
 
   validates :code, presence: true, uniqueness: {case_sensitive: false}
 end

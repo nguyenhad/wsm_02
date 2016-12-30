@@ -1,7 +1,9 @@
 class PersonalIssue < ApplicationRecord
   belongs_to :user
   belongs_to :company
+  belongs_to :approver, class_name: User.name
 
+  enum status: {pending: 0, approve: 1, reject: 2}
   enum unit: [:day, :month, :year]
 
   ATTR_PARAMS = [
@@ -17,6 +19,8 @@ class PersonalIssue < ApplicationRecord
     :company_id,
     :user_handover,
     :part_handover,
-    :work_handover
+    :work_handover,
+    :status,
+    :approver_id
   ].freeze
 end

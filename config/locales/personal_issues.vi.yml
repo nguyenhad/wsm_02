@@ -1,0 +1,12 @@
+vi:
+  dashboard:
+    personal_issues:
+      index:
+        title: "Danh sách nghỉ không phép"
+        index: "STT"
+        time_off_from: "Từ"
+        time_off_to: "Đến"
+        reason: "Lý do"
+        status: "Trạng thái"
+      status:
+        change : "cập nhât"

@@ -181,9 +181,11 @@ ActiveRecord::Schema.define(version: 20161226065543) do
     t.string   "user_handover"
     t.string   "part_handover"
     t.string   "work_handover"
+    t.integer  "status",             default: 0
+    t.integer  "approver_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.index ["user_id", "company_id"], name: "index_personal_issues_on_user_id_and_company_id", using: :btree
+    t.index ["user_id", "company_id", "approver_id"], name: "index_personal_issues_on_user_id_and_company_id_and_approver_id", using: :btree
   end
 
   create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -420,11 +422,10 @@ ActiveRecord::Schema.define(version: 20161226065543) do
 
   create_table "white_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "company_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "list_user",  limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["company_id"], name: "index_white_lists_on_company_id", using: :btree
-    t.index ["user_id"], name: "index_white_lists_on_user_id", using: :btree
   end
 
   create_table "workspaces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -473,7 +474,6 @@ ActiveRecord::Schema.define(version: 20161226065543) do
   add_foreign_key "user_workspaces", "workspaces"
   add_foreign_key "users", "companies"
   add_foreign_key "white_lists", "companies"
-  add_foreign_key "white_lists", "users"
   add_foreign_key "workspaces", "companies"
   add_foreign_key "workspaces", "users"
 end

@@ -14,9 +14,11 @@ class CreatePersonalIssues < ActiveRecord::Migration[5.0]
       t.string :user_handover
       t.string :part_handover
       t.string :work_handover
+      t.integer :status, default: 0
+      t.integer :approver_id
       t.timestamps
     end
 
-    add_index :personal_issues, [:user_id, :company_id]
+    add_index :personal_issues, [:user_id, :company_id, :approver_id]
   end
 end

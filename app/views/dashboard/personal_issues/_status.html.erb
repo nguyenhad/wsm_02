@@ -1,0 +1,13 @@
+<%= form_for [:dashboard, personal_issue] do |f| %>
+  <div class="row">
+    <div class="col-md-7">
+      <%= f.hidden_field :approver_id, {value: @current_user.id} %>
+      <%= f.select :status,
+        options_for_select(PersonalIssue.statuses.keys, personal_issue.status),
+        {}, {class: "form-control"} %>
+    </div>
+    <div class="col-md-5 form-group" >
+      <%= f.submit t(".change"), class: "btn btn-primary form-control" %>
+    </div>
+  </div>
+<% end %>

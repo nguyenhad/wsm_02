@@ -10,3 +10,6 @@ en:
         status: "status"
       status:
         change : "change"
+  personal_issues:
+    index:
+      title: "Personal Issues"

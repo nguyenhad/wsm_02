@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
   end
 
   def verify_owner_workspace
-    return if current_user.is_owner_workspace? @workspace
+    return if current_user.is_owner_workspace?
     flash[:danger] = t "dashboard.workspaces.unauthorized"
     redirect_to root_path
   end

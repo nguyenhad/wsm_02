@@ -29,7 +29,7 @@ en:
         change: "change"
   request_leaves:
       index:
-        list_request_leave: "List requests leave"
+        title: "List requests leave"
         no_reqquest_leave_display: "No request leave displayed!"
         no_num: "Index"
         created_at: "Created at"

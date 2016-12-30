@@ -3,6 +3,8 @@ class RequestLeavesController < ApplicationController
 
   def index
     @request_leaves = current_user.request_leaves.page params[:page]
+    @user_leave = current_user.user_leaves
+      .find_by year: Time.zone.now.year, month: Time.zone.now.month
   end
 
   def new

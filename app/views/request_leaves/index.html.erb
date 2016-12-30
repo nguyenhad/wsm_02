@@ -12,6 +12,8 @@
     </tr>
   </thead>
   <tbody>
+    <p><%= t("request_leaves.index.you_have_time_request",
+      remain: @user_leave.nil? ? 0 : @user_leave.remain) %></p>
     <%= render @request_leaves %>
   </tbody>
 </table>

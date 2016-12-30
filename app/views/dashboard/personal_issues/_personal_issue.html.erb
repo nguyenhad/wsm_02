@@ -4,19 +4,23 @@
       Settings.per_page.request_off, personal_issue_counter %>
   </td>
 
-  <td><%= l personal_issue.off_no_salary_from, format: :date_month_year %></td>
-  <td><%= l personal_issue.off_no_salary_to, format: :date_month_year %></td>
-
+  <td>
+    <% if personal_issue.off_no_salary_from? %>
+      <%= t(".empty") %>
+    <% else %>
+      <%= l personal_issue.off_no_salary_from, format: :date_month_year %>
+    <% end %>
+  </td>
+  <td>
+    <% if personal_issue.off_no_salary_to? %>
+      <%= t(".empty") %>
+    <% else %>
+      <%= l personal_issue.off_no_salary_to, format: :date_month_year %>
+    <% end %>
+  </td>
   <td><%= personal_issue.reason %></td>
 
   <td>
-    <%= link_to [:edit, personal_issue] do %>
-      <span class="glyphicon glyphicon-edit" %></span>
-    <% end %>
-
-    <%= link_to personal_issue,
-      method: :delete, data: {confirm: t("are_you_sure")} do %>
-      <span class="glyphicon glyphicon-trash" %></span>
-  <% end %>
+    <%= render "status", personal_issue: personal_issue %>
   </td>
 </tr>

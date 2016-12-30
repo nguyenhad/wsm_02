@@ -1,0 +1,12 @@
+en:
+  dashboard:
+    personal_issues:
+      index:
+        title: "Personal Issues"
+        index: "Index"
+        time_off_from: "Time off from"
+        time_off_to: "Time off to"
+        reason: "reason"
+        status: "status"
+      status:
+        change : "change"

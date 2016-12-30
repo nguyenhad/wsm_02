@@ -48,6 +48,7 @@ en:
         create_to: "To..."
         choose_leave_type: "Choose leave type"
         choose_status: "Choose status"
+        you_have_time_request: "You have %{remain} times for request leaves"
       request_leave:
         tooltip_edit: "edit"
         tooltip_cancel: "cancel"

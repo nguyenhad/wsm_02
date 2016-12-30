@@ -612,6 +612,25 @@ namespace :db do
       user_id: User.find_by(employee_code: "B500003").id},
     ])
 
+    puts("create user_dayoffs")
+    User.all.each do |user|
+      UserDayoff.create!(
+        user_id: user.id,
+        year: 2016,
+        remain: 12
+      )
+    end
+
+    puts("create user_leaves")
+    User.all.each do |user|
+      UserLeave.create!(
+        user_id: user.id,
+        month: 12,
+        year: 2016,
+        remain: 5
+      )
+    end
+
     # puts "create timesheets"
     # (10..12).each do |month|
     #   UserWorkspace.all.each do |user_workspace|
